@@ -1,0 +1,33 @@
+<nav>
+    <!-- example for column wise arrangement using fxlayout -->
+    <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+        <div fxLayoutAlign="center" fxFlex="10%"></div>
+        <div fxLayoutAlign="center" fxFlex="80%" class="header"> Road Side Assistance</div>
+        <div fxLayoutAlign="center" fxFlex="10%"></div>
+    </div>
+</nav>
+<br>
+
+<!-- reference for fx layout -->
+<!-- https://github.com/angular/flex-layout/wiki/fxLayoutGap-API -->
+
+
+<!-- example for row wise fx -->
+<div fxLayout="column">
+    <mat-card>
+        <div fxLayoutAlign="center">
+            <mat-card-title> Login</mat-card-title>
+        </div>
+        <div fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="text" matInput placeholder="Email ID" formControlName="username">
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="password" matInput placeholder="Password" formControlName="password">
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center"><button mat-button>Click me!</button></div>
+    </mat-card>
+</div>
