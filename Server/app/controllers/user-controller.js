@@ -10,20 +10,47 @@ exports.authenticate = (request, response) => {
     const pwd = request.params.pwd;
     const promise = userService.auth(userId);
     // check for pwd match 
-
-    var jwt = nJwt.create({ id: userId }, config.secret);
-    jwt.setExpiration(new Date().getTime() + (24 * 60 * 60 * 1000));
-
+    // https://developer.okta.com/blog/2019/05/16/angular-authentication-jwt
     const result = (authSuccess) => {
         //set response to 200
-        response.status(200).send({ auth: true, token: jwt.compact() });
-        // set the json value to the todo object
-        response.json(authSuccess);
+        response.status(200);
+        console.log(authSuccess);
+        if (pwd == authSuccess.userPassword) {
+            var jwt = nJwt.create({ id: userId }, config.secret);
+            jwt.setExpiration(new Date().getTime() + (24 * 60 * 60 * 1000));
+            response.json({ auth: true, token: jwt.compact() });
+        } else {
+            response.json({ message: "Invalid User" });
+        }
     };
     promise.then(result)
         .catch(renderErrorResponse(response));
 };
 
+exports.register = (request, response) => {
+    const userToReg = Object.assign({}, request.body);
+    const result = (userReg) => {
+        response.status(201);
+        response.json(userReg);
+    };
+    const promise = userService.save(userToReg);
+    promise.then(result).catch(renderErrorResponse(response));
+};
+
+exports.updateUser = (request, response) => {
+    const userId = request.params.id;
+    const user = Object.assign({}, request.body);
+    console.log(userId)
+
+    // get the body fRom the req
+    user.id = userId;
+    const result = (todo) => {
+        response.status(200);
+        response.json(todo);
+    };
+    const promise = userService.update(user);
+    promise.then(result).catch(renderErrorResponse(response));
+};
 // method to handle the error response
 // @params - resp
 let renderErrorResponse = (response) => {
