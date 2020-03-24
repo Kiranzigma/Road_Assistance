@@ -1,3 +1,3 @@
 'use strict';
 
-const rsaModel = require('./rsa');
+const userModel = require('./user-model');
