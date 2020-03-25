@@ -15,19 +15,21 @@
 <!-- example for row wise fx -->
 <div fxLayout="column">
     <mat-card>
-        <div fxLayoutAlign="center">
-            <mat-card-title> Login</mat-card-title>
-        </div>
-        <div fxLayoutAlign="center">
-            <mat-form-field>
-                <input type="text" matInput placeholder="Email ID" formControlName="username">
-            </mat-form-field>
-        </div>
-        <div fxLayoutAlign="center">
-            <mat-form-field>
-                <input type="password" matInput placeholder="Password" formControlName="password">
-            </mat-form-field>
-        </div>
-        <div fxLayoutAlign="center"><button (click)="authenticate()" mat-button>Sign In</button></div>
+        <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
+            <div fxLayoutAlign="center">
+                <mat-card-title> Login</mat-card-title>
+            </div>
+            <div fxLayoutAlign="center">
+                <mat-form-field>
+                    <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="center">
+                <mat-form-field>
+                    <input type="password" formControlName="userPassword" matInput placeholder="Password">
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="center"><button type="submit" mat-button>Sign In</button></div>
+        </form>
     </mat-card>
 </div>
