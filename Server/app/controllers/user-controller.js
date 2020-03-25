@@ -14,13 +14,12 @@ exports.authenticate = (request, response) => {
     const result = (authSuccess) => {
         //set response to 200
         response.status(200);
-        console.log(authSuccess);
         if (pwd == authSuccess.userPassword) {
             var jwt = nJwt.create({ id: userId }, config.secret);
             jwt.setExpiration(new Date().getTime() + (24 * 60 * 60 * 1000));
             response.json({ auth: true, token: jwt.compact() });
         } else {
-            response.json({ message: "Invalid User" });
+            response.json({ auth: false, message: "Invalid User" });
         }
     };
     promise.then(result)
