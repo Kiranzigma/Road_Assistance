@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { LayoutModule } from './layout/layout.module';
-
+import { AuthGuard} from './auth-guard.service'
+import { LayoutModule } from './layout/layout.module'
 
 const routes: Routes = [
-  {path: 'layout', loadChildren: './layout/layout.module#LayoutModule'},
+  {path: 'layout', loadChildren: () => LayoutModule, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo: 'login'}
 ];

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppServiceService } from '../app-service.service';
+import { IResponse } from '../interface/IResponse';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +10,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _routes: Router) { }
+  constructor(private _routes: Router, private appservice: AppServiceService) { }
 
   ngOnInit(): void {
   }
 
-  authenticate(){
+  authenticate() {
+    let params = [];
+    params.push('sa');
+    params.push('password-2');
     // authenticate the user and let him login
-    this._routes.navigate(['/layout']);
+    const val = this.appservice.get<IResponse>('US-AU', params).subscribe(x => {
+      if(x.auth == true){
+        sessionStorage.setItem("jwt_token",JSON.stringify(x));
+        this._routes.navigate(['/layout']);
+      }
+    });
   }
 }

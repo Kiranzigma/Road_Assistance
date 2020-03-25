@@ -12,11 +12,11 @@ export class LayoutComponent implements OnInit {
   constructor(private _routes: Router) { }
   ngOnInit(): void {
     this.Nav = [{ displayName : 'Profile', route : 'home'},
-    {displayName : 'Logout', route : 'login'} ]
+    {displayName : 'Logout', route : 'logout'} ]
   }
   getURL(param : any):void{
-    debugger;
-    if(param.route == "login"){
+    if(param.route == "logout"){
+      sessionStorage.removeItem('jwt_token');
       this._routes.navigate(['/login']);
     }
   }
