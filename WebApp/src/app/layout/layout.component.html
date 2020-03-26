@@ -1,5 +1,5 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" [(opened)]="opened" role="navigation">
+    <mat-sidenav mode="push" [(opened)]="opened" role="navigation">
         <!-- img for the profile picture -->
         <img style="height: 8vh;border-radius: 60%" [src]="">
         <mat-nav-list>
@@ -9,12 +9,12 @@
     <router-outlet></router-outlet>
     <mat-sidenav-content>
         <mat-toolbar class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
-            <div fxLayoutAlign="left" fxFlex="10%">
+            <div fxLayoutAlign="left center" fxFlex="10%">
                 <button (click)="opened = !opened" mat-icon-button>
                 <mat-icon>menu</mat-icon>
                 </button>
             </div>
-            <div fxLayoutAlign="center" fxFlex="80%">
+            <div fxLayoutAlign="center center" fxFlex="80%">
                 Road Side Assistance
             </div>
             <div fxLayoutAlign="center" fxFlex="10%"></div>
