@@ -4,6 +4,7 @@ const nJwt = require('njwt');
 const config = require('../config');
 const mongoose = require('mongoose');
 const usermodel = mongoose.model('UserSchema');
+let CryptoJS = require("crypto-js");
 
 // method to retrieve the values from the resource
 // @params - req, resp
@@ -17,7 +18,9 @@ exports.authenticate = (request, response) => {
     const result = (authSuccess) => {
         //set response to 200
         response.status(200);
-        if (usermodels.userPassword == authSuccess.userPassword) {
+        let userPwd = CryptoJS.AES.decrypt(authSuccess.userPassword.toString(), '123456$#@$^@1ERF');
+        let pwd = CryptoJS.AES.decrypt(usermodels.userPassword.toString(), '123456$#@$^@1ERF')
+        if (pwd.toString(CryptoJS.enc.Utf8) == userPwd.toString(CryptoJS.enc.Utf8)) {
             var jwt = nJwt.create({ id: userId }, config.secret);
             jwt.setExpiration(new Date().getTime() + (24 * 60 * 60 * 1000));
             response.json({ auth: true, token: jwt.compact() });
