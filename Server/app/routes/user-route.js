@@ -8,8 +8,8 @@ module.exports = (app) => {
     app.route('/user')
         .post(userController.register)
         // route the get, put, delete method to the controller
-    app.route('/user/:id/:pwd')
-        .get(userController.authenticate);
+    app.route('/user/:id')
+        .post(userController.authenticate);
     app.route('/user/:id')
         .put(jwtAuth, userController.updateUser);
 

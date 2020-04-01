@@ -28,5 +28,13 @@ export class AppServiceService {
 
     return this.http.get<T>(urlparam);
   }
+  
+  post<T>(url: string, body: any, param?:any[]){
+    
+    let urlparam = this.geturl(url, param);
+    // generic type of response
+    return this.http.post<T>(urlparam,body);
+  }
+
 
 }
