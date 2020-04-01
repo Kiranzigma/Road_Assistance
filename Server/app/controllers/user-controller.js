@@ -2,19 +2,22 @@
 const userService = require('../services/user.service');
 const nJwt = require('njwt');
 const config = require('../config');
+const mongoose = require('mongoose');
+const usermodel = mongoose.model('UserSchema');
 
 // method to retrieve the values from the resource
 // @params - req, resp
 exports.authenticate = (request, response) => {
     const userId = request.params.id;
-    const pwd = request.params.pwd;
+    const userContent = Object.assign({}, request.body);
+    const usermodels = new usermodel(userContent);
     const promise = userService.auth(userId);
     // check for pwd match 
     // https://developer.okta.com/blog/2019/05/16/angular-authentication-jwt
     const result = (authSuccess) => {
         //set response to 200
         response.status(200);
-        if (pwd == authSuccess.userPassword) {
+        if (usermodels.userPassword == authSuccess.userPassword) {
             var jwt = nJwt.create({ id: userId }, config.secret);
             jwt.setExpiration(new Date().getTime() + (24 * 60 * 60 * 1000));
             response.json({ auth: true, token: jwt.compact() });

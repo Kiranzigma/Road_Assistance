@@ -10,6 +10,7 @@ import { AppServiceService } from './app-service.service';
 // for the service to be available across the project
 import { HttpClientModule } from '@angular/common/http'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import {EncryptServiceService} from '../app/encrypt-service.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     HttpClientModule
     ],
-  providers: [AppServiceService],
+  providers: [AppServiceService, EncryptServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
