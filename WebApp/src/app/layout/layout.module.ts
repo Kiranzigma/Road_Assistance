@@ -4,8 +4,9 @@ import { LayoutComponent } from './layout.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MaterialModule } from '../shared/material-module';
 import { LayoutRoutingModule } from './layout.routing';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, ProfileComponent],
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,
     FlexLayoutModule.withConfig({useColumnBasisZero: false})

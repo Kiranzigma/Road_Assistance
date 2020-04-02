@@ -3,3 +3,28 @@
 // for the angular material to work properly we need to have this in our main css
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+mat-toolbar {
+    background-color: orange !important;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .sidenav {
+        display: none;
+        min-width: 15%;
+    }
+}
+
+mat-sidenav-container {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
