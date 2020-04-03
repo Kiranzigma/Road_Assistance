@@ -4,11 +4,21 @@ import { LayoutComponent } from './layout.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MaterialModule } from '../shared/material-module';
 import { LayoutRoutingModule } from './layout.routing';
+import { ProfileComponent } from './profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AppServiceService } from '../app-service.service';
+import {AgmCoreModule} from '@agm/core';
+import { RequestVendorComponent } from './request-vendor/request-vendor.component'
+
 @NgModule({
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent],
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,
-    FlexLayoutModule.withConfig({useColumnBasisZero: false})
-  ]
+    FlexLayoutModule.withConfig({useColumnBasisZero: false}), HttpClientModule, 
+    AgmCoreModule.forRoot({
+      apiKey : 'AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo'
+    })
+  ],
+  providers:[AppServiceService]
 })
 export class LayoutModule { }

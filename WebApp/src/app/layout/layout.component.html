@@ -1,23 +1,23 @@
 <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="push" [(opened)]="opened" role="navigation">
-        <!-- img for the profile picture -->
+    <mat-sidenav fixedInViewport="true" class="sidenav" mode="push" [(opened)]="opened" role="navigation">
         <img style="height: 8vh;border-radius: 60%" [src]="">
         <mat-nav-list>
             <a mat-list-item (click)="getURL(this.nav)" *ngFor="let nav of Nav">{{nav.displayName}}</a>
         </mat-nav-list>
+        <!-- img for the profile picture -->
     </mat-sidenav>
-    <router-outlet></router-outlet>
     <mat-sidenav-content>
         <mat-toolbar class="container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
             <div fxLayoutAlign="left center" fxFlex="10%">
                 <button (click)="opened = !opened" mat-icon-button>
                 <mat-icon>menu</mat-icon>
-                </button>
+            </button>
             </div>
             <div fxLayoutAlign="center center" fxFlex="80%">
                 Road Side Assistance
             </div>
             <div fxLayoutAlign="center" fxFlex="10%"></div>
         </mat-toolbar>
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
