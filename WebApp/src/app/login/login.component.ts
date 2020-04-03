@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { IResponse } from '../interface/IResponse';
 import { FormGroup, FormControl } from '@angular/forms';
 import { EncryptServiceService } from '../../app/encrypt-service.service';
+import { userResponse } from '../interface/userResponse';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,10 @@ import { EncryptServiceService } from '../../app/encrypt-service.service';
 })
 export class LoginComponent implements OnInit {
 
+  view: any;
+
   constructor(private _routes: Router,
+    private route: ActivatedRoute,
     private appservice: AppServiceService,
     private EncrDecr: EncryptServiceService) { }
 
@@ -21,7 +25,21 @@ export class LoginComponent implements OnInit {
     userPassword: new FormControl(''),
   });
 
+  registerForm = new FormGroup({
+    userName: new FormControl(''),
+    userEmail: new FormControl(''),
+    userPassword: new FormControl(''),
+  });
+
   ngOnInit(): void {
+   this.urlReader();
+  }
+
+  urlReader() {
+    this.route.url.subscribe(params => {
+      this.view=params[0].path;
+      console.log("Current View -- " + this.view);
+    })
   }
 
   authenticate() {
@@ -37,5 +55,28 @@ export class LoginComponent implements OnInit {
         this._routes.navigate(['/layout']);
       }
     });
+  }
+
+  signUp(){
+    this._routes.navigate(['\signUp']);
+  }
+
+  register(){
+    let userName = this.registerForm.get('userName');
+    let userEmail = this.registerForm.get('userEmail');
+    let userPassword = this.registerForm.get('userPassword')
+    console.log(this.registerForm.get('userName'));
+    console.log(this.registerForm.get('userEmail'));
+    console.log(this.registerForm.get('userPassword'));
+    let body = {
+      userEmail: this.registerForm.get('userEmail').value,
+      userPassword: this.EncrDecr.set('123456$#@$^@1ERF', this.registerForm.get('userPassword').value)
+    };
+
+    if(userName!=null&&body.userEmail!=null&&body.userPassword!=null){
+        this.appservice.post<userResponse>('US-AU', body).subscribe(y => {
+          console.log("Posted");
+        })
+    }
   }
 }

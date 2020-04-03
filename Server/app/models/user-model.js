@@ -21,7 +21,7 @@ let userSchema = new Schema({
     versionKey: false
 });
 
-// Duplicate the id field as mangoose returns _id field instead of id
+// Duplicate the id field as mongoose returns _id field instead of id
 
 userSchema.virtual('id').get(function() {
     return this._id.toHexString();
