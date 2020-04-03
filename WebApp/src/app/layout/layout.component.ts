@@ -10,24 +10,13 @@ import { AppServiceService } from '../app-service.service';
 export class LayoutComponent implements OnInit {
   opened: boolean = false;
   Nav:any[];
-  lat: string;
-  long: string;
-  location: Object;
+  
   constructor(private _routes: Router, private Appservice : AppServiceService) { }
   ngOnInit(): void {
-    this.Nav = [{ displayName : 'Profile', route : 'profile'},
-    {displayName : 'Logout', route : 'logout'} ]
-    
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.showPosition(position);
-    });
-  }
-  showPosition(position) {
-    this.lat = position.coords.latitude;
-    this.long = position.coords.longitude;
-    console.log(this.lat);
-    console.log(this.long);
-  }  
+    this.Nav = [{ displayName : 'Profile', route : 'Profile'},
+    { displayName : 'Request Repair', route : 'PequestVendor'},
+    { displayName : 'Logout', route : 'logout'} ]
+  } 
  
   getURL(param : any):void{
     if(param.route == "logout"){

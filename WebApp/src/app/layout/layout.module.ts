@@ -7,10 +7,11 @@ import { LayoutRoutingModule } from './layout.routing';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppServiceService } from '../app-service.service';
-import {AgmCoreModule} from '@agm/core'
+import {AgmCoreModule} from '@agm/core';
+import { RequestVendorComponent } from './request-vendor/request-vendor.component'
 
 @NgModule({
-  declarations: [LayoutComponent, ProfileComponent],
+  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent],
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,
     FlexLayoutModule.withConfig({useColumnBasisZero: false}), HttpClientModule, 
