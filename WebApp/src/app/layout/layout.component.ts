@@ -10,22 +10,25 @@ import { AppServiceService } from '../app-service.service';
 export class LayoutComponent implements OnInit {
   opened: boolean = false;
   Nav:any[];
-  lat: any;
-  long: any;
+  lat: string;
+  long: string;
   location: Object;
   constructor(private _routes: Router, private Appservice : AppServiceService) { }
   ngOnInit(): void {
     this.Nav = [{ displayName : 'Profile', route : 'profile'},
     {displayName : 'Logout', route : 'logout'} ]
-    this.Appservice.getLocation().subscribe(
-      x => {
-        console.log(x.location.lat);
-        console.log(x.location.lng);
-        this.lat = x.location.lat;
-        this.long = x.location.lng;
-      }
-    );
+    
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.showPosition(position);
+    });
   }
+  showPosition(position) {
+    this.lat = position.coords.latitude;
+    this.long = position.coords.longitude;
+    console.log(this.lat);
+    console.log(this.long);
+  }  
+ 
   getURL(param : any):void{
     if(param.route == "logout"){
       sessionStorage.removeItem('jwt_token');
