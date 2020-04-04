@@ -5,3 +5,14 @@ agm-map {
 .sidenav {
     background-color: rgb(252, 200, 103) !important;
 }
+
+mat-sidenav{
+    a:hover{
+            font-weight: bold;
+            background-color: #4dd0e1;
+    }
+}
+
+main-nav{
+    position: sticky;
+}
