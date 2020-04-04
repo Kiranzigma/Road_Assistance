@@ -11,12 +11,17 @@ import { AppServiceService } from './app-service.service';
 import { HttpClientModule } from '@angular/common/http'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import {EncryptServiceService} from '../app/encrypt-service.service';
+<<<<<<< Updated upstream
 import { UserServiceService } from './shared/user-service.service';
+=======
+import { UserRequestComponent } from './user-request/user-request.component';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    UserRequestComponent
   ],
   imports: [
     BrowserModule,
