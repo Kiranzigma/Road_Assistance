@@ -4,6 +4,7 @@ import { AppServiceService } from '../app-service.service';
 import { IResponse } from '../interface/IResponse';
 import { FormGroup, FormControl } from '@angular/forms';
 import { EncryptServiceService } from '../../app/encrypt-service.service';
+import { UserServiceService } from '../shared/user-service.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private _routes: Router,
     private appservice: AppServiceService,
-    private EncrDecr: EncryptServiceService) { }
+    private EncrDecr: EncryptServiceService,
+    private user: UserServiceService) { }
 
   loginForm = new FormGroup({
     userEmail: new FormControl(''),
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
     const val = this.appservice.post<IResponse>('US-AU', body, params).subscribe(x => {
       if (x.auth == true) {
         sessionStorage.setItem("jwt_token", JSON.stringify(x));
+        this.user.setUser(x.user);
         this._routes.navigate(['/layout']);
       }
     });

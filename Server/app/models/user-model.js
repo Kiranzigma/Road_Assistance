@@ -16,6 +16,9 @@ let userSchema = new Schema({
     userPassword: {
         type: String,
         required: true
+    },
+    userType: {
+        type: String
     }
 }, {
     versionKey: false
