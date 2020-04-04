@@ -21,7 +21,7 @@
     <!-- example for row wise fx -->
 
 <div fxLayoutAlign="center center" fxFlex="90%" [ngSwitch]="view">
-        <mat-card *ngSwitchCase="'signUp'" class="cardSize">
+        <mat-card *ngSwitchCase="'signUp'" class="registerCardSize">
             <form [formGroup]="registerForm" (ngSubmit)="register()">
                 <div fxLayoutAlign="center">
                     <mat-card-title> Register</mat-card-title>
@@ -36,11 +36,6 @@
                     <mat-form-field>
                         <input type="text" formControlName="userLastName" matInput placeholder="Last Name">
                     <mat-error *ngIf="rf.userLastName.invalid">{{getErrorMessage('userLastName')}}</mat-error>
-                    </mat-form-field>
-                </div>
-                <div fxLayoutAlign="center">
-                    <mat-form-field>
-                        <input type="password" formControlName="userPassword" matInput placeholder="Password">
                     </mat-form-field>
                 </div>
                 <div fxLayoutAlign="center">
@@ -64,7 +59,7 @@
                 <div fxLayoutAlign="center" class = "loginButton"><button type="submit" mat-button >Sign Up</button></div>
             </form>
         </mat-card>
-        <mat-card *ngSwitchDefault class="cardSize">
+        <mat-card *ngSwitchDefault class="loginCardSize">
             <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
                 <div fxLayoutAlign="center">
                     <mat-card-title> Login</mat-card-title>

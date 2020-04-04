@@ -1,6 +1,13 @@
-.cardSize{
+.loginCardSize{
     width: 25%;
     height: 50%;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.registerCardSize{
+    width: 25%;
+    height: 70%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
 }

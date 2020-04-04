@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { IResponse } from '../interface/IResponse';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { FormGroup, FormControl } from '@angular/forms';
 import { EncryptServiceService } from '../../app/encrypt-service.service';
 import { userResponse } from '../interface/userResponse';
 import { MustMatch } from '../../app/helpers/must-match.validator';
@@ -30,11 +29,6 @@ export class LoginComponent implements OnInit {
     userPassword: new FormControl('')
   });
 
-  registerForm = new FormGroup({
-    userName: new FormControl(''),
-    userEmail: new FormControl(''),
-    userPassword: new FormControl(''),
-  });
 
   ngOnInit(): void {
    this.urlReader();
