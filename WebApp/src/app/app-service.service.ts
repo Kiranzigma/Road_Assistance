@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { HttpClient} from '@angular/common/http';
 
+import {Observable} from 'rxjs';
 @Injectable()
 export class AppServiceService {
 
@@ -22,14 +23,14 @@ export class AppServiceService {
     return url;
   }
 
-  get<T>(url: string, param?: any[]) {
+  get<T>(url: string, param?: any[]) : Observable<any> {
 
     let urlparam = this.geturl(url, param);
 
     return this.http.get<T>(urlparam);
   }
   
-  post<T>(url: string, body: any, param?:any[]){
+  post<T>(url: string, body: any, param?:any[]) : Observable<any>{
     
     let urlparam = this.geturl(url, param);
     // generic type of response
