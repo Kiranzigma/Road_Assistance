@@ -6,14 +6,12 @@ agm-map {
     background-color: rgb(252, 200, 103) !important;
 }
 
-mat-nav-list{
-    a:hover
-    {
-        font-weight: bold;
-        background-color: #4dd0e1;
-      }
-} 
+mat-nav-list {
+    a:hover {
+        background-color: orange;
+    }
+}
 
-.navbar{
+.navbar {
     position: sticky;
 }
