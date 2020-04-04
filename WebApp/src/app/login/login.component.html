@@ -1,4 +1,5 @@
 
+
 <div fxLayout="column" fxFlexFill fxLayout.xs="column">
     <!-- example for column wise arrangement using fxlayout -->
     <div fxLayoutAlign="center" fxFlex="10%">
@@ -6,13 +7,12 @@
             <div fxLayoutAlign="center" fxFlex="10%"></div>
             <div fxLayoutAlign="center center" fxFlex="80%" class="header"> Road Side Assistance</div>
             <div *ngIf="view=='login'; else notShow" fxLayoutAlign="right" fxFlex="10%"><button (click)="signUp()"
-                mat-button>Sign Up</button></div>
+                mat-button>User Registration</button></div>
                 <ng-template #notShow>
-                    <div fxLayoutAlign="center" fxFlex="10%"></div>
+                    <div fxLayoutAlign="center" fxFlex="10%"><button (click)="login()" mat-button>Login</button></div>
                 </ng-template>
         </mat-toolbar>
     </div>
-
 
     <!-- reference for fx layout -->
 
@@ -28,12 +28,14 @@
                 </div>
                 <div fxLayoutAlign="center" class="registerField">
                     <mat-form-field>
-                        <input type="password" formControlName="userName" matInput placeholder="User Name">
+                        <input type="text" formControlName="userFirstName" matInput placeholder="First Name">
+                    <mat-error *ngIf="rf.userFirstName.invalid">{{getErrorMessage('userFirstName')}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayoutAlign="center">
                     <mat-form-field>
-                        <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
+                        <input type="text" formControlName="userLastName" matInput placeholder="Last Name">
+                    <mat-error *ngIf="rf.userLastName.invalid">{{getErrorMessage('userLastName')}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayoutAlign="center">
@@ -41,6 +43,24 @@
                         <input type="password" formControlName="userPassword" matInput placeholder="Password">
                     </mat-form-field>
                 </div>
+                <div fxLayoutAlign="center">
+                <mat-form-field>
+                    <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
+                    <mat-error *ngIf="rf.userEmail.invalid">{{getErrorMessage('userEmail')}}</mat-error>
+                </mat-form-field>
+            	</div>
+            	<div fxLayoutAlign="center">
+                <mat-form-field>
+                    <input type="password" formControlName="userPassword" matInput placeholder="Password">
+                    <mat-error *ngIf="rf.userPassword.invalid">{{getErrorMessage('userPassword')}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="center">
+                <mat-form-field>
+                    <input type="password" formControlName="confirmPassword" matInput placeholder="Re-Enter Password">
+                    <mat-error *ngIf="rf.confirmPassword.invalid">{{getErrorMessage('confirmPassword')}}</mat-error>
+                </mat-form-field>
+            </div>
                 <div fxLayoutAlign="center" class = "loginButton"><button type="submit" mat-button >Sign Up</button></div>
             </form>
         </mat-card>
@@ -63,4 +83,5 @@
             </form>
         </mat-card>
 </div>
+
 </div>
