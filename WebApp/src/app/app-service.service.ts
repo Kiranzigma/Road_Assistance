@@ -37,5 +37,4 @@ export class AppServiceService {
     return this.http.post<T>(urlparam,body);
   }
 
-
 }
