@@ -12,7 +12,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import {EncryptServiceService} from '../app/encrypt-service.service';
 import { UserServiceService } from './shared/user-service.service';
-
 @NgModule({
   declarations: [
     AppComponent,

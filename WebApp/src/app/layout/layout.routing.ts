@@ -12,7 +12,7 @@ const routes: Routes = [
       children:[
         {path: 'Profile', component: ProfileComponent},
         {path: 'RequestVendor', component: RequestVendorComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
-        {path: '**', redirectTo:'RequestVendor'}
+        {path: '**', redirectTo:'Profile'}
       ],
     },
  ];

@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(private _routes: Router,
     private appservice: AppServiceService,
     private EncrDecr: EncryptServiceService,
-    private user: UserServiceService) { }
+    private user: UserServiceService
+    ) { }
 
   loginForm = new FormGroup({
     userEmail: new FormControl(''),
@@ -24,6 +25,8 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    sessionStorage.removeItem('jwt_token');
+    sessionStorage.removeItem('auth');
   }
 
   authenticate() {
@@ -35,8 +38,9 @@ export class LoginComponent implements OnInit {
     // authenticate the user and let him login
     const val = this.appservice.post<IResponse>('US-AU', body, params).subscribe(x => {
       if (x.auth == true) {
+        sessionStorage.setItem("auth", this.EncrDecr.set('123456$#@$^@1ERF',JSON.stringify(x.user)));
+        delete x.user
         sessionStorage.setItem("jwt_token", JSON.stringify(x));
-        this.user.setUser(x.user);
         this._routes.navigate(['/layout']);
       }
     });
