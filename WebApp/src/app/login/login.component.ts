@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { IResponse } from '../interface/IResponse';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { EncryptServiceService } from '../../app/encrypt-service.service';
 import { userResponse } from '../interface/userResponse';
 import { MustMatch } from '../../app/helpers/must-match.validator';
@@ -25,6 +26,12 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder) { }
 
   loginForm = new FormGroup({
+    userEmail: new FormControl(''),
+    userPassword: new FormControl('')
+  });
+
+  registerForm = new FormGroup({
+    userName: new FormControl(''),
     userEmail: new FormControl(''),
     userPassword: new FormControl(''),
   });
@@ -78,6 +85,12 @@ export class LoginComponent implements OnInit {
 
   register(){
     this.submitted = true;
+    let userName = this.registerForm.get('userName');
+    let userEmail = this.registerForm.get('userEmail');
+    let userPassword = this.registerForm.get('userPassword')
+    console.log(this.registerForm.get('userName'));
+    console.log(this.registerForm.get('userEmail'));
+    console.log(this.registerForm.get('userPassword'));
     let body = {
       userEmail: this.registerForm.get('userEmail').value,
       userPassword: this.EncrDecr.set('123456$#@$^@1ERF', this.registerForm.get('userPassword').value),
@@ -86,48 +99,49 @@ export class LoginComponent implements OnInit {
     };
 
     if(this.registerForm.valid){
-          this.appservice.post<userResponse>('US-AU', body).subscribe(y => {
+        this.appservice.post<userResponse>('US-AU', body).subscribe(y => {
           console.log("Posted");
         })
-    } else {
-          console.log("Validation Failed");
-    }
+      } else {
+        console.log("Validation Failed");
   }
+}
 
-  
-  getErrorMessage(x: any) {
-    //console.log(x);
-    console.log(this.registerForm.controls);
-    //console.log(this.registerForm.get('confirmPassword'));
-    switch(x) {
-      case "userFirstName":
-        if (this.registerForm.get('userFirstName').hasError('required')) {
-          return 'You must enter a value';
-        }
-      case "userEmail":
-        if (this.registerForm.get('userEmail').hasError('required')) {
-          return 'You must enter a value';
-        } else if (this.registerForm.get('userEmail').hasError('email')){
-          return this.registerForm.get('userEmail').hasError('email') ? 'Not a valid email' : '';
-        }
-      case "userLastName":
-        if (this.registerForm.get('userLastName').hasError('required')) {
-          return 'You must enter a value';
-        }
-      case "userPassword":
-        if (this.registerForm.get('userPassword').hasError('required')) {
-          return 'You must enter a value';
-        } else
-        if (this.registerForm.get('userPassword').hasError('minlength')){
-          return this.registerForm.get('userPassword').hasError('minlength') ? 'Password too short (8 or more)' : '';
-        }
-      case "confirmPassword":
-        if (this.registerForm.get('confirmPassword').hasError('required')) {
-          return 'You must enter a value';
-        } else
-        if (this.registerForm.get('confirmPassword').hasError('mustMatch')){
-          return this.registerForm.get('confirmPassword').hasError('mustMatch') ? 'Passwords don\'t match' : '';
-        }
-    }      
+
+getErrorMessage(x: any) {
+  //console.log(x);
+  console.log(this.registerForm.controls);
+  //console.log(this.registerForm.get('confirmPassword'));
+  switch(x) {
+    case "userFirstName":
+      if (this.registerForm.get('userFirstName').hasError('required')) {
+        return 'You must enter a value';
+      }
+    case "userEmail":
+      if (this.registerForm.get('userEmail').hasError('required')) {
+        return 'You must enter a value';
+      } else if (this.registerForm.get('userEmail').hasError('email')){
+        return this.registerForm.get('userEmail').hasError('email') ? 'Not a valid email' : '';
+      }
+    case "userLastName":
+      if (this.registerForm.get('userLastName').hasError('required')) {
+        return 'You must enter a value';
+      }
+    case "userPassword":
+      if (this.registerForm.get('userPassword').hasError('required')) {
+        return 'You must enter a value';
+      } else
+      if (this.registerForm.get('userPassword').hasError('minlength')){
+        return this.registerForm.get('userPassword').hasError('minlength') ? 'Password too short (8 or more)' : '';
+      }
+    case "confirmPassword":
+      if (this.registerForm.get('confirmPassword').hasError('required')) {
+        return 'You must enter a value';
+      } else
+      if (this.registerForm.get('confirmPassword').hasError('mustMatch')){
+        return this.registerForm.get('confirmPassword').hasError('mustMatch') ? 'Passwords don\'t match' : '';
+      }
+
+    }
   }
 }
