@@ -23,7 +23,7 @@ exports.authenticate = (request, response) => {
         if (pwd.toString(CryptoJS.enc.Utf8) == userPwd.toString(CryptoJS.enc.Utf8)) {
             var jwt = nJwt.create({ id: userId }, config.secret);
             jwt.setExpiration(new Date().getTime() + (24 * 60 * 60 * 1000));
-            response.json({ auth: true, token: jwt.compact() });
+            response.json({ auth: true, token: jwt.compact(), user: authSuccess });
         } else {
             response.json({ auth: false, message: "Invalid User" });
         }
