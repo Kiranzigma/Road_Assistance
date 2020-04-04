@@ -1,57 +1,66 @@
-<!-- example for column wise arrangement using fxlayout -->
-<mat-toolbar fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
-    <div fxLayoutAlign="center" fxFlex="10%"></div>
-    <div fxLayoutAlign="center center" fxFlex="50%" class="header"> Road Side Assistance</div>
-    <div *ngIf="view=='login'; else notShow" fxLayoutAlign="right" fxFlex="10%"><button (click)="signUp()" mat-button>Sign Up</button></div>
-    <ng-template #notShow><div fxLayoutAlign="center" fxFlex="10%"></div></ng-template>
-</mat-toolbar>
-<br>
 
-<!-- reference for fx layout -->
-<!-- https://github.com/angular/flex-layout/wiki/fxLayoutGap-API -->
+<div fxLayout="column" fxFlexFill fxLayout.xs="column">
+    <!-- example for column wise arrangement using fxlayout -->
+    <div fxLayoutAlign="center" fxFlex="10%">
+        <mat-toolbar fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+            <div fxLayoutAlign="center" fxFlex="10%"></div>
+            <div fxLayoutAlign="center center" fxFlex="80%" class="header"> Road Side Assistance</div>
+            <div *ngIf="view=='login'; else notShow" fxLayoutAlign="right" fxFlex="10%"><button (click)="signUp()"
+                mat-button>Sign Up</button></div>
+                <ng-template #notShow>
+                    <div fxLayoutAlign="center" fxFlex="10%"></div>
+                </ng-template>
+        </mat-toolbar>
+    </div>
 
 
-<!-- example for row wise fx -->
-<div fxLayout="column" [ngSwitch]="view">
-    <mat-card *ngSwitchCase="'signUp'">
-        <form [formGroup]="registerForm" (ngSubmit)="register()">
-            <div fxLayoutAlign="center">
-                <mat-card-title> Register</mat-card-title>
-            </div>
-            <div fxLayoutAlign="center">
-                <mat-form-field>
-                    <input type="password" formControlName="userName" matInput placeholder="User Name">
-                </mat-form-field>
-            </div>
-            <div fxLayoutAlign="center">
-                <mat-form-field>
-                    <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
-                </mat-form-field>
-            </div>
-            <div fxLayoutAlign="center">
-                <mat-form-field>
-                    <input type="password" formControlName="userPassword" matInput placeholder="Password">
-                </mat-form-field>
-            </div>
-            <div fxLayoutAlign="center"><button type="submit" mat-button>Sign Up</button></div>
-        </form>
-    </mat-card>
-    <mat-card *ngSwitchDefault>
-        <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
-            <div fxLayoutAlign="center">
-                <mat-card-title> Login</mat-card-title>
-            </div>
-            <div fxLayoutAlign="center">
-                <mat-form-field>
-                    <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
-                </mat-form-field>
-            </div>
-            <div fxLayoutAlign="center">
-                <mat-form-field>
-                    <input type="password" formControlName="userPassword" matInput placeholder="Password">
-                </mat-form-field>
-            </div>
-            <div fxLayoutAlign="center"><button type="submit" mat-button>Sign In</button></div>
-        </form>
-    </mat-card>
+    <!-- reference for fx layout -->
+
+    <!-- https://github.com/angular/flex-layout/wiki/fxLayoutGap-API -->
+
+    <!-- example for row wise fx -->
+
+<div fxLayoutAlign="center center" fxFlex="90%" [ngSwitch]="view">
+        <mat-card *ngSwitchCase="'signUp'" class="cardSize">
+            <form [formGroup]="registerForm" (ngSubmit)="register()">
+                <div fxLayoutAlign="center">
+                    <mat-card-title> Register</mat-card-title>
+                </div>
+                <div fxLayoutAlign="center" class="registerField">
+                    <mat-form-field>
+                        <input type="password" formControlName="userName" matInput placeholder="User Name">
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="center">
+                    <mat-form-field>
+                        <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="center">
+                    <mat-form-field>
+                        <input type="password" formControlName="userPassword" matInput placeholder="Password">
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="center" class = "loginButton"><button type="submit" mat-button >Sign Up</button></div>
+            </form>
+        </mat-card>
+        <mat-card *ngSwitchDefault class="cardSize">
+            <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
+                <div fxLayoutAlign="center">
+                    <mat-card-title> Login</mat-card-title>
+                </div>
+                <div fxLayoutAlign="center" class="loginField">
+                    <mat-form-field >
+                        <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="center">
+                    <mat-form-field>
+                        <input type="password" formControlName="userPassword" matInput placeholder="Password">
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="center" class = "loginButton"><button type="submit" mat-button>Sign In</button></div>
+            </form>
+        </mat-card>
+</div>
 </div>
