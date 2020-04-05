@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-find-vendor',
@@ -11,6 +11,7 @@ export class FindVendorComponent implements OnInit {
   icon : string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
   constructor() { }
   coordinates :any[];
+  @Output() switcher = new EventEmitter<string>();
 
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -31,5 +32,8 @@ export class FindVendorComponent implements OnInit {
 
   markerClicked(marker){
     console.log(marker.company);
+  }
+  emit(){
+    this.switcher.emit();
   }
 }

@@ -12,9 +12,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class RequestVendorComponent implements OnInit {
   btndisabled : boolean = true;
   vinData : any[];
-  
+  switch : boolean = false;
   constructor(private appService: AppServiceService) { }
-
+  switcher : any;
   requestForm = new FormGroup({
     vehicleNumber: new FormControl(''),
     vehicleRegNumber: new FormControl(''),
@@ -43,5 +43,11 @@ export class RequestVendorComponent implements OnInit {
     }else{
       this.btndisabled = true;
     }
+  }
+  findMechanic(){
+    this.switch = true;
+  }
+  outputemit(x : string){
+    this.switch = false;
   }
 }

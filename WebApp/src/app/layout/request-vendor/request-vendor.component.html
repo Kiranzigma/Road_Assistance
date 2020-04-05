@@ -1,4 +1,4 @@
-<form [formGroup]="requestForm">
+<form *ngIf="switch == false" [formGroup]="requestForm" (ngSubmit)="findMechanic()">
     <div fxLayout="column">
         <div fxLayout="row">
             <div fxFlex="100%">
@@ -46,5 +46,5 @@
     </div>
 </form>
 
-<app-find-vendor>
+<app-find-vendor *ngIf="switch == true" (switcher)="outputemit($event)">
 </app-find-vendor>
