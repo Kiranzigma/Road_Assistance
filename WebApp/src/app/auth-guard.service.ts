@@ -16,13 +16,13 @@ export class AuthGuard implements CanActivate {
             const validUserType = route.data.expectedRole;
             if(validUserType != undefined){
                 let userData = this.userService.getUser();
-                if(userData.userType != validUserType){
+                if(userData?.userType != validUserType){
                     checkUser = false;
                     if(checkUser ==  false){
                         this.router.navigate(['/layout/Profile'])
                         return false;
                     }
-                }       
+                }    
             }
         if (this.isExpired() == false && checkUser) {
             return true;

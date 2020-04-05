@@ -1,25 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import { AppServiceService } from 'src/app/app-service.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
+// https://vingenerator.org/
+// https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/5XYKT3A17BG157871?format=json
 @Component({
   selector: 'app-request-vendor',
   templateUrl: './request-vendor.component.html',
   styleUrls: ['./request-vendor.component.scss']
 })
 export class RequestVendorComponent implements OnInit {
-  lat: string;
-  long: string;
-  constructor() { }
+  btndisabled : boolean = true;
+  vinData : any[];
+  switch : boolean = false;
+  constructor(private appService: AppServiceService) { }
+  switcher : any;
+  requestForm = new FormGroup({
+    vehicleNumber: new FormControl(''),
+    vehicleRegNumber: new FormControl(''),
+    description : new FormControl(''),
+    message : new FormControl('')
+  });
 
-  ngOnInit(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.showPosition(position);
-    });
+  ngOnInit(): void {   
   }
 
-  showPosition(position) {
-    this.lat = position.coords.latitude;
-    this.long = position.coords.longitude;
-    console.log(this.lat);
-    console.log(this.long);
-  } 
+  checkInput(){
+    let vin = this.requestForm?.get('vehicleNumber')?.value;
+    if(vin?.length == 17){
+      this.appService.getExternal("https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/" + vin +"?format=json").subscribe(
+         x=>{
+          this.vinData = x.Results.filter(y=> {
+            if((y.Variable == "Make" ||y.Variable == "Manufacturer Name"|| y.Variable == "Model"  ||y.Variable == "Engine Model") && y.Value != null) {
+              return y;
+            }
+          })
+          if(this.vinData.length > 1){
+            this.btndisabled = false;
+          }
+         }          
+      );
+    }else{
+      this.btndisabled = true;
+    }
+  }
+  findMechanic(){
+    this.switch = true;
+  }
+  outputemit(x : string){
+    this.switch = false;
+  }
 }

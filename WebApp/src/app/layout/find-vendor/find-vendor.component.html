@@ -1,0 +1,28 @@
+<div fxLayout="row">
+    <div fxFlex="50%">
+        <mat-form-field fxLayoutAlign="center center">
+            <input type="text" matInput placeholder="Address">
+        </mat-form-field>
+    </div>
+    <div class="map" fxFlex="50%">
+        <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">
+            <agm-marker [iconUrl]="icon" [latitude]="lat" [longitude]="long">
+            </agm-marker>
+            <agm-marker *ngFor="let marker of coordinates;" [latitude]="marker.latitude" [longitude]="marker.longitude" [markerClickable]="true" (markerClick)="markerClicked(marker)">
+            </agm-marker>
+        </agm-map>
+    </div>
+</div>
+<br>
+<div fxLayout="row">
+    <div fxFlex="50%" fxLayoutAlign="center center">
+        <button (click)="emit()" mat-button>
+            Back
+        </button>
+    </div>
+    <div fxFlex="50%" fxLayoutAlign="center center">
+        <button mat-button>
+            Request
+        </button>
+    </div>
+</div>

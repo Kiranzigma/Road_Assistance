@@ -13,4 +13,9 @@ export class EncryptServiceService {
     return encrypted.toString();
   }
 
+  get(keys,value){
+    var decrypted = CryptoJS.AES.decrypt(value.toString(), keys.toString());
+    return decrypted.toString(CryptoJS.enc.Utf8);
+  }
+
 }

@@ -37,4 +37,7 @@ export class AppServiceService {
     return this.http.post<T>(urlparam,body);
   }
 
+  getExternal<T>(url): Observable<any>{
+    return this.http.get(url);
+  }
 }

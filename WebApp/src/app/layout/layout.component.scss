@@ -2,17 +2,17 @@ agm-map {
     height: 500px;
 }
 
-.sidenav {
-    background-color: rgb(252, 200, 103) !important;
+.navside {
+    background-color: rgba(235, 183, 39, 0.993) !important;
 }
 
-mat-sidenav{
-    a:hover{
-            font-weight: bold;
-            background-color: #4dd0e1;
+mat-nav-list {
+    a:hover {
+        background-color: orange;
     }
 }
 
-main-nav{
+.navbar {
+    top:0%;
     position: sticky;
 }
