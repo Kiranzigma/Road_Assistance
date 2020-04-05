@@ -7,7 +7,3 @@ export interface IResponse{
 export interface Iuser{
     userType : String
 }
-
-export interface Imake{
-    Make_Name: String;
-}

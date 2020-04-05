@@ -1,0 +1,15 @@
+<div fxLayout="row">
+    <div fxFlex="50%">
+        <mat-form-field fxLayoutAlign="center center">
+            <input type="text" matInput formControlName="address" placeholder="Address">
+        </mat-form-field>
+    </div>
+    <div class="map" fxFlex="50%">
+        <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">
+            <agm-marker [iconUrl]="icon" [latitude]="lat" [longitude]="long">
+            </agm-marker>
+            <agm-marker *ngFor="let marker of coordinates;" [latitude]="marker.latitude" [longitude]="marker.longitude" [markerClickable]="true" (markerClick)="markerClicked(marker)">
+            </agm-marker>
+        </agm-map>
+    </div>
+</div>
