@@ -3,7 +3,7 @@
         <div fxLayout="row">
             <div fxFlex="100%">
                 <mat-form-field fxLayoutAlign="center">
-                    <input type="text" matInput formControlName="vehicleNumber" maxlength="17" placeholder="Vehicle Identification Number">
+                    <input type="text" (ngModelChange)="checkInput()" matInput formControlName="vehicleNumber" maxlength="17" placeholder="Vehicle Identification Number">
                 </mat-form-field>
             </div>
         </div>
@@ -54,7 +54,7 @@
         <div fxLayout="row">
             <div fxFlex="100%">
                 <div fxLayoutAlign="center">
-                    <button type="submit" mat-button>Find Mechanic</button>
+                    <button type="submit" [disabled]="btndisabled" mat-button>Find Mechanic</button>
                 </div>
             </div>
         </div>

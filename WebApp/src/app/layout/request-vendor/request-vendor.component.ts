@@ -11,14 +11,15 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./request-vendor.component.scss']
 })
 export class RequestVendorComponent implements OnInit {
-  vehicleNumber: string;
+  btndisabled : boolean = true;
+  vinData : any[];
   lat: string;
   long: string;
   icon : string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
   constructor(private appService: AppServiceService) { }
   makes: Imake[];
   coordinates :any[];
-  
+
   requestForm = new FormGroup({
     vehicleNumber: new FormControl(''),
     vehicleRegNumber: new FormControl(''),
@@ -49,5 +50,24 @@ export class RequestVendorComponent implements OnInit {
 
   markerClicked(marker){
     console.log(marker.company);
+  }
+  checkInput(){
+    let vin = this.requestForm?.get('vehicleNumber')?.value;
+    if(vin?.length == 17){
+      this.appService.getExternal("https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/" + vin +"?format=json").subscribe(
+         x=>{
+          this.vinData = x.Results.filter(y=> {
+            if((y.Variable == "Make" ||y.Variable == "Manufacturer Name"|| y.Variable == "Model"  ||y.Variable == "Engine Model") && y.Value != null) {
+              return y;
+            }
+          })
+          if(this.vinData.length > 1){
+            this.btndisabled = false;
+          }
+         }          
+      );
+    }else{
+      this.btndisabled = true;
+    }
   }
 }
