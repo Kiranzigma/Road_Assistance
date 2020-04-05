@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppServiceService } from 'src/app/app-service.service';
 import { Imake } from 'src/app/interface/IResponse';
+import { FormGroup, FormControl } from '@angular/forms';
+
 // https://vingenerator.org/
 // https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/5XYKT3A17BG157871?format=json
 @Component({
@@ -9,12 +11,21 @@ import { Imake } from 'src/app/interface/IResponse';
   styleUrls: ['./request-vendor.component.scss']
 })
 export class RequestVendorComponent implements OnInit {
+  vehicleNumber: string;
   lat: string;
   long: string;
   icon : string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
   constructor(private appService: AppServiceService) { }
   makes: Imake[];
   coordinates :any[];
+  
+  requestForm = new FormGroup({
+    vehicleNumber: new FormControl(''),
+    vehicleRegNumber: new FormControl(''),
+    description : new FormControl(''),
+    message : new FormControl('')
+  });
+
   ngOnInit(): void {
     navigator.geolocation.getCurrentPosition((position) => {
       this.showPosition(position);
@@ -26,9 +37,9 @@ export class RequestVendorComponent implements OnInit {
         company : 'XYZ Mech'
       }
     ]
-    this.appService.getExternal<Imake>("https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json").subscribe(x=>{
-      this.makes = x.Results;
-    });
+    // this.appService.getExternal<Imake>("https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json").subscribe(x=>{
+    //   this.makes = x.Results;
+    // });
   }
 
   showPosition(position) {
