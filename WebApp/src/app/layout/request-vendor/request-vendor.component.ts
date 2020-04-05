@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AppServiceService } from 'src/app/app-service.service';
-import { Imake } from 'src/app/interface/IResponse';
 import { FormGroup, FormControl } from '@angular/forms';
 
 // https://vingenerator.org/
@@ -13,12 +12,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class RequestVendorComponent implements OnInit {
   btndisabled : boolean = true;
   vinData : any[];
-  lat: string;
-  long: string;
-  icon : string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
+  
   constructor(private appService: AppServiceService) { }
-  makes: Imake[];
-  coordinates :any[];
 
   requestForm = new FormGroup({
     vehicleNumber: new FormControl(''),
@@ -27,30 +22,9 @@ export class RequestVendorComponent implements OnInit {
     message : new FormControl('')
   });
 
-  ngOnInit(): void {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.showPosition(position);
-    });
-    this.coordinates = [
-      {
-        latitude : "42.3371621"
-        , longitude : "-71.1059823",
-        company : 'XYZ Mech'
-      }
-    ]
-    // this.appService.getExternal<Imake>("https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json").subscribe(x=>{
-    //   this.makes = x.Results;
-    // });
+  ngOnInit(): void {   
   }
 
-  showPosition(position) {
-    this.lat = position.coords.latitude;
-    this.long = position.coords.longitude;
-  } 
-
-  markerClicked(marker){
-    console.log(marker.company);
-  }
   checkInput(){
     let vin = this.requestForm?.get('vehicleNumber')?.value;
     if(vin?.length == 17){
