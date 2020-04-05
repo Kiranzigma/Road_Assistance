@@ -1,8 +1,18 @@
-agm-map {
-    height: 50%;
-    width: 50%;
+.map {
+    width: 100%;
+    min-height: 50vh;
+    agm-map {
+        height: 100%;
+        width: 80%;
+    }
 }
 
-.sidenav {
-    background-color: rgb(252, 200, 103) !important;
+button {
+    background-color: orange !important;
+}
+
+::ng-deep mat-form-field {
+    div {
+        width: 50%;
+    }
 }
