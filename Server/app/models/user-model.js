@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 /**
- * Mongoose schema for rsa objects
+ * Mongoose schema for user objects
  */
 
 let userSchema = new Schema({
@@ -25,6 +25,16 @@ let userSchema = new Schema({
         type: String,
         required: true
     },
+    isVerified: {
+         type: Boolean, 
+         default: false 
+    },
+    passwordResetToken: {
+        type: String
+    },
+    passwordResetExpires: {
+        type: Date
+    }
 }, {
     versionKey: false
 });
@@ -41,4 +51,6 @@ userSchema.set('toJSON', {
     virtuals: true
 });
 
+
 module.exports = mongoose.model('UserSchema', userSchema);
+

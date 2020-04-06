@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: 'layout', loadChildren: () => LayoutModule, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'signUp', component: LoginComponent},
+  {path: 'verification', component:LoginComponent},
   {path: '**', redirectTo: 'login'}
 ];
 
