@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AppServiceService } from 'src/app/app-service.service';
 
 @Component({
   selector: 'app-find-vendor',
@@ -6,10 +7,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./find-vendor.component.scss']
 })
 export class FindVendorComponent implements OnInit {
+  address: any;
   lat: string;
   long: string;
   icon : string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
-  constructor() { }
+  constructor(private appService: AppServiceService) { }
   coordinates :any[];
   @Output() switcher = new EventEmitter<string>();
 
@@ -28,6 +30,12 @@ export class FindVendorComponent implements OnInit {
   showPosition(position) {
     this.lat = position.coords.latitude;
     this.long = position.coords.longitude;
+    this.appService.getExternal("https://maps.googleapis.com/maps/api/geocode/json?latlng="+ this.lat +","+this.long +"&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
+      x=>{
+        x.results.slice(0,1).forEach(y=> this.address = y);
+        this.address = this.address.formatted_address;
+      }
+    );
   } 
 
   markerClicked(marker){
@@ -35,5 +43,15 @@ export class FindVendorComponent implements OnInit {
   }
   emit(){
     this.switcher.emit();
+  }
+  getLatLong(){
+    this.appService.getExternal("https://maps.googleapis.com/maps/api/geocode/json?address="+ this.address + "&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
+      x=>{
+        x.results.slice(0,1).forEach(y=> {
+          this.lat = y.geometry.location.lat;
+          this.long = y.geometry.location.lng;
+        });
+      }
+    )
   }
 }

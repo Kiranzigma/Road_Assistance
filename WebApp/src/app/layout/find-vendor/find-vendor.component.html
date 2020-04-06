@@ -1,7 +1,8 @@
+<br>
 <div fxLayout="row">
     <div fxFlex="50%">
         <mat-form-field fxLayoutAlign="center center">
-            <input type="text" matInput placeholder="Address">
+            <input type="text" [(ngModel)]="address" (ngModelChange)="getLatLong()" matInput placeholder="Address" [value]="address">
         </mat-form-field>
     </div>
     <div class="map" fxFlex="50%">
