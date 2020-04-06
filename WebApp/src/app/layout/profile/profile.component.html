@@ -4,11 +4,28 @@
 <br>
 <form [formGroup]="updateForm" fxLayout="column" class="flexColumn">
     <div fxLayout = "row" class="profileImage">
-        <div fxFlex="100%">
-        <img src="../../../assets/empty-profile.png" width="200px" height="200px" class="profileIcon">
+        <!-- <img fxFlex="128px" src="http://placehold.it/128x128" class="profileIcon" onclick="openUploadImageDialogue()"> -->
+        <label class="hoverable" for="fileInput">
+            <img [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'"> 
+            <div class="hover-text">Choose file</div>
+            <div class="background"></div>
+        </label>
+        <br/>
+    </div> 
+    <br>
+        <input id="fileInput" type='file' (change)="onSelectFile($event)">
+        <div fxLayout="row">
+            <div fxFlex="100%">
+                <div fxLayoutAlign="center">
+                    <button *ngIf="url" (click)="delete()" class="deleteButton" >delete</button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div fxLayout="row">
+        
+   
+
+
+    <div fxLayout="row" class="formStart">
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
                 <input type="text" matInput formControlName="firstName" placeholder="First Name">

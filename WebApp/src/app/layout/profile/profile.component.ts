@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormGroup, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -10,9 +11,13 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  title : string = "Update Profile"
-  constructor(private _routes: Router) { }
+  name = 'Angular 9';
+  url = '';
+  title : string = "Update Profile";
 
+  constructor(private http: HttpClient) { 
+   
+  }
   updateForm = new FormGroup({
     firstName : new FormControl(''),
     lastName : new FormControl(''),
@@ -24,8 +29,21 @@ export class ProfileComponent implements OnInit {
     confirmPassword : new FormControl('')
     
   });
-  ngOnInit(): void {
-   
+  ngOnInit(): void {}
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+  
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+  
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.url = event.target.result;
+      }
+    }
   }
-
+  public delete(){
+    this.url = null;
+  }
 }
+
+
