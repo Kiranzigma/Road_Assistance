@@ -17,6 +17,18 @@ let userSchema = new Schema({
         type: String,
         required: true
     },
+    userFirstName: {
+        type: String,
+        required: true
+    },
+    userLastName: {
+        type: String,
+        required: true
+    },
+    isVerified: {
+         type: Boolean, 
+         default: false 
+    },
     userType: {
         type: String
     }
