@@ -2,7 +2,11 @@
 <mat-toolbar class="layout" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
     <div fxLayoutAlign="center" fxFlex="10%"></div>
     <div fxLayoutAlign="center center" fxFlex="80%" class="header"> Road Side Assistance</div>
-    <div fxLayoutAlign="center" fxFlex="10%"></div>
+    <div *ngIf="view=='login'; else notShow" fxLayoutAlign="right" fxFlex="10%"><button (click)="signUp()"
+        mat-button>User Registration</button></div>
+        <ng-template #notShow>
+            <div fxLayoutAlign="center" fxFlex="10%"><button (click)="login()" mat-button>Login</button></div>
+        </ng-template>
 </mat-toolbar>
 <br>
 
@@ -11,14 +15,75 @@
 
 
 <!-- example for row wise fx -->
-<div fxLayout="column">
-    <mat-card>
+<div fxLayout="column" [ngSwitch]="view">
+    <mat-card *ngSwitchCase="'signUp'" >
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <div fxLayoutAlign="center">
+                <mat-card-title> Register</mat-card-title>
+            </div>
+            <div fxLayoutAlign="center">
+                <mat-form-field>
+                    <input type="text" formControlName="userFirstName" matInput placeholder="First Name">
+                <mat-error *ngIf="rf.userFirstName.invalid">{{getRegisterErrorMessage('userFirstName')}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="center">
+                <mat-form-field>
+                    <input type="text" formControlName="userLastName" matInput placeholder="Last Name">
+                <mat-error *ngIf="rf.userLastName.invalid">{{getRegisterErrorMessage('userLastName')}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
+                <mat-error *ngIf="rf.userEmail.invalid">{{getRegisterErrorMessage('userEmail')}}</mat-error>
+            </mat-form-field>
+            </div>
+            <div fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="password" formControlName="userPassword" matInput placeholder="Password">
+                <mat-error *ngIf="rf.userPassword.invalid">{{getRegisterErrorMessage('userPassword')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="password" formControlName="confirmPassword" matInput placeholder="Re-Enter Password">
+                <mat-error *ngIf="rf.confirmPassword.invalid">{{getRegisterErrorMessage('confirmPassword')}}</mat-error>
+            </mat-form-field>
+        </div>
+            <div fxLayoutAlign="center" ><button type="submit" mat-button >Sign Up</button></div>
+        </form>
+    </mat-card>
+
+    <mat-card *ngSwitchCase="'verification'" >
+        <form [formGroup]="verificationForm">
+        <div fxLayoutAlign="center">
+            <mat-card-title> Please Verify</mat-card-title>
+        </div>
+        <div fxLayoutAlign="center">
+            <mat-form-field >
+                <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
+                <mat-error *ngIf="vf.userEmail.invalid">{{getVerificationErrorMessage('userEmail')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center">
+            <mat-form-field >
+                <input type="text" formControlName="verificationCode" matInput placeholder="Verification Code">
+                <mat-error *ngIf="vf.verificationCode.invalid">{{getVerificationErrorMessage('verificationCode')}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center" ><button type="submit" (click)="verifyOrResend('Verify')" mat-button>Verify</button></div>
+        <div fxLayoutAlign="center" ><button type="submit" (click)="verifyOrResend('Resend')" mat-button>Resend Code</button></div>
+        </form>
+    </mat-card>
+
+    <mat-card *ngSwitchDefault >
         <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
             <div fxLayoutAlign="center">
                 <mat-card-title> Login</mat-card-title>
             </div>
-            <div fxLayoutAlign="center">
-                <mat-form-field>
+            <div fxLayoutAlign="center" >
+                <mat-form-field >
                     <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
                 </mat-form-field>
             </div>
@@ -27,7 +92,7 @@
                     <input type="password" formControlName="userPassword" matInput placeholder="Password">
                 </mat-form-field>
             </div>
-            <div fxLayoutAlign="center"><button type="submit" mat-button>Sign In</button></div>
+            <div fxLayoutAlign="center" ><button type="submit" mat-button>Sign In</button></div>
         </form>
     </mat-card>
 </div>
