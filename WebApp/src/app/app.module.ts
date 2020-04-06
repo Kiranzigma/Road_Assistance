@@ -11,7 +11,10 @@ import { AppServiceService } from './app-service.service';
 import { HttpClientModule } from '@angular/common/http'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import {EncryptServiceService} from '../app/encrypt-service.service';
+import { CommonModule } from '@angular/common';
+
 import { UserServiceService } from './shared/user-service.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,8 @@ import { UserServiceService } from './shared/user-service.service';
     MaterialModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
     ],
   providers: [AppServiceService, EncryptServiceService, UserServiceService],
   bootstrap: [AppComponent]

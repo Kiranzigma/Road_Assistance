@@ -1,6 +1,9 @@
 'use strict';
 const mongoose = require('mongoose');
+var crypto = require('crypto');
+var nodemailer = require('nodemailer');
 const usermodel = mongoose.model('UserSchema');
+const tokenmodel = mongoose.model('TokenSchema');
 
 // method to search a value in the database
 exports.auth = (userId) => {
@@ -9,8 +12,7 @@ exports.auth = (userId) => {
 };
 
 exports.save = (user) => {
-    const newuser = new usermodel(user);
-    return newuser.save();
+    
 }
 
 exports.update = (user) => {
@@ -19,3 +21,4 @@ exports.update = (user) => {
     }, user, { new: true }).exec();
     return promise;
 }
+

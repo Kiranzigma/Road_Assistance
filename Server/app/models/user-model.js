@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 /**
- * Mongoose schema for rsa objects
+ * Mongoose schema for user objects
  */
 
 let userSchema = new Schema({
@@ -17,6 +17,24 @@ let userSchema = new Schema({
         type: String,
         required: true
     },
+    userFirstName: {
+        type: String,
+        required: true
+    },
+    userLastName: {
+        type: String,
+        required: true
+    },
+    isVerified: {
+         type: Boolean, 
+         default: false 
+    },
+    passwordResetToken: {
+        type: String
+    },
+    passwordResetExpires: {
+        type: Date
+    },
     userType: {
         type: String
     }
@@ -24,7 +42,7 @@ let userSchema = new Schema({
     versionKey: false
 });
 
-// Duplicate the id field as mangoose returns _id field instead of id
+// Duplicate the id field as mongoose returns _id field instead of id
 
 userSchema.virtual('id').get(function() {
     return this._id.toHexString();
@@ -36,4 +54,6 @@ userSchema.set('toJSON', {
     virtuals: true
 });
 
+
 module.exports = mongoose.model('UserSchema', userSchema);
+
