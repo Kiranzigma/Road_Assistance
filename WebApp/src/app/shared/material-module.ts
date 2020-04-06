@@ -6,14 +6,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-
-import {MatDialogModule} from '@angular/material/dialog';
-
 import { MatFileUploadModule } from 'mat-file-upload';
 import {WebcamModule} from 'ngx-webcam';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
 
 // import the modules from the angular material using the full path as it got changed in the version 9
 const modules = [
@@ -24,14 +20,10 @@ const modules = [
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    MatDialogModule,
     MatFileUploadModule,
     WebcamModule,
     MatSelectModule,
-    MatTooltipModule,
-    MatRadioModule,
     MatTooltipModule
-
 ];
 
 @NgModule({
