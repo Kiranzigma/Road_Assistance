@@ -1,1 +1,69 @@
-<p>profile works!</p>
+<app-navbar [title]="title">
+
+</app-navbar>
+<br>
+<form [formGroup]="updateForm" fxLayout="column" class="flexColumn">
+    <div fxLayout = "row" class="profileImage">
+        <div fxFlex="100%">
+        <img src="../../../assets/empty-profile.png" width="200px" height="200px" class="profileIcon">
+        </div>
+    </div>
+    <div fxLayout="row">
+        <div fxFlex="50%">
+            <mat-form-field fxLayoutAlign="center">
+                <input type="text" matInput formControlName="firstName" placeholder="First Name">
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field fxLayoutAlign="center">
+                <input type="text" matInput formControlName="lastName" placeholder="Last Name">
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout="row">
+        <div fxFlex="50%">
+            <mat-form-field fxLayoutAlign="center">
+                <input type="text" matInput formControlName="email" placeholder="Email">
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field fxLayoutAlign="center">
+                <input type="text" matInput formControlName="mobile" placeholder="Mobile Number">
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout="row">
+        <div fxFlex="50%">
+            <mat-radio-group formControlName="gender" fxLayoutAlign="space-around" class="radioButton">
+                <mat-radio-button value ="1">Male</mat-radio-button>
+                <mat-radio-button value ="2">Female</mat-radio-button>
+                <mat-radio-button value ="3">Other</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field fxLayoutAlign="center">
+                <input type="text" matInput formControlName="password" placeholder="Password">
+            </mat-form-field>
+        </div>
+    </div>
+    <div fxLayout="row">
+        <div fxFlex="50%">
+            <mat-form-field fxLayoutAlign="center">
+                <input type="text" matInput formControlName="newPassword" placeholder="New Password">
+            </mat-form-field>
+        </div>
+        <div fxFlex="50%">
+            <mat-form-field fxLayoutAlign="center">
+                <input type="text" matInput formControlName="confirmPassword" placeholder="Re-enter New Password">
+            </mat-form-field>
+        </div>
+    </div>
+    <br><br>
+    <div fxLayout="row">
+        <div fxFlex="100%">
+            <div fxLayoutAlign="center">
+                <button type="submit" mat-button>Update</button>
+            </div>
+        </div>
+    </div>
+</form>
