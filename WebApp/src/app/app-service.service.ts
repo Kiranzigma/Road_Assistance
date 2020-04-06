@@ -16,11 +16,10 @@ export class AppServiceService {
 
     let url = environment.api_url + url_map[0].url;
 
-    if(param) {
     param.forEach(x => {
       url = url + "/" + x;
     });
-    }
+
     return url;
   }
 
