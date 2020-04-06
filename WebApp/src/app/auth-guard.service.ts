@@ -12,24 +12,23 @@ export class AuthGuard implements CanActivate {
     
     constructor(private router: Router, private userService: UserServiceService) { }
     canActivate(route : ActivatedRouteSnapshot) {
-        let checkUser: Boolean = true;
-            const validUserType = route.data.expectedRole;
-            if(validUserType != undefined){
-                let userData = this.userService.getUser();
-                if(userData?.userType != validUserType){
-                    checkUser = false;
-                    if(checkUser ==  false){
-                        this.router.navigate(['/layout/Profile'])
-                        return false;
-                    }
-                }    
-            }
-        if (this.isExpired() == false && checkUser) {
+        if (this.isExpired() == false && this.checkUserFunc(route)) {
             return true;
         } else {
             this.router.navigate(['/login'])
             return false;
         }
+    }
+    checkUserFunc(route){
+    let checkUser: Boolean = true;
+            const validUserType = route.data.expectedRole;
+            if(validUserType != undefined){
+                let userData = this.userService.getUser();
+                if(userData?.userType != validUserType){                    
+                        checkUser = false;
+                }    
+            }
+            return checkUser;
     }
     isExpired() {
         const helper = new JwtHelperService();
