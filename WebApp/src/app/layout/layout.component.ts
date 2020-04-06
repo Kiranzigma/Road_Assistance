@@ -13,14 +13,17 @@ export class LayoutComponent implements OnInit {
   
   constructor(private _routes: Router, private Appservice : AppServiceService) { }
   ngOnInit(): void {
-    this.Nav = [{ displayName : 'Profile', route : 'Profile'},
-    { displayName : 'Request Repair', route : 'PequestVendor'},
-    { displayName : 'Logout', route : 'logout'} ]
+    this.Nav = [
+      { icon: 'commute', displayName : 'Request Repair', route : 'RequestVendor'},
+      { icon: 'account_circle', displayName : 'Profile', route : 'Profile'},
+      { icon:'power_settings_new', displayName : 'Logout', route : 'logout'} ]
   } 
  
   getURL(param : any):void{
+    this.opened = ! this.opened;
     if(param.route == "logout"){
       sessionStorage.removeItem('jwt_token');
+      sessionStorage.removeItem('auth');
       this._routes.navigate(['/login']);
     }else{
       this._routes.navigate(["/layout/" + param.route]);

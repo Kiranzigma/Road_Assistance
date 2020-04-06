@@ -34,10 +34,12 @@
           },
           "configurations": {
             "production": {
+
               "fileReplacements": [{
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }],
+            
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -125,6 +127,6 @@
   },
   "defaultProject": "RoadSideAssistance",
   "cli": {
-    "analytics": "81ec827d-98f4-425d-a241-5fac4002b259"
+    "analytics": "f489dcb2-367c-4434-9a55-8f1814aa4abd"
   }
 }

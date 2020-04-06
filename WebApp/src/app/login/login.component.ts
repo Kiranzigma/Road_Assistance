@@ -4,10 +4,14 @@ import { AppServiceService } from '../app-service.service';
 import { IResponse } from '../interface/IResponse';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { EncryptServiceService } from '../../app/encrypt-service.service';
+
 import { userResponse } from '../interface/userResponse';
 import { verificationResponse } from '../interface/verificationResponse';
 import { MustMatch } from '../../app/helpers/must-match.validator';
 import { MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+
+import { UserServiceService } from '../shared/user-service.service';
 
 
 @Component({
@@ -30,6 +34,7 @@ export class LoginComponent implements OnInit {
     private EncrDecr: EncryptServiceService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
+    private user: UserServiceService
     ) { }
 
   loginForm = new FormGroup({
@@ -40,6 +45,7 @@ export class LoginComponent implements OnInit {
   
 
   ngOnInit(): void {
+
    this.urlReader();
    this.submitted=false;
   
@@ -68,6 +74,10 @@ export class LoginComponent implements OnInit {
       this.view=params[0].path;
       console.log("Current View -- " + this.view);
     })
+    
+    sessionStorage.removeItem('jwt_token');
+    sessionStorage.removeItem('auth');
+
   }
 
 
@@ -80,6 +90,8 @@ export class LoginComponent implements OnInit {
     // authenticate the user and let him login
     const val = this.appservice.post<IResponse>('US-AU', body, params).subscribe(x => {
       if (x.auth == true) {
+        sessionStorage.setItem("auth", this.EncrDecr.set('123456$#@$^@1ERF',JSON.stringify(x.user)));
+        delete x.user
         sessionStorage.setItem("jwt_token", JSON.stringify(x));
         this._routes.navigate(['/layout']);
       }

@@ -13,6 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {EncryptServiceService} from '../app/encrypt-service.service';
 import { CommonModule } from '@angular/common';
 
+import { UserServiceService } from './shared/user-service.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,7 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     CommonModule
     ],
-  providers: [AppServiceService, EncryptServiceService],
+  providers: [AppServiceService, EncryptServiceService, UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

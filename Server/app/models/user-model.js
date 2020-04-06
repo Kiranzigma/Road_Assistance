@@ -34,6 +34,9 @@ let userSchema = new Schema({
     },
     passwordResetExpires: {
         type: Date
+    },
+    userType: {
+        type: String
     }
 }, {
     versionKey: false

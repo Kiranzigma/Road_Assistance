@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { FormGroup, FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-profile',
@@ -7,12 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() {
-    debugger;
-  }
 
+  constructor(private _routes: Router,
+    private route: ActivatedRoute) { }
+
+  updateForm = new FormGroup({
+    $key: new FormControl(null),
+    firstName : new FormControl(''),
+    lastName : new FormControl(''),
+    email : new FormControl(''),
+    mobile : new FormControl(''),
+    gender : new FormControl(''),
+    password : new FormControl(''),
+    newPassword : new FormControl(''),
+    confirmPassword : new FormControl('')
+    
+  });
   ngOnInit(): void {
-    debugger;
+    sessionStorage.removeItem('jwt_token');
+    sessionStorage.removeItem('auth');
   }
 
 }
