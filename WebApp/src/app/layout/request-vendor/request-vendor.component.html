@@ -1,60 +1,54 @@
-<div fxLayout="column">
-    <div fxLayout="row">
-        <div fxFlex="100%">
-            <mat-form-field fxLayoutAlign="center">
-                <input type="text" matInput formControlName="vehicleNumber" placeholder="Vehicle Identification Number">
-            </mat-form-field>
+<app-navbar [title]="title">
+
+</app-navbar>
+<br>
+<form *ngIf="switch == false" [formGroup]="requestForm" (ngSubmit)="findMechanic()">
+    <div fxLayout="column">
+        <div fxLayout="row">
+            <div fxFlex="100%">
+                <mat-form-field fxLayoutAlign="center">
+                    <input type="text" (ngModelChange)="checkInput()" matInput formControlName="vehicleNumber" maxlength="17" placeholder="Vehicle Identification Number">
+                </mat-form-field>
+            </div>
         </div>
-    </div>
-    <div fxLayout="row">
-        <div fxFlex="100%">
-            <mat-form-field fxLayoutAlign="center">
-                <input type="text" matInput formControlName="vehicleRegNumber" placeholder="Registration Number">
-            </mat-form-field>
+        <div fxLayout="row">
+            <div fxFlex="100%">
+                <mat-form-field fxLayoutAlign="center">
+                    <input type="text" matInput formControlName="vehicleRegNumber" placeholder="Registration Number">
+                </mat-form-field>
+            </div>
         </div>
-    </div>
-    <div fxLayout="row">
-        <div fxFlex="100%">
-            <mat-form-field fxLayoutAlign="center center">
-                <textarea matInput cdkTextareaAutosize formControlName="description" placeholder="Description">
+        <div fxLayout="row">
+            <div fxFlex="100%">
+                <mat-form-field fxLayoutAlign="center center">
+                    <textarea matInput cdkTextareaAutosize formControlName="description" placeholder="Description">
                  </textarea>
-            </mat-form-field>
+                </mat-form-field>
+            </div>
         </div>
-    </div>
-    <div fxLayout="row">
-        <div fxFlex="100%">
-            <mat-form-field fxLayoutAlign="center center">
-                <textarea matInput cdkTextareaAutosize formControlName="message" placeholder="Message to Mechanic">
+        <div fxLayout="row">
+            <div fxFlex="100%">
+                <mat-form-field fxLayoutAlign="center center">
+                    <textarea matInput cdkTextareaAutosize formControlName="message" placeholder="Message to Mechanic">
                  </textarea>
-            </mat-form-field>
+                </mat-form-field>
+            </div>
         </div>
-    </div>
-    <div fxLayout="row">
-        <div fxFlex="100%" fxLayoutAlign="center center">
-            <mat-file-upload [allowMultipleFiles]="false" [labelText]="'Select a file to upload:'"></mat-file-upload>
+        <div fxLayout="row">
+            <div fxFlex="100%" fxLayoutAlign="center center">
+                <mat-file-upload [allowMultipleFiles]="false" [labelText]="'Select a file to upload:'"></mat-file-upload>
+            </div>
         </div>
-    </div>
-    <!-- <div fxLayout="row">
-        <div fxFlex="50%">
-            <mat-form-field fxLayoutAlign="center center">
-                <input type="text" matInput formControlName="address" placeholder="Address">
-            </mat-form-field>
-        </div>
-        <div class="map" fxFlex="50%">
-            <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">
-                <agm-marker [iconUrl]="icon" [latitude]="lat" [longitude]="long">
-                </agm-marker>
-                <agm-marker *ngFor="let marker of coordinates;" [latitude]="marker.latitude" [longitude]="marker.longitude" [markerClickable]="true" (markerClick)="markerClicked(marker)">
-                </agm-marker>
-            </agm-map>
-        </div>
-    </div> -->
-    <br>
-    <div fxLayout="row">
-        <div fxFlex="100%">
-            <div fxLayoutAlign="center">
-                <button type="submit" mat-button>Find Mechanic</button>
+        <br>
+        <div fxLayout="row">
+            <div fxFlex="100%">
+                <div fxLayoutAlign="center">
+                    <button type="submit" [disabled]="btndisabled" mat-button>Find Mechanic</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
+
+<app-find-vendor *ngIf="switch == true" (switcher)="outputemit($event)">
+</app-find-vendor>
