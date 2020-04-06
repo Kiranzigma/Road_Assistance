@@ -8,14 +8,17 @@ import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppServiceService } from '../app-service.service';
 import {AgmCoreModule} from '@agm/core';
+
 import { RequestVendorComponent } from './request-vendor/request-vendor.component'
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FindVendorComponent } from './find-vendor/find-vendor.component';
 import { UserRequestComponent } from './user-request/user-request.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent, FindVendorComponent, UserRequestComponent],
+  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent],
+
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,ReactiveFormsModule,
     FlexLayoutModule.withConfig({useColumnBasisZero: false}), HttpClientModule,FormsModule,

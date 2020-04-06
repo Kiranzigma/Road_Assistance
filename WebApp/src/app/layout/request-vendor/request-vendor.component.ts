@@ -10,6 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./request-vendor.component.scss']
 })
 export class RequestVendorComponent implements OnInit {
+  title : string = "Request Mechanic"
   btndisabled : boolean = true;
   vinData : any[];
   switch : boolean = false;

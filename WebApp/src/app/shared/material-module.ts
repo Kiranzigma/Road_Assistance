@@ -13,7 +13,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
+import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
 
 // import the modules from the angular material using the full path as it got changed in the version 9
 const modules = [
@@ -30,7 +31,9 @@ const modules = [
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatRadioModule,
+    MatDialogModule
 ];
 
 @NgModule({

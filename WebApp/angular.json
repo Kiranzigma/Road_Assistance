@@ -127,6 +127,6 @@
   },
   "defaultProject": "RoadSideAssistance",
   "cli": {
-    "analytics": false
+    "analytics": "43087ca7-350a-4089-bb73-563e46037d31"
   }
 }
