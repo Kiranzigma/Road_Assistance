@@ -8,7 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppServiceService } from '../app-service.service';
 import {AgmCoreModule} from '@agm/core';
-import { RequestVendorComponent } from './request-vendor/request-vendor.component'
+import { RequestVendorComponent } from './request-vendor/request-vendor.component';
 
 @NgModule({
   declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent],
