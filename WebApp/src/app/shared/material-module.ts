@@ -13,7 +13,6 @@ import { MatFileUploadModule } from 'mat-file-upload';
 import {WebcamModule} from 'ngx-webcam';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatRadioModule} from '@angular/material/radio';
 
 
 // import the modules from the angular material using the full path as it got changed in the version 9
@@ -30,7 +29,8 @@ const modules = [
     WebcamModule,
     MatSelectModule,
     MatTooltipModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
 
 ];
 
