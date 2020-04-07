@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     
     constructor(private router: Router, private userService: UserServiceService) { }
     canActivate(route : ActivatedRouteSnapshot) {
-        if (this.isExpired() == false && this.checkUserFunc(route)) {
+        if (this.isExpired() == false && this.checkUserFunc(route) && this.redirectUser(route) ) {
             return true;
         } else {
             this.router.navigate(['/login'])
@@ -29,6 +29,16 @@ export class AuthGuard implements CanActivate {
                 }    
             }
             return checkUser;
+    }
+    redirectUser(route){
+        if(route.data.isRoute == "true"){
+            if(this.userService?.getUser()?.userType == "user"){
+                this.router.navigate(['/layout/RequestVendor'])
+            }else if(this.userService?.getUser()?.userType == "vendor"){
+                this.router.navigate(['/layout/UserRequestComponent']);
+            }
+        }     
+        return true;
     }
     isExpired() {
         const helper = new JwtHelperService();
