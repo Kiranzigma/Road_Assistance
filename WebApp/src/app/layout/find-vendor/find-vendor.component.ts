@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter, AfterContentInit, Input } from '@angular/core';
 import { AppServiceService } from 'src/app/app-service.service';
 import { google } from 'google-maps';
 import { Observable, Subscriber, Subject } from 'rxjs';
@@ -10,6 +10,8 @@ declare var google: any;
   styleUrls: ['./find-vendor.component.scss']
 })
 export class FindVendorComponent {
+  @Input()
+  vinData : any;
   address: any;
   lat: string;
   long: string;
