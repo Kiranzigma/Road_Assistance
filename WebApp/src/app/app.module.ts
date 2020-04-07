@@ -6,9 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { MaterialModule } from './shared/material-module';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppServiceService } from './app-service.service';
+import { AppServiceService, APIInterceptorService } from './app-service.service';
 // for the service to be available across the project
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import {EncryptServiceService} from '../app/encrypt-service.service';
 import { UserServiceService } from './shared/user-service.service';
@@ -28,7 +28,8 @@ import { UserServiceService } from './shared/user-service.service';
     BrowserAnimationsModule,
     HttpClientModule
     ],
-  providers: [AppServiceService, EncryptServiceService, UserServiceService],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: APIInterceptorService, multi: true },
+    AppServiceService, EncryptServiceService, UserServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
