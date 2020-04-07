@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpHandler, HttpEvent} from '@angular/common/http';
+import { HttpInterceptor} from '@angular/common/http';
 
 import {Observable} from 'rxjs';
+import { IResponse } from './interface/IResponse';
 @Injectable()
 export class AppServiceService {
 
@@ -40,4 +42,18 @@ export class AppServiceService {
   getExternal<T>(url): Observable<any>{
     return this.http.get(url);
   }
+}
+
+@Injectable()
+export class APIInterceptorService implements HttpInterceptor {
+   intercept(req: HttpRequest<any>, next: HttpHandler):   Observable<HttpEvent<any>> {
+       // All HTTP requests are going to go through this method
+       let newHeaders = req.headers;
+       let t: IResponse = JSON.parse(sessionStorage.getItem('jwt_token'));
+       if (t != null) {
+        newHeaders = newHeaders.append("token", t.token);
+       }
+       const authReq = req.clone({headers: newHeaders});
+       return next.handle(authReq);
+   }
 }
