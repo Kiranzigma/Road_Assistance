@@ -11,13 +11,19 @@ import { UserServiceService } from '../shared/user-service.service';
 export class LayoutComponent implements OnInit {
   opened: boolean = false;
   Nav:any[];
-  constructor(private _routes: Router, private Appservice : AppServiceService) { }
+  constructor(private _routes: Router, private Appservice : AppServiceService, private userService : UserServiceService) { }
   ngOnInit(): void {
-    this.Nav = [
-      { icon: 'commute', displayName : 'Request Repair', route : 'RequestVendor', data: 'user'},
-      { icon: 'commute', displayName : 'Requests', route : 'UserRequestComponent', data: 'vendor'},
-      { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
-      { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ]
+     if(this.userService.getUser().userType == "user"){
+      this.Nav = [
+        { icon: 'commute', displayName : 'Request Repair', route : 'RequestVendor', data: 'user'},
+        { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
+        { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
+    }else if(this.userService.getUser().userType == "vendor"){
+      this.Nav = [
+        { icon: 'commute', displayName : 'Requests', route : 'UserRequestComponent', data: 'vendor'},
+        { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
+        { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
+    }
   } 
  
   getURL(param : any):void{

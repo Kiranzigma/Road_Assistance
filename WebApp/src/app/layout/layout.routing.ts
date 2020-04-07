@@ -14,7 +14,7 @@ const routes: Routes = [
         {path: 'Profile', component: ProfileComponent},
         {path: 'RequestVendor', component: RequestVendorComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
         {path: 'UserRequestComponent', component: UserRequestComponent,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
-        {path: '**', redirectTo:'Profile'}
+        {path: '**', canActivate : [AuthGuard], data: {isRoute : "true"}}
       ],
     },
  ];
