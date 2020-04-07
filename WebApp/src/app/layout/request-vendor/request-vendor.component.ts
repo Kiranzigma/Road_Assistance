@@ -11,7 +11,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class RequestVendorComponent implements OnInit {
   title : string = "Request Mechanic"
-  btndisabled : boolean = false;
+  btndisabled : boolean = true;
   vinData : any[];
   switch : boolean = false;
   constructor(private appService: AppServiceService) { }
