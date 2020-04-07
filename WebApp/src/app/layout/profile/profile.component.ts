@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     
   });
   ngOnInit(): void {}
+
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -37,7 +38,7 @@ export class ProfileComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]); // read file as data url
   
       reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
+        this.url  = event.target.result as string;
       }
     }
   }
