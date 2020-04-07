@@ -19,7 +19,7 @@ export class UserRequestComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
   }
   
-  displayedColumns: string[] = ['created', 'state', 'number', 'title'];
+  displayedColumns: string[] = ['created', 'state', 'number', 'title', 'details'];
   exampleDatabase: ExampleHttpDatabase | null;
   data: IUserRequest[] = [];
 
@@ -61,6 +61,9 @@ export class UserRequestComponent implements OnInit,AfterViewInit {
         })
       ).subscribe(x => this.data = x);
   }
+  public redirectToDetails = (id: string) => {
+    
+  }
   }
 
   export interface api {
@@ -76,9 +79,12 @@ export class ExampleHttpDatabase {
 
   getRequest(sort: string, order: string, page: number):Observable<api>{
     let t;
-    this.http.get<IUserRequest>('US-VE').subscribe(x=>{
+    this.http.get<IUserRequest>('US-VEN').subscribe(x=>{
       t = x;
     });
     return t;
 }
+
+
+
 }
