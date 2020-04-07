@@ -50,5 +50,5 @@
     </div>
 </form>
 
-<app-find-vendor *ngIf="switch == true" (switcher)="outputemit($event)">
+<app-find-vendor *ngIf="switch == true" [(vinData)]="vinData" (switcher)="outputemit($event)">
 </app-find-vendor>

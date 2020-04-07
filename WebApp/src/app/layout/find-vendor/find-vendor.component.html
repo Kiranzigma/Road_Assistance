@@ -7,6 +7,9 @@
         <mat-form-field *ngFor="let marker of coordinates;" fxLayoutAlign="center center">
             <input type="text" readonly matInput placeholder="Estimated Arrival" [value]="marker.duration">
         </mat-form-field>
+        <mat-form-field *ngFor="let vin of vinData;" fxLayoutAlign="center center">
+            <input type="text" readonly matInput [placeholder]="vin.Variable" [value]="vin.Value">
+        </mat-form-field>
     </div>
     <div class="map" fxFlex="50%">
         <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">
