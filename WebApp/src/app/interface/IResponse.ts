@@ -7,3 +7,13 @@ export interface IResponse{
 export interface Iuser{
     userType : String
 }
+
+export interface IUserRequest{
+    created_at: string;
+    number: string;
+    state: string;
+    title: string;
+    user: Iuser;
+    items: [];
+    total_count: number;
+}
