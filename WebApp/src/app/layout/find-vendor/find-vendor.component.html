@@ -1,15 +1,21 @@
 <br>
 <div fxLayout="row">
-    <div fxFlex="50%">
-        <mat-form-field fxLayoutAlign="center center">
-            <input type="text" [(ngModel)]="address" (ngModelChange)="getLatLong()" matInput placeholder="Current Address" [value]="address">
-        </mat-form-field>
-        <mat-form-field *ngFor="let marker of coordinates;" fxLayoutAlign="center center">
-            <input type="text" readonly matInput placeholder="Estimated Arrival" [value]="marker.duration">
-        </mat-form-field>
-        <mat-form-field *ngFor="let vin of vinData;" fxLayoutAlign="center center">
-            <input type="text" readonly matInput [placeholder]="vin.Variable" [value]="vin.Value">
-        </mat-form-field>
+    <div class="findVendor" fxLayout="column" fxFlex="50%">
+        <div fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="text" [(ngModel)]="address" (ngModelChange)="getLatLong()" matInput placeholder="Current Address" [value]="address">
+            </mat-form-field>
+        </div>
+        <div fxLayoutAlign="center">
+            <mat-form-field *ngFor="let marker of coordinates;">
+                <input type="text" readonly matInput placeholder="Estimated Arrival" [value]="marker.duration">
+            </mat-form-field>
+        </div>
+        <div *ngFor="let vin of vinData;" fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="text" readonly matInput [placeholder]="vin.Variable" [value]="vin.Value">
+            </mat-form-field>
+        </div>
     </div>
     <div class="map" fxFlex="50%">
         <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">

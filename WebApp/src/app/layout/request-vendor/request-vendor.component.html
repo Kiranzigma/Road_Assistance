@@ -2,50 +2,36 @@
 
 </app-navbar>
 <br>
-<form *ngIf="switch == false" [formGroup]="requestForm" (ngSubmit)="findMechanic()">
-    <div fxLayout="column">
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <mat-form-field fxLayoutAlign="center">
-                    <input type="text" (ngModelChange)="checkInput()" matInput formControlName="vehicleNumber" maxlength="17" placeholder="Vehicle Identification Number">
-                </mat-form-field>
-            </div>
-        </div>
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <mat-form-field fxLayoutAlign="center">
-                    <input type="text" matInput formControlName="vehicleRegNumber" placeholder="Registration Number">
-                </mat-form-field>
-            </div>
-        </div>
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <mat-form-field fxLayoutAlign="center center">
-                    <textarea matInput cdkTextareaAutosize formControlName="description" placeholder="Description">
+<form *ngIf="switch == false" fxLayout="column" [formGroup]="requestForm" (ngSubmit)="findMechanic()">
+    <div fxLayoutAlign="center">
+        <mat-form-field>
+            <input type="text" (ngModelChange)="checkInput()" matInput formControlName="vehicleNumber" maxlength="17" placeholder="Vehicle Identification Number">
+        </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center">
+        <mat-form-field>
+            <input type="text" matInput formControlName="vehicleRegNumber" placeholder="Registration Number">
+        </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center center">
+        <mat-form-field>
+            <textarea matInput cdkTextareaAutosize formControlName="description" placeholder="Description">
                  </textarea>
-                </mat-form-field>
-            </div>
-        </div>
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <mat-form-field fxLayoutAlign="center center">
-                    <textarea matInput cdkTextareaAutosize formControlName="message" placeholder="Message to Mechanic">
+        </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center center">
+        <mat-form-field>
+            <textarea matInput cdkTextareaAutosize formControlName="message" placeholder="Message to Mechanic">
                  </textarea>
-                </mat-form-field>
-            </div>
-        </div>
-        <div fxLayout="row">
-            <div fxFlex="100%" fxLayoutAlign="center center">
-                <mat-file-upload [allowMultipleFiles]="false" [labelText]="'Select a file to upload:'"></mat-file-upload>
-            </div>
-        </div>
-        <br>
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <div fxLayoutAlign="center">
-                    <button type="submit" [disabled]="btndisabled" mat-button>Find Mechanic</button>
-                </div>
-            </div>
+        </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center center">
+        <mat-file-upload [allowMultipleFiles]="false" [labelText]="'Select a file to upload:'"></mat-file-upload>
+    </div>
+    <br>
+    <div fxLayoutAlign="center">
+        <div>
+            <button type="submit" [disabled]="btndisabled" mat-button>Find Mechanic</button>
         </div>
     </div>
 </form>
