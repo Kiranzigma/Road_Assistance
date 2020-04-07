@@ -46,3 +46,7 @@
 .resendButton {
     margin-top: 5%;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+    margin: 10px 0px 10px 40px
+  }

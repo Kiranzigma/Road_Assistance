@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
     userFirstName: ['', Validators.required],
     userLastName: ['', Validators.required],
+    userType: ['', Validators.required],
     userEmail: ['', [Validators.required, Validators.email]],
     userPassword: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', Validators.required]
@@ -100,6 +101,7 @@ export class LoginComponent implements OnInit {
     let body = {
       userEmail: this.registerForm.get('userEmail').value,
       userPassword: this.registerForm.get('userPassword').value,
+      userType: this.registerForm.get('userType').value,
       userFirstName: this.registerForm.get('userFirstName').value,
       userLastName: this.registerForm.get('userLastName').value
     };
