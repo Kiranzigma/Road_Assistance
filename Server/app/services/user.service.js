@@ -9,8 +9,7 @@ exports.auth = (userId) => {
 };
 
 exports.save = (user) => {
-    const newuser = new usermodel(user);
-    return newuser.save();
+    
 }
 
 exports.update = (user) => {
