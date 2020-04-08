@@ -122,6 +122,22 @@ export class LoginComponent implements OnInit {
           });
           this._routes.navigate(['/login']);
         
+        },
+        error => {
+          if(error.error.msg.includes("E11000")){
+            console.log(error.error.msg);
+            const dialogRef = this.dialog.open(DialogInvalidToken, {
+               width: '250px',
+               data: { 
+               msg: this.registerForm.get('userEmail').value + " already exists."
+              }
+            });
+    
+           dialogRef.afterClosed().subscribe(result => {
+           console.log('The dialog was closed');
+           this.mail = '';
+            });
+          }
         })
       } else {
         console.log("Validation Failed");
@@ -189,7 +205,7 @@ verifyOrResend(buttontype){
     },
     error => {
       console.log(error.error.msg);
-    const dialogRef = this.dialog.open(DialogInvalidToken, {
+      const dialogRef = this.dialog.open(DialogInvalidToken, {
       width: '250px',
       data: { 
         msg: error.error.msg
@@ -332,20 +348,7 @@ export class DialogInvalidToken {
     }
 }
 
-//Dialog PopUp for Already VerifiedUser
-@Component({
-  selector: 'dialog-userExists',
-  templateUrl: 'dialog-userExists.html',
-})
 
-export class DialogUserExists { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogUserExists>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
 
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
 
 
