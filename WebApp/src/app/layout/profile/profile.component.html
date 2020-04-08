@@ -2,7 +2,14 @@
 
 </app-navbar>
 <br>
-<form [formGroup]="updateForm" fxLayout="column" class="flexColumn">
+<form [formGroup]="updateForm" fxLayout="column" class="flexColumn" (ngSubmit)="updateUser()">
+    <div fxLayout = "row">
+        <div fxFlex = "100%">
+            <div fxLayoutAlign = "end">
+                <button class="addAddressButton">Add Address</button>
+            </div>
+        </div>
+    </div>
     <div fxLayout = "row" class="profileImage">
         <!-- <img fxFlex="128px" src="http://placehold.it/128x128" class="profileIcon" onclick="openUploadImageDialogue()"> -->
         <label class="hoverable" for="fileInput">
@@ -13,7 +20,7 @@
         <br/>
     </div> 
     <br>
-        <input id="fileInput" type='file' (change)="onSelectFile($event)">
+        <input id="fileInput" type='file' (change)="onSelectFile($event)" accept="image/x-png,image/gif,image/jpeg">
         <div fxLayout="row">
             <div fxFlex="100%">
                 <div fxLayoutAlign="center">
@@ -21,26 +28,23 @@
                 </div>
             </div>
         </div>
-        
-   
-
 
     <div fxLayout="row" class="formStart">
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
-                <input type="text" matInput formControlName="firstName" placeholder="First Name">
+                <input type="text" matInput formControlName="firstName" placeholder="First Name" required>
             </mat-form-field>
         </div>
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
-                <input type="text" matInput formControlName="lastName" placeholder="Last Name">
+                <input type="text" matInput formControlName="lastName" placeholder="Last Name" required>
             </mat-form-field>
         </div>
     </div>
     <div fxLayout="row">
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
-                <input type="text" matInput formControlName="email" placeholder="Email">
+                <input type="text" readonly matInput formControlName="email" placeholder="Email">
             </mat-form-field>
         </div>
         <div fxFlex="50%">
@@ -59,19 +63,21 @@
         </div>
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
-                <input type="text" matInput formControlName="password" placeholder="Password">
+                <input type="password" readonly matInput formControlName="password" placeholder="Password">
             </mat-form-field>
         </div>
     </div>
     <div fxLayout="row">
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
-                <input type="text" matInput formControlName="newPassword" placeholder="New Password">
+                <input type="password" matInput formControlName="newPassword" placeholder="New Password">
+                <mat-error *ngIf="rf.newPassword.invalid">{{getUpdateErrorMessage('userPassword')}}</mat-error>
             </mat-form-field>
         </div>
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
-                <input type="text" matInput formControlName="confirmPassword" placeholder="Re-enter New Password">
+                <input type="password" matInput formControlName="confirmPassword" placeholder="Re-enter New Password">
+                <mat-error *ngIf="rf.confirmPassword.invalid">{{getUpdateErrorMessage('confirmPassword')}}</mat-error>
             </mat-form-field>
         </div>
     </div>
@@ -79,7 +85,7 @@
     <div fxLayout="row">
         <div fxFlex="100%">
             <div fxLayoutAlign="center">
-                <button type="submit" mat-button>Update</button>
+                <button type="submit"  mat-button>Update</button>
             </div>
         </div>
     </div>
