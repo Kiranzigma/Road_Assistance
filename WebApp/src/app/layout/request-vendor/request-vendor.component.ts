@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AppServiceService } from 'src/app/app-service.service';
 import { FormGroup, FormControl } from '@angular/forms';
-
+import {routerTransition} from '../../shared/router-animations'
 // https://vingenerator.org/
 // https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/5XYKT3A17BG157871?format=json
 @Component({
   selector: 'app-request-vendor',
   templateUrl: './request-vendor.component.html',
-  styleUrls: ['./request-vendor.component.scss']
+  styleUrls: ['./request-vendor.component.scss'],
+  animations: [routerTransition()]
 })
 export class RequestVendorComponent implements OnInit {
   title : string = "Request Mechanic"
-  btndisabled : boolean = true;
+  btndisabled : boolean = false;
   vinData : any[];
   switch : boolean = false;
   rightBtn : string = "Find Mechanic";
