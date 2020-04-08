@@ -136,6 +136,7 @@ verifyOrResend(buttontype){
   };
   if(this.verificationForm.valid){
     this.appservice.post<verificationResponse>('US-VE', body).subscribe(y => {
+      console.log(y); 
       console.log("User Verified");
       const dialogRef = this.dialog.open(DialogVerify, {
         width: '250px',
@@ -149,6 +150,20 @@ verifyOrResend(buttontype){
         this.mail = '';
       });
       this._routes.navigate(['/login']);
+  },
+  error => {
+    console.log(error.error.msg);
+    const dialogRef = this.dialog.open(DialogInvalidToken, {
+      width: '250px',
+      data: { 
+        msg: error.error.msg
+    }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.mail = '';
+    });
   })
 }
 } else if(buttontype=="Resend"){
@@ -171,7 +186,21 @@ verifyOrResend(buttontype){
           this.mail = '';
         });
         this._routes.navigate(['/login']);
-    })
+    },
+    error => {
+      console.log(error.error.msg);
+    const dialogRef = this.dialog.open(DialogInvalidToken, {
+      width: '250px',
+      data: { 
+        msg: error.error.msg
+    }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.mail = '';
+    });
+    })   
 }
 
 }
@@ -279,7 +308,39 @@ export class DialogVerify {
 
 export class DialogResend { 
   constructor(
-    public dialogRef: MatDialogRef<DialogVerify>,
+    public dialogRef: MatDialogRef<DialogResend>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+}
+
+//Dialog PopUp for Invalid Token
+@Component({
+  selector: 'dialog-invalidtoken',
+  templateUrl: 'dialog-invalidToken.html',
+})
+
+export class DialogInvalidToken { 
+  constructor(
+    public dialogRef: MatDialogRef<DialogInvalidToken>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+}
+
+//Dialog PopUp for Already VerifiedUser
+@Component({
+  selector: 'dialog-invalidtoken',
+  templateUrl: 'dialog-invalidToken.html',
+})
+
+export class DialogUserExists { 
+  constructor(
+    public dialogRef: MatDialogRef<DialogUserExists>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
     onNoClick(): void {
