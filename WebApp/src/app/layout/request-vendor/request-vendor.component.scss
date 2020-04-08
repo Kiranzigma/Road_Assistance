@@ -2,8 +2,8 @@ button {
     background-color: orange !important;
 }
 
-::ng-deep mat-form-field {
-    div {
+form {
+    mat-form-field {
         width: 50%;
     }
 }

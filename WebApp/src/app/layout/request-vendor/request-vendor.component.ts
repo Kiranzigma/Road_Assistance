@@ -14,6 +14,8 @@ export class RequestVendorComponent implements OnInit {
   btndisabled : boolean = true;
   vinData : any[];
   switch : boolean = false;
+  rightBtn : string = "Find Mechanic";
+  leftBtn : string = "";
   constructor(private appService: AppServiceService) { }
   switcher : any;
   requestForm = new FormGroup({
@@ -47,8 +49,23 @@ export class RequestVendorComponent implements OnInit {
   }
   findMechanic(){
     this.switch = true;
+    this.rightBtn = "Submit Request";
+    this.leftBtn = "Back";
+  }
+  back(){
+    this.switch = false;
+    this.leftBtn ="";
+    this.rightBtn = "Find Mechanic";
   }
   outputemit(x : string){
-    this.switch = false;
+    this.back();
+  }
+  outputemitted(x: string){
+    if(this.rightBtn == "Find Mechanic" && x == "right"){
+      this.findMechanic();
+    }
+    if(this.leftBtn == "Back" && x == "left"){
+      this.back();
+    }
   }
 }
