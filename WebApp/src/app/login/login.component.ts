@@ -334,8 +334,8 @@ export class DialogInvalidToken {
 
 //Dialog PopUp for Already VerifiedUser
 @Component({
-  selector: 'dialog-invalidtoken',
-  templateUrl: 'dialog-invalidToken.html',
+  selector: 'dialog-userExists',
+  templateUrl: 'dialog-userExists.html',
 })
 
 export class DialogUserExists { 
