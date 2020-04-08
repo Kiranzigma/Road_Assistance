@@ -195,12 +195,16 @@ getRegisterErrorMessage(x: any) {
       if (this.registerForm.get('userLastName').hasError('required')) {
         return 'You must enter a value';
       }
+    case "userType":
+        if (this.registerForm.get('userType').hasError('required')) {
+          return 'You must select a value';
+        }
     case "userPassword":
       if (this.registerForm.get('userPassword').hasError('required')) {
         return 'You must enter a value';
       } else
       if (this.registerForm.get('userPassword').hasError('minlength')){
-        return this.registerForm.get('userPassword').hasError('minlength') ? 'Password too short (8 or more)' : '';
+        return this.registerForm.get('userPassword').hasError('minlength') ? 'Password short (8 or more characters)' : '';
       }
     case "confirmPassword":
       if (this.registerForm.get('confirmPassword').hasError('required')) {
