@@ -2,9 +2,8 @@
     <mat-sidenav fixedInViewport="true" class="navside" mode="push" [(opened)]="opened" role="navigation">
         <img style="height: 8vh;border-radius: 60%" [src]="">
         <mat-nav-list>
-
             <a mat-list-item (click)="getURL(this.nav)" *ngFor="let nav of Nav">
-                   <mat-icon >{{nav.icon}}</mat-icon> &nbsp; {{nav.displayName}}
+                <mat-icon>{{nav.icon}}</mat-icon> &nbsp; {{nav.displayName}}
             </a>
         </mat-nav-list>
         <!-- img for the profile picture -->

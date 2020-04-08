@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
     userFirstName: ['', Validators.required],
     userLastName: ['', Validators.required],
+    userType: ['', Validators.required],
     userEmail: ['', [Validators.required, Validators.email]],
     userPassword: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', Validators.required]
@@ -100,6 +101,7 @@ export class LoginComponent implements OnInit {
     let body = {
       userEmail: this.registerForm.get('userEmail').value,
       userPassword: this.registerForm.get('userPassword').value,
+      userType: this.registerForm.get('userType').value,
       userFirstName: this.registerForm.get('userFirstName').value,
       userLastName: this.registerForm.get('userLastName').value
     };
@@ -120,6 +122,22 @@ export class LoginComponent implements OnInit {
           });
           this._routes.navigate(['/login']);
         
+        },
+        error => {
+          if(error.error.msg.includes("E11000")){
+            console.log(error.error.msg);
+            const dialogRef = this.dialog.open(DialogInvalidToken, {
+               width: '250px',
+               data: { 
+               msg: this.registerForm.get('userEmail').value + " already exists."
+              }
+            });
+    
+           dialogRef.afterClosed().subscribe(result => {
+           console.log('The dialog was closed');
+           this.mail = '';
+            });
+          }
         })
       } else {
         console.log("Validation Failed");
@@ -134,6 +152,7 @@ verifyOrResend(buttontype){
   };
   if(this.verificationForm.valid){
     this.appservice.post<verificationResponse>('US-VE', body).subscribe(y => {
+      console.log(y); 
       console.log("User Verified");
       const dialogRef = this.dialog.open(DialogVerify, {
         width: '250px',
@@ -147,6 +166,20 @@ verifyOrResend(buttontype){
         this.mail = '';
       });
       this._routes.navigate(['/login']);
+  },
+  error => {
+    console.log(error.error.msg);
+    const dialogRef = this.dialog.open(DialogInvalidToken, {
+      width: '250px',
+      data: { 
+        msg: error.error.msg
+    }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.mail = '';
+    });
   })
 }
 } else if(buttontype=="Resend"){
@@ -169,7 +202,21 @@ verifyOrResend(buttontype){
           this.mail = '';
         });
         this._routes.navigate(['/login']);
-    })
+    },
+    error => {
+      console.log(error.error.msg);
+      const dialogRef = this.dialog.open(DialogInvalidToken, {
+      width: '250px',
+      data: { 
+        msg: error.error.msg
+    }
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.mail = '';
+    });
+    })   
 }
 
 }
@@ -193,12 +240,16 @@ getRegisterErrorMessage(x: any) {
       if (this.registerForm.get('userLastName').hasError('required')) {
         return 'You must enter a value';
       }
+    case "userType":
+        if (this.registerForm.get('userType').hasError('required')) {
+          return 'You must select a value';
+        }
     case "userPassword":
       if (this.registerForm.get('userPassword').hasError('required')) {
         return 'You must enter a value';
       } else
       if (this.registerForm.get('userPassword').hasError('minlength')){
-        return this.registerForm.get('userPassword').hasError('minlength') ? 'Password too short (8 or more)' : '';
+        return this.registerForm.get('userPassword').hasError('minlength') ? 'Password short (8 or more characters)' : '';
       }
     case "confirmPassword":
       if (this.registerForm.get('confirmPassword').hasError('required')) {
@@ -273,12 +324,31 @@ export class DialogVerify {
 
 export class DialogResend { 
   constructor(
-    public dialogRef: MatDialogRef<DialogVerify>,
+    public dialogRef: MatDialogRef<DialogResend>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
 
     onNoClick(): void {
       this.dialogRef.close();
     }
 }
+
+//Dialog PopUp for Invalid Token
+@Component({
+  selector: 'dialog-invalidtoken',
+  templateUrl: 'dialog-invalidToken.html',
+})
+
+export class DialogInvalidToken { 
+  constructor(
+    public dialogRef: MatDialogRef<DialogInvalidToken>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+}
+
+
+
 
 

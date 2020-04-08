@@ -1,54 +1,44 @@
-<app-navbar [title]="title">
+<app-navbar [title]="title" [leftBtn]="leftBtn" [rightBtn]="rightBtn" [btnDisabled]="btndisabled" (eventEmit)="outputemitted($event)">
 
 </app-navbar>
 <br>
-<form *ngIf="switch == false" [formGroup]="requestForm" (ngSubmit)="findMechanic()">
-    <div fxLayout="column">
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <mat-form-field fxLayoutAlign="center">
-                    <input type="text" (ngModelChange)="checkInput()" matInput formControlName="vehicleNumber" maxlength="17" placeholder="Vehicle Identification Number">
-                </mat-form-field>
-            </div>
+<div *ngIf="switch == false" @routerTransition>
+    <form id="reqForm" fxLayout="column" [formGroup]="requestForm">
+        <div fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="text" (ngModelChange)="checkInput()" matInput formControlName="vehicleNumber" maxlength="17" placeholder="Vehicle Identification Number">
+            </mat-form-field>
         </div>
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <mat-form-field fxLayoutAlign="center">
-                    <input type="text" matInput formControlName="vehicleRegNumber" placeholder="Registration Number">
-                </mat-form-field>
-            </div>
+        <div fxLayoutAlign="center">
+            <mat-form-field>
+                <input type="text" matInput formControlName="vehicleRegNumber" placeholder="Registration Number">
+            </mat-form-field>
         </div>
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <mat-form-field fxLayoutAlign="center center">
-                    <textarea matInput cdkTextareaAutosize formControlName="description" placeholder="Description">
-                 </textarea>
-                </mat-form-field>
-            </div>
+        <div fxLayoutAlign="center center">
+            <mat-form-field>
+                <textarea matInput cdkTextareaAutosize formControlName="description" placeholder="Description">
+                     </textarea>
+            </mat-form-field>
         </div>
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <mat-form-field fxLayoutAlign="center center">
-                    <textarea matInput cdkTextareaAutosize formControlName="message" placeholder="Message to Mechanic">
-                 </textarea>
-                </mat-form-field>
-            </div>
+        <div fxLayoutAlign="center center">
+            <mat-form-field>
+                <textarea matInput cdkTextareaAutosize formControlName="message" placeholder="Message to Mechanic">
+                     </textarea>
+            </mat-form-field>
         </div>
-        <div fxLayout="row">
-            <div fxFlex="100%" fxLayoutAlign="center center">
-                <mat-file-upload [allowMultipleFiles]="false" [labelText]="'Select a file to upload:'"></mat-file-upload>
-            </div>
+        <div fxLayoutAlign="center center">
+            <mat-file-upload [allowMultipleFiles]="false" [labelText]="'Select a file to upload:'"></mat-file-upload>
         </div>
         <br>
-        <div fxLayout="row">
-            <div fxFlex="100%">
-                <div fxLayoutAlign="center">
-                    <button type="submit" [disabled]="btndisabled" mat-button>Find Mechanic</button>
-                </div>
+        <!-- <div fxLayoutAlign="center">
+            <div>
+                <button type="submit" [disabled]="btndisabled" mat-button>Find Mechanic</button>
             </div>
-        </div>
-    </div>
-</form>
+        </div> -->
+    </form>
+</div>
 
-<app-find-vendor *ngIf="switch == true" (switcher)="outputemit($event)">
-</app-find-vendor>
+<div *ngIf="switch == true" @routerTransition>
+    <app-find-vendor [(vinData)]="vinData" (switcher)="outputemit($event)">
+    </app-find-vendor>
+</div>
