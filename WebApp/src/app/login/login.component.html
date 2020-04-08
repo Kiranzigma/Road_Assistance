@@ -37,6 +37,7 @@
             <mat-radio-group formControlName="userType" class="radioButton">
                 <mat-radio-button value ="user">User</mat-radio-button>
                 <mat-radio-button value ="vendor">Vendor</mat-radio-button>
+                <mat-error *ngIf="rf.userType.invalid && submitted">{{getRegisterErrorMessage('userType')}}</mat-error>
             </mat-radio-group>
             </div>
             <div fxLayoutAlign="center">
