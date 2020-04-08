@@ -15,8 +15,8 @@
 
 
 <!-- example for row wise fx -->
-<div fxLayout="column" [ngSwitch]="view">
-    <mat-card *ngSwitchCase="'signUp'" >
+<div fxLayout="column" fxLayoutAlign="center center" [ngSwitch]="view">
+    <mat-card *ngSwitchCase="'signUp'" class="registerCardSize">
         <form [formGroup]="registerForm" (ngSubmit)="register()">
             <div fxLayoutAlign="center">
                 <mat-card-title> Register</mat-card-title>
@@ -62,7 +62,7 @@
         </form>
     </mat-card>
 
-    <mat-card *ngSwitchCase="'verification'" >
+    <mat-card *ngSwitchCase="'verification'" class="verificationCardSize">
         <form [formGroup]="verificationForm">
         <div fxLayoutAlign="center">
             <mat-card-title> Please Verify</mat-card-title>
@@ -84,7 +84,7 @@
         </form>
     </mat-card>
 
-    <mat-card *ngSwitchDefault >
+    <mat-card *ngSwitchDefault class="loginCardSize">
         <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
             <div fxLayoutAlign="center">
                 <mat-card-title> Login</mat-card-title>
