@@ -68,5 +68,8 @@ export class RequestVendorComponent implements OnInit {
     if(this.leftBtn == "Back" && x == "left"){
       this.back();
     }
+    if(this.rightBtn == "Submit Request" && x == "right"){
+      
+    }
   }
 }
