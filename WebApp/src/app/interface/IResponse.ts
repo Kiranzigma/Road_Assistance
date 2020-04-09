@@ -18,11 +18,9 @@ export interface Iuser{
 }
 
 export interface IUserRequest{
-    created_at: string;
-    number: string;
+    created_Date: string;
+    id: string;
     state: string;
-    title: string;
-    user: Iuser;
-    items: [];
-    total_count: number;
+    description: string;
+    user: Iuser
 }

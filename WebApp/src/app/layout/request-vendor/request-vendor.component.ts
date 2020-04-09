@@ -12,7 +12,7 @@ import {routerTransition} from '../../shared/router-animations'
 })
 export class RequestVendorComponent implements OnInit {
   title : string = "Request Mechanic"
-  btndisabled : boolean = false;
+  btndisabled : boolean = true;
   vinData : any[];
   switch : boolean = false;
   rightBtn : string = "Find Mechanic";
@@ -67,6 +67,9 @@ export class RequestVendorComponent implements OnInit {
     }
     if(this.leftBtn == "Back" && x == "left"){
       this.back();
+    }
+    if(this.rightBtn == "Submit Request" && x == "right"){
+      
     }
   }
 }
