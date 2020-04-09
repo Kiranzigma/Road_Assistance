@@ -1,8 +1,8 @@
-<app-navbar [title]="title">
+<app-navbar [title]="title" [rightBtn]="rightBtn" [btnDisabled]="btnDisabled" (eventEmit)="outputemitted()">
 
 </app-navbar>
 <br>
-<form [formGroup]="updateForm" fxLayout="column" class="flexColumn" (ngSubmit)="updateUser()">
+<form [formGroup]="updateForm" fxLayout="column" class="flexColumn" (ngSubmit)="updateUser()" @routerTransition>
     <div fxLayout = "row" class="profileImage">
         <!-- <img fxFlex="128px" src="http://placehold.it/128x128" class="profileIcon" onclick="openUploadImageDialogue()"> -->
         <label class="hoverable" for="fileInput">
@@ -78,11 +78,11 @@
         </div>
     </div>
     <br>
-    <div fxLayout="row">
+    <!-- <div fxLayout="row">
         <div fxFlex="100%">
             <div fxLayoutAlign="center">
                 <button type="submit"  mat-button>Update</button>
             </div>
         </div>
-    </div>
+    </div> -->
 </form>

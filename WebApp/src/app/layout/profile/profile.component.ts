@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validator, AbstractControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validator, AbstractControl, Validators, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { isBuffer } from 'util';
 import { FitBoundsAccessor } from '@agm/core';
@@ -11,19 +11,27 @@ import { MustMatch } from '../../helpers/must-match.validator';
 import { EncryptServiceService } from 'src/app/encrypt-service.service';
 import { userResponse } from 'src/app/interface/userResponse';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {routerTransition} from '../../shared/router-animations';
 
 
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  animations: [routerTransition()]
 })
 export class ProfileComponent implements OnInit{
-  name = 'Angular 9';
+  btnDisabled : boolean = false;
   url = '';
+  
+
   title : string = "Update Profile";
-  firstName:any;
+  
+  switch: boolean = false;
+  
+  rightBtn : string = "Update";
+
   updateForm : FormGroup;
 
   // validationMessages= {
@@ -67,9 +75,15 @@ export class ProfileComponent implements OnInit{
     }, {
       validator: MustMatch('newPassword','confirmPassword')
       });
- 
+
+      if (this.userService.getUser().userType === "vendor"){
+        this.rightBtn = "Add Address";
+      }
+      
   }
  
+ 
+
   get rf() { return this.updateForm.controls; }
 
   onSelectFile(event) {
@@ -83,6 +97,8 @@ export class ProfileComponent implements OnInit{
       }
     }
   }
+
+
   public delete(){
     this.url = null;
   }
@@ -103,8 +119,9 @@ updateUser(){
     arr.push(this.userService.getUser().id);
     this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
       console.log(y);
-      alert('Details have been updated successfully')
+      alert('Details have been updated successfully');
     });
+    
 
   }
 }
@@ -162,5 +179,13 @@ getUpdateErrorMessage(x: any) {
         }
 
     }
+}
+outputemitted(){
+  if(this.rightBtn == "Update"){
+    this.updateUser();
+  }
+  if(this.rightBtn == "Add Address"){
+    console.log("Switch to Add Address page");
+  }
 }
 }
