@@ -7,8 +7,7 @@ export const environment = {
   "api_url":"http://localhost:3000/",
   "services":[
     //UserAuthentication
-    {code:"US-AU",url:"User"},
-
+    {code:"US-AU",url:"user"},
     {code:"US-VEN",url:"Vendor"},
 
     //UserVerification

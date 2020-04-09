@@ -84,3 +84,13 @@ p {
   #fileInput{
     display: none;
   }
+
+  .addAddressButton{
+    color: solid black;
+    border-radius: 5px;
+  }
+
+  .addAddressButton:hover{
+    cursor: pointer;
+    
+  }
