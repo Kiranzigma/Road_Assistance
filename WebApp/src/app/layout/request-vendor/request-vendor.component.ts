@@ -12,7 +12,7 @@ import {routerTransition} from '../../shared/router-animations'
 })
 export class RequestVendorComponent implements OnInit {
   title : string = "Request Mechanic"
-  btndisabled : boolean = false;
+  btndisabled : boolean = true;
   vinData : any[];
   switch : boolean = false;
   rightBtn : string = "Find Mechanic";
