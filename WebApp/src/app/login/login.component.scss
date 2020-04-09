@@ -1,8 +1,10 @@
 .loginCardSize{
+
     width: 25%;
-    height: 50%;
+    height: 40%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    margin-top: 50px;
 }
 
 .registerCardSize{
@@ -10,13 +12,15 @@
     height: 70%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    margin-top: 50px;
 }
 
 .verificationCardSize{
     width: 25%;
-    height: 50%;
+    height: 40%;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
+    margin-top: 50px;
 }
 
 .loginField{
@@ -45,4 +49,12 @@
 
 .resendButton {
     margin-top: 5%;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin: 10px 0px 10px 40px
+  }
+
+mat-error {
+      font-size: 10px;
 }
