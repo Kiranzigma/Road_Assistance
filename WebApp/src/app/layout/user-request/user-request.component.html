@@ -1,38 +1,36 @@
-<div class="example-container mat-elevation-z8 "> 
-  <!-- -->
 
-<div class="example-table-container">
 
-    <table mat-table [dataSource]="data" class="example-table"
-           matSort matSortActive="state" matSortDisableClear matSortDirection="desc">
+<div class="example-table-container mat-elevation-z8">
+
+    <table mat-table [dataSource]="dataSource" class="example-table" matSort>
       <!-- Number Column -->
-      <ng-container matColumnDef="number">
-        <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell *matCellDef="let row">{{row.number}}</td>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+        <td mat-cell *matCellDef="let row">{{row.id}}</td>
       </ng-container>
 
       <!-- Title Column -->
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef>Title</th>
-        <td mat-cell *matCellDef="let row">{{row.title}}</td>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <td mat-cell *matCellDef="let row">{{row.description}}</td>
       </ng-container>
 
       <!-- State Column -->
       <ng-container matColumnDef="state">
-        <th mat-header-cell *matHeaderCellDef>State</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
         <td mat-cell *matCellDef="let row">{{row.state}}</td>
       </ng-container>
 
       <!-- Created Column -->
       <ng-container matColumnDef="created">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
           Created
         </th>
-        <td mat-cell *matCellDef="let row">{{row.created_at | date}}</td>
+        <td mat-cell *matCellDef="let row">{{row.created_Date | date}}</td>
       </ng-container>
 
       <ng-container matColumnDef="details">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+        <th mat-header-cell *matHeaderCellDef>
           Details
         </th>
         <td mat-cell *matCellDef="let element">
@@ -45,8 +43,9 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 10, 25, 100]" >
+  </mat-paginator>
   </div>
 
-  <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 4, 6, 10, 20]" [length]="resultsLength">
-  </mat-paginator>
-</div>
+  
+
