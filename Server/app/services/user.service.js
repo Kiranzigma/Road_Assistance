@@ -1,6 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 const usermodel = mongoose.model('UserSchema');
+const userreq = mongoose.model('UserRequestSchema');
 
 // method to search a value in the database
 exports.auth = (userId) => {
@@ -18,3 +19,4 @@ exports.update = (user) => {
     }, user, { new: true }).exec();
     return promise;
 }
+
