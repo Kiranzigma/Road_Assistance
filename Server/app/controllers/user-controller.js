@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 const usermodel = mongoose.model('UserSchema');
+const userreqmodel = mongoose.model('UserRequestSchema');
 let CryptoJS = require("crypto-js");
 const tokenmodel = mongoose.model('TokenSchema');
 
@@ -160,6 +161,8 @@ exports.updateUser = (request, response) => {
     const promise = userService.update(user);
     promise.then(result).catch(renderErrorResponse(response));
 };
+
+
 // method to handle the error response
 // @params - resp
 let renderErrorResponse = (response) => {
