@@ -5,19 +5,21 @@ import { IUserRequest } from '../../interface/IResponse';
 import { AppServiceService } from 'src/app/app-service.service';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
-import { DataSource } from '@angular/cdk/table';
 import { MatTableDataSource } from '@angular/material/table';
+import { routerTransition } from 'src/app/shared/router-animations';
+
 
 
 @Component({
   selector: 'app-user-request',
   templateUrl: './user-request.component.html',
-  styleUrls: ['./user-request.component.scss']
+  styleUrls: ['./user-request.component.scss'],
+  animations: [routerTransition()]
 })
 
 export class UserRequestComponent implements OnInit {
-
-  displayedColumns: string[] = ['created', 'state', 'id', 'description', 'details'];
+  title : string = "Request Tracker";
+  displayedColumns: string[] = ['id', 'created', 'description', 'state', 'details'];
   data: IUserRequest[] = [];
   dataSource: MatTableDataSource<IUserRequest>;  
 
