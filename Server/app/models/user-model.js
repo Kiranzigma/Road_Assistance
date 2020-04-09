@@ -30,13 +30,14 @@ let userSchema = new Schema({
          default: false 
     },
     userType: {
-        type: String
+        type: String,
+        required: true
     },
     userMobileNumber: {
-        type: Number
+        type: String
     },
     userGender: {
-        type: Number
+        type: String
     },
     vendorLicense: {
         type: String

@@ -3,13 +3,6 @@
 </app-navbar>
 <br>
 <form [formGroup]="updateForm" fxLayout="column" class="flexColumn" (ngSubmit)="updateUser()">
-    <div fxLayout = "row">
-        <div fxFlex = "100%">
-            <div fxLayoutAlign = "end">
-                <button class="addAddressButton">Add Address</button>
-            </div>
-        </div>
-    </div>
     <div fxLayout = "row" class="profileImage">
         <!-- <img fxFlex="128px" src="http://placehold.it/128x128" class="profileIcon" onclick="openUploadImageDialogue()"> -->
         <label class="hoverable" for="fileInput">
@@ -33,11 +26,13 @@
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
                 <input type="text" matInput formControlName="firstName" placeholder="First Name" required>
+                <mat-error *ngIf="rf.firstName.invalid">{{getUpdateErrorMessage('firstName')}}</mat-error>
             </mat-form-field>
         </div>
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
                 <input type="text" matInput formControlName="lastName" placeholder="Last Name" required>
+                <mat-error *ngIf="rf.lastName.invalid">{{getUpdateErrorMessage('lastName')}}</mat-error>
             </mat-form-field>
         </div>
     </div>
@@ -50,15 +45,16 @@
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
                 <input type="text" matInput formControlName="mobile" placeholder="Mobile Number">
+                <mat-error *ngIf="rf.mobile.invalid">{{getUpdateErrorMessage('mobileNumber')}}</mat-error>
             </mat-form-field>
         </div>
     </div>
     <div fxLayout="row">
         <div fxFlex="50%">
             <mat-radio-group formControlName="gender" fxLayoutAlign="space-around" class="radioButton">
-                <mat-radio-button value ="1">Male</mat-radio-button>
-                <mat-radio-button value ="2">Female</mat-radio-button>
-                <mat-radio-button value ="3">Other</mat-radio-button>
+                <mat-radio-button value ="M" >Male</mat-radio-button>
+                <mat-radio-button value ="F" >Female</mat-radio-button>
+                <mat-radio-button value ="O" >Other</mat-radio-button>
             </mat-radio-group>
         </div>
         <div fxFlex="50%">
@@ -71,7 +67,7 @@
         <div fxFlex="50%">
             <mat-form-field fxLayoutAlign="center">
                 <input type="password" matInput formControlName="newPassword" placeholder="New Password">
-                <mat-error *ngIf="rf.newPassword.invalid">{{getUpdateErrorMessage('userPassword')}}</mat-error>
+                <mat-error *ngIf="rf.newPassword.invalid">{{getUpdateErrorMessage('newPassword')}}</mat-error>
             </mat-form-field>
         </div>
         <div fxFlex="50%">

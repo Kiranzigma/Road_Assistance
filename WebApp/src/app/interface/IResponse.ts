@@ -5,6 +5,7 @@ export interface IResponse{
 }
 
 export interface Iuser{
+    id:String;
     userType : String;
     userFirstName : String;
     userLastName: String;

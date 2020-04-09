@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validator, AbstractControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +10,7 @@ import { UserServiceService } from 'src/app/shared/user-service.service';
 import { MustMatch } from '../../helpers/must-match.validator';
 import { EncryptServiceService } from 'src/app/encrypt-service.service';
 import { userResponse } from 'src/app/interface/userResponse';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -25,19 +26,28 @@ export class ProfileComponent implements OnInit{
   firstName:any;
   updateForm : FormGroup;
 
-  validationMessages= {
-    'firstName' :{
-      'required' : 'First Name is required',
-      'minLength' : 'First Name must be greater than 2 characters',
-      'maxLength' : 'First Name must be lesser than 30 characters'
-    }
-  } 
-    // 'email' :{
-    //   'required' : 'Email is required',
-    //   'emailDomain' : 'Please enter a valid mailid'
-    // },
-  //   'password : 'Password is req'
-  // }
+  // validationMessages= {
+  //   'firstName' :{
+  //     'required' : 'First Name is required',
+  //     'minLength' : 'First Name must be greater than 2 characters',
+  //     'maxLength' : 'First Name must be lesser than 30 characters'
+  //   },
+  //   'lastName' :{
+  //     'required' : 'Last Name is required',
+  //     'minLength' : 'Last Name must be greater than 2 characters',
+  //     'maxLength' : 'Last Name must be lesser than 30 characters'
+  //   },
+  //   'mobile' : {
+  //     'minLength' : 'Please enter a correct input',
+  //   }
+
+  // } 
+  //   // 'email' :{
+  //   //   'required' : 'Email is required',
+  //   //   'emailDomain' : 'Please enter a valid mailid'
+  //   // },
+  // //   'password : 'Password is req'
+  // // }
 
   constructor(private fb: FormBuilder,
     private userService: UserServiceService,
@@ -49,11 +59,11 @@ export class ProfileComponent implements OnInit{
       firstName : [this.userService.getUser().userFirstName,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
       lastName : [this.userService.getUser().userLastName,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
       email : [this.userService.getUser().userEmail],
-      mobile : ['',[Validators.required,Validators.minLength(10),Validators.maxLength(10)]],
-      gender : [''],
+      mobile : [this.userService.getUser().userMobileNumber,[Validators.minLength(10),Validators.maxLength(10)]],
+      gender : [this.userService.getUser().userGender],
       password : [this.userService.getUser().userPassword],
-      newPassword : ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword : ['', Validators.required]
+      newPassword : ['', [Validators.minLength(6)]],
+      confirmPassword : ['',[Validators.minLength(6)]]
     }, {
       validator: MustMatch('newPassword','confirmPassword')
       });
@@ -80,18 +90,22 @@ export class ProfileComponent implements OnInit{
 
 updateUser(){
   let body = {
-    userFirstName: this.updateForm.get('userFirstName').value,
-    userLastName: this.updateForm.get('userLastName').value,
-    gender: this.updateForm.get('gender').value,
-    mobile: this.updateForm.get('mobile').value,
-    newPassword:this.updateForm.get('newPassword').value,
-    confirmPassword:this.updateForm.get('confirmPassword').value
+    userFirstName: this.updateForm.get('firstName').value,
+    userLastName: this.updateForm.get('lastName').value,
+    userGender: this.updateForm.get('gender').value,
+    userMobileNumber: this.updateForm.get('mobile').value,
+    userPassword:this.updateForm.get('newPassword').value ? this.EncrDecr.set('123456$#@$^@1ERF',this.updateForm.get('newPassword').value) : this.userService.getUser().userPassword ,
   };
+  
 
   if(this.updateForm.valid){
-    this.appservice.post<userResponse>('US-AU',body).subscribe(y => {
+    let arr=[];
+    arr.push(this.userService.getUser().id);
+    this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
+      console.log(y);
+      alert('Details have been updated successfully')
+    });
 
-    })
   }
 }
 
@@ -111,30 +125,41 @@ updateUser(){
 
 
 
+
 getUpdateErrorMessage(x: any) {
   switch(x) {
     case "firstName":
-      if (this.updateForm.get('userFirstName').hasError('required')) {
+      if (this.updateForm.get('firstName').hasError('required')) {
         return 'You must enter a value';
+      }
+      else if(this.updateForm.get('firstName').hasError('minLength')) {
+        return this.updateForm.get('firstName').hasError ('minLength')? 'First Name should be atleast of 3 characters' : '';
+      }
+      else if(this.updateForm.get('firstName').hasError('maxLength')) {
+        return this.updateForm.get('firstName').hasError ('maxLength')? 'First Name can be only to a max of 30 characters' : '';
       }
     case "lastName":
-      if (this.updateForm.get('userLastName').hasError('required')) {
+      if (this.updateForm.get('lastName').hasError('required')) {
         return 'You must enter a value';
       }
-    case "newPassword":
-      if (this.updateForm.get('userPassword').hasError('required')) {
-        return 'You must enter a value';
-      } else
-      if (this.updateForm.get('userPassword').hasError('minlength')){
-        return this.updateForm.get('userPassword').hasError('minlength') ? 'Password too short (8 or more)' : '';
+      else if(this.updateForm.get('lastName').hasError('minLength')) {
+        return this.updateForm.get('lastName').hasError ('minLength')? 'Last Name should be atleast of 3 characters' : '';
       }
-    case "confirmPassword":
-      if (this.updateForm.get('confirmPassword').hasError('required')) {
-        return 'You must enter a value';
-      } else
-      if (this.updateForm.get('confirmPassword').hasError('mustMatch')){
-        return this.updateForm.get('confirmPassword').hasError('mustMatch') ? 'Passwords don\'t match' : '';
+      else if(this.updateForm.get('lastName').hasError('maxLength')) {
+        return this.updateForm.get('lastName').hasError ('maxLength')? 'Last Name can be only to a max of 30 characters' : '';
       }
+    case "mobileNumber":
+      if(this.updateForm.get('mobile').hasError('minLength')) {
+        return this.updateForm.get('mobile').hasError ('minLength')? 'Please enter a valid mobile number' : '';
+      }
+      case "newPassword":
+        if (this.updateForm.get('newPassword').hasError('minlength')){
+          return this.updateForm.get('newPassword').hasError('minlength') ? 'Password short (6 or more characters)' : '';
+        }
+      case "confirmPassword":
+        if (this.updateForm.get('confirmPassword').hasError('mustMatch')){
+          return this.updateForm.get('confirmPassword').hasError('mustMatch') ? 'Passwords don\'t match' : '';
+        }
 
     }
 }
