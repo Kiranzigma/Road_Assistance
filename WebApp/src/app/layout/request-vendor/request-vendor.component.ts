@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AppServiceService } from 'src/app/app-service.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import {routerTransition} from '../../shared/router-animations'
+import { UserServiceService } from 'src/app/shared/user-service.service';
+import { Iuser } from 'src/app/interface/IResponse';
 // https://vingenerator.org/
 // https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/5XYKT3A17BG157871?format=json
 @Component({
@@ -17,13 +19,22 @@ export class RequestVendorComponent implements OnInit {
   switch : boolean = false;
   rightBtn : string = "Find Mechanic";
   leftBtn : string = "";
-  constructor(private appService: AppServiceService) { }
+  user : Iuser;
+  lat : "";
+  long : "";
+  vendorId : any;
+  constructor(private appService: AppServiceService, private userService: UserServiceService) {
+    this.user = this.userService.getUser();
+   }
   switcher : any;
+  uploads: boolean = false;
+  
+  fileUpload = [];
   requestForm = new FormGroup({
     vehicleNumber: new FormControl(''),
     vehicleRegNumber: new FormControl(''),
     description : new FormControl(''),
-    message : new FormControl('')
+    message : new FormControl(''),
   });
 
   ngOnInit(): void {   
@@ -58,18 +69,47 @@ export class RequestVendorComponent implements OnInit {
     this.leftBtn ="";
     this.rightBtn = "Find Mechanic";
   }
-  outputemit(x : string){
-    this.back();
+  outputemit(x : any){
+   this.lat = x.lat;
+   this.long = x.long;
   }
   outputemitted(x: string){
+    if(this.rightBtn == "Submit Request" && x == "right"){
+      this.submit();
+    }
     if(this.rightBtn == "Find Mechanic" && x == "right"){
       this.findMechanic();
     }
     if(this.leftBtn == "Back" && x == "left"){
       this.back();
+    }    
+  }
+  submit(){
+    let body = {
+      "user_id" :  this.user.userEmail,
+      "message" : this.requestForm.get('message')?.value,
+      "description": this.requestForm.get('description')?.value,
+      "vin" : this.requestForm.get('vehicleNumber')?.value,
+      "register_no" : this.requestForm.get("vehicleRegNumber")?.value,
+      "image": this.fileUpload,
+      "latitude": this.lat,
+      "longitude":this.long,
+      "vendor_id": this.vendorId
     }
-    if(this.rightBtn == "Submit Request" && x == "right"){
-      
+    console.log(body);
+  }
+  onUploadClicked(x){
+   for(let i = 0; i < x.length; i++){
+    if(x[i].type == "image/png" || x[i].type == "image/jpg" || x[i].type == "image/jpeg"  ){
+      let reader = new FileReader();
+      reader.readAsDataURL(x[i]);
+      reader.onload= () =>{
+       let u = reader.result as string;
+       this.fileUpload.push(u);
+      }
+    }else{
+      this.uploads = true;
     }
+   }
   }
 }

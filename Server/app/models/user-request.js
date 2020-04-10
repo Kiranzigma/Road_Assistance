@@ -8,50 +8,53 @@ const Schema = mongoose.Schema;
  */
 
 let userRequestSchema = new Schema({
-    user_id : {
-        type : String,
-        required : true
+    user_id: {
+        type: String,
+        required: true
     },
-    message : {
-        type : String
+    message: {
+        type: String
     },
-
-    description : {
-       type : String,
-       required : true
+    vendor_id: {
+        type: String
     },
 
-    created_Date : {
-       type : Date
+    description: {
+        type: String,
+        required: true
     },
 
-    state : {
-      type : String,
-      required : true
+    created_Date: {
+        type: Date
     },
 
-    vin : {
-      type : Number,
-      required : true
+    state: {
+        type: String,
+        required: true
     },
 
-    register_no : {
-        type : Number,
-        required : true
+    vin: {
+        type: Number,
+        required: true
     },
 
-    image : {
-      type : []
+    register_no: {
+        type: Number,
+        required: true
     },
 
-    latitude : {
-        type : Number,
-        required : true
+    image: {
+        type: []
     },
 
-    longitude : {
-        type : Number,
-        required : true
+    latitude: {
+        type: Number,
+        required: true
+    },
+
+    longitude: {
+        type: Number,
+        required: true
     }
 }, {
     versionKey: false
