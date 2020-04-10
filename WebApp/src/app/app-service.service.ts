@@ -33,6 +33,13 @@ export class AppServiceService {
     return this.http.get<T>(urlparam);
   }
   
+  put<T>(url: string, body: any, param?:any[]) : Observable<any> {
+
+    let urlparam = this.geturl(url, param);
+
+    return this.http.put<T>(urlparam,body);
+  }
+
   post<T>(url: string, body: any, param?:any[]) : Observable<any>{
     
     let urlparam = this.geturl(url, param);
@@ -51,10 +58,9 @@ export class APIInterceptorService implements HttpInterceptor {
        // All HTTP requests are going to go through this method
        let newHeaders = req.headers;
        let t: IResponse = JSON.parse(sessionStorage.getItem('jwt_token'));
-       if (t != null) {
-        newHeaders = newHeaders.append("token", t.token);
+       if (t != null && req.url.includes("localhost")) {
+             req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + t.token ) });
        }
-       const authReq = req.clone({headers: newHeaders});
-       return next.handle(authReq);
-   }
+      return next.handle(req);
+  }
 }

@@ -30,8 +30,31 @@ let userSchema = new Schema({
          default: false 
     },
     userType: {
+        type: String,
+        required: true
+    },
+    userMobileNumber: {
         type: String
+    },
+    userGender: {
+        type: String
+    },
+    vendorLicense: {
+        type: String
+    },
+    image:{
+        type: String
+    },
+    vendorLatitude:{
+        type: String
+    },
+    vendorLongitude:{
+        type:String
+    },
+    vendorCompanyName:{
+        type:String
     }
+
 }, {
     versionKey: false
 });

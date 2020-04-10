@@ -5,7 +5,16 @@ export interface IResponse{
 }
 
 export interface Iuser{
-    userType : String
+    id:String;
+    userType : String;
+    userFirstName : String;
+    userLastName: String;
+    userEmail: String;
+    userPassword: String;
+    isVerified: Boolean;
+    userMobileNumber: Number;
+    userGender: Number;
+    vendorLicense: String;
 }
 
 export interface IUserRequest{
