@@ -1,14 +1,15 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { IResponse } from '../interface/IResponse';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { EncryptServiceService } from '../../app/encrypt-service.service';
 import { UserServiceService } from '../shared/user-service.service';
-import { userResponse } from '../interface/userResponse';
-import { verificationResponse } from '../interface/verificationResponse';
+import { userResponse } from '../interface/IResponse'
+import { verificationResponse } from '../interface/IResponse';
 import { MustMatch } from '../../app/helpers/must-match.validator';
-import { MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { DialogRegister,DialogResend,DialogInvalidToken,DialogVerify} from '../shared/dialog-components/dialog.component'
 
 @Component({
   selector: 'app-login',
@@ -282,71 +283,7 @@ getRegisterErrorMessage(x: any) {
 
 
 
-//Dialog PopUp for Register
 
-@Component({
-  selector: 'dialog-popupRegister',
-  templateUrl: 'dialog-popupRegister.html',
-})
-
-export class DialogRegister { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogRegister>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
-
-//Dialog PopUp for Verify
-
-@Component({
-  selector: 'dialog-popupVerify',
-  templateUrl: 'dialog-popupVerify.html',
-})
-
-export class DialogVerify { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogVerify>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
-
-//Dialog PopUp for Resend
-@Component({
-  selector: 'dialog-popupResend',
-  templateUrl: 'dialog-popupResend.html',
-})
-
-export class DialogResend { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogResend>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
-
-//Dialog PopUp for Invalid Token
-@Component({
-  selector: 'dialog-invalidtoken',
-  templateUrl: 'dialog-invalidToken.html',
-})
-
-export class DialogInvalidToken { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogInvalidToken>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
 
 
 
