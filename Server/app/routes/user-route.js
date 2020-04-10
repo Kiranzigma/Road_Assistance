@@ -13,6 +13,9 @@ module.exports = (app) => {
   app.route('/vendor')
   .get(userrequestController.list)
   .post(userrequestController.save);
+  
+  app.route('/vendor/:id')
+  .put(userrequestController.update);
 
 
   app.route('/user/confirmation')
