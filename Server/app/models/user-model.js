@@ -42,7 +42,7 @@ let userSchema = new Schema({
     vendorLicense: {
         type: String
     },
-    image:{
+    userImage:{
         type: String
     },
     vendorLatitude:{

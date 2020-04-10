@@ -127,9 +127,13 @@ exports.resendToken = (umail) =>{
 }
 
 exports.update = (user) => {
+
     const promise = usermodel.findByIdAndUpdate({
         _id: user.id
     }, user, { new: true }).exec();
     return promise;
 }
+
+
+
 
