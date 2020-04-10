@@ -23,4 +23,5 @@ module.exports = (app) => {
   app.route('/user/:id')
   .post(userController.authenticate)
   .put(jwtAuth, userController.updateUser);
+  
 };

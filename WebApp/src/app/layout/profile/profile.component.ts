@@ -24,7 +24,7 @@ import {routerTransition} from '../../shared/router-animations';
 export class ProfileComponent implements OnInit{
   btnDisabled : boolean = false;
   url = '';
-  
+  userImage:'';
 
   title : string = "Update Profile";
   
@@ -70,77 +70,99 @@ export class ProfileComponent implements OnInit{
         gender : [this.user.userGender],
         password : [this.user.userPassword],
         newPassword : ['', [Validators.minLength(6)]],
-        confirmPassword : ['',[Validators.minLength(6)]]
+        confirmPassword : ['',[Validators.minLength(6)]],
+        userImage : [this.user.userImage]
       }, {
         validator: MustMatch('newPassword','confirmPassword')
         });
+        
     }
+
+    public selectedFile:any;
+    public blobUrl;
+    
   
   ngOnInit():void{
 
-    this.updateForm = this.fb.group({
-      firstName : [this.userService.getUser().userFirstName,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
-      lastName : [this.userService.getUser().userLastName,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
-      email : [this.userService.getUser().userEmail],
-      mobile : [this.userService.getUser().userMobileNumber,[Validators.minLength(10),Validators.maxLength(10)]],
-      gender : [this.userService.getUser().userGender],
-      password : [this.userService.getUser().userPassword],
-      newPassword : ['', [Validators.minLength(6)]],
-      confirmPassword : ['',[Validators.minLength(6)]]
-    }, {
-      validator: MustMatch('newPassword','confirmPassword')
-      });
-
+      //this.blobUrl = window.URL.createObjectURL(this.userImage);
+      console.log(this.user.userImage)
       if (this.userService.getUser().userType === "vendor"){
         this.rightBtn = "Add Address";
       }
       
-
+      this.blobUrl=this.user.userImage;
   }
  
- 
+
 
   get rf() { return this.updateForm.controls; }
 
   onSelectFile(event) {
+   // this.selectedFile= event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-  
       reader.readAsDataURL(event.target.files[0]); // read file as data url
   
       reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url  = event.target.result as string;
+        this.url=reader.result as string; 
+        // console.log(window.URL)
+        // let bloburl = window.URL.createObjectURL(this.url);
+        // console.log(bloburl);     
       }
     }
   }
-
 
   public delete(){
     this.url = null;
   }
 
-
-updateUser(){
-  let body = {
-    userFirstName: this.updateForm.get('firstName').value,
-    userLastName: this.updateForm.get('lastName').value,
-    userGender: this.updateForm.get('gender').value,
-    userMobileNumber: this.updateForm.get('mobile').value,
-    userPassword:this.updateForm.get('newPassword').value ? this.EncrDecr.set('123456$#@$^@1ERF',this.updateForm.get('newPassword').value) : this.userService.getUser().userPassword ,
-  };
+  updateUser(){
+    let body = {
+      userFirstName: this.updateForm.get('firstName').value,
+      userLastName: this.updateForm.get('lastName').value,
+      userGender: this.updateForm.get('gender').value,
+      userMobileNumber: this.updateForm.get('mobile').value,
+      userPassword:this.updateForm.get('newPassword').value ? this.EncrDecr.set('123456$#@$^@1ERF',this.updateForm.get('newPassword').value) : this.userService.getUser().userPassword ,
+      userImage: this.url
+    };
+    
   
-
-  if(this.updateForm.valid){
-    let arr=[];
-    arr.push(this.user.id);
-    this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
-
-      this.userService.reloadUser(y);
-      alert('Details have been updated successfully');
-    });
-
+    if(this.updateForm.valid){
+      let arr=[];
+      arr.push(this.user.id);
+      this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
+        this.userService.reloadUser(y);
+        console.log(body)
+        alert('Details have been updated successfully');
+      });
+    }
   }
 
+
+// updateUser(){
+//   let body = {
+//     userFirstName: this.updateForm.get('firstName').value,
+//     userLastName: this.updateForm.get('lastName').value,
+//     userGender: this.updateForm.get('gender').value,
+//     userMobileNumber: this.updateForm.get('mobile').value,
+//     userPassword:this.updateForm.get('newPassword').value ? this.EncrDecr.set('123456$#@$^@1ERF',this.updateForm.get('newPassword').value) : this.userService.getUser().userPassword, 
+//     //userImage:this.selectedFile
+//   };
+  
+
+//   if(this.updateForm.valid){
+//     let arr=[];
+//     arr.push(this.user.id);
+//     //const uploadData = new FormData();
+  
+//     this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
+
+//       this.userService.reloadUser(y);
+//       alert('Details have been updated successfully');
+//     });
+
+//   }
+//}
 
 // function emailDomain (control: AbstractControl):{ [key:string] : any } | null {
 //   const email: string = control.value;

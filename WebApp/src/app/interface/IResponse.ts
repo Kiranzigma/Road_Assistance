@@ -15,6 +15,7 @@ export interface Iuser{
     userMobileNumber: Number;
     userGender: Number;
     vendorLicense: String;
+    userImage:String;
 }
 
 export interface IUserRequest{
