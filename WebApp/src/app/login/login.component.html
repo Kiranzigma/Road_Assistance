@@ -34,11 +34,18 @@
                 </mat-form-field>
             </div>
             <div fxLayoutAlign="center">
-            <mat-radio-group formControlName="userType" class="radioButton">
+            <mat-radio-group formControlName="userType" class="radioButton" (change)="onChangeRadio($event)">
                 <mat-radio-button value ="user">User</mat-radio-button>
                 <mat-radio-button value ="vendor">Vendor</mat-radio-button>
                 <mat-error *ngIf="rf.userType.invalid && submitted">{{getRegisterErrorMessage('userType')}}</mat-error>
             </mat-radio-group>
+            </div>
+            
+            <div *ngIf="radioFilter=='vendor'" fxLayoutAlign="center">
+                <mat-form-field>
+                    <input type="text" formControlName="vendorLicense" matInput placeholder="Vendor License">
+                <mat-error *ngIf="rf.vendorLicense.invalid">{{getRegisterErrorMessage('vendorLicense')}}</mat-error>
+                </mat-form-field>
             </div>
             <div fxLayoutAlign="center">
             <mat-form-field>

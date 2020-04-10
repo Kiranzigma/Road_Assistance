@@ -9,7 +9,8 @@ import { userResponse } from '../interface/IResponse'
 import { verificationResponse } from '../interface/IResponse';
 import { MustMatch } from '../../app/helpers/must-match.validator';
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import { DialogRegister,DialogResend,DialogInvalidToken,DialogVerify} from '../shared/dialog-components/dialog.component'
+import { DialogRegister,DialogResend,DialogInvalidToken,DialogVerify} from '../shared/dialog-components/dialog.component';
+import { MatRadioChange, MatRadioButton}  from '@angular/material/radio';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
   verificationForm:FormGroup;
   submitted:boolean;
   mail: String;
+  radioFilter:String;
 
   constructor(private _routes: Router,
     private route: ActivatedRoute,
@@ -78,6 +80,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  onChangeRadio(radioChange: MatRadioChange) {
+    console.log(radioChange.value);
+    this.radioFilter=radioChange.value;
+    if(radioChange.value=="vendor"){
+    this.registerForm.addControl('vendorLicense', new FormControl ('', [Validators.required, Validators.minLength(10)]));
+    }
+    else{
+    this.registerForm.removeControl('vendorLicense');
+    }
+ } 
+
   get rf() { return this.registerForm.controls; }
 
   get vf() { return this.verificationForm.controls;}
@@ -106,6 +119,12 @@ export class LoginComponent implements OnInit {
       userFirstName: this.registerForm.get('userFirstName').value,
       userLastName: this.registerForm.get('userLastName').value
     };
+
+    if(this.radioFilter=="vendor"){
+      body['vendorLicense'] = this.registerForm.get('vendorLicense').value;
+    }
+
+    console.log(body);
 
     if(this.registerForm.valid){
         this.appservice.post<userResponse>('US-AU', body).subscribe(y => {
@@ -244,6 +263,13 @@ getRegisterErrorMessage(x: any) {
     case "userType":
         if (this.registerForm.get('userType').hasError('required')) {
           return 'You must select a value';
+        }
+    case "vendorLicense":
+        if (this.registerForm.get('vendorLicense').hasError('required')) {
+            return 'You must select a value';
+        } else
+        if (this.registerForm.get('vendorLicense').hasError('minlength')){
+          return this.registerForm.get('vendorLicense').hasError('minlength') ? 'License Length Invalid' : '';
         }
     case "userPassword":
       if (this.registerForm.get('userPassword').hasError('required')) {
