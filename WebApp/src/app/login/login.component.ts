@@ -1,14 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { IResponse } from '../interface/IResponse';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { EncryptServiceService } from '../../app/encrypt-service.service';
 import { UserServiceService } from '../shared/user-service.service';
-import { userResponse } from '../interface/userResponse';
-import { verificationResponse } from '../interface/verificationResponse';
+import { userResponse } from '../interface/IResponse'
+import { verificationResponse } from '../interface/IResponse';
 import { MustMatch } from '../../app/helpers/must-match.validator';
-import { MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { DialogRegister,DialogResend,DialogInvalidToken,DialogVerify} from '../shared/dialog-components/dialog.component';
+import { MatRadioChange, MatRadioButton}  from '@angular/material/radio';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
   verificationForm:FormGroup;
   submitted:boolean;
   mail: String;
+  radioFilter:String;
 
   constructor(private _routes: Router,
     private route: ActivatedRoute,
@@ -77,6 +80,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  onChangeRadio(radioChange: MatRadioChange) {
+    console.log(radioChange.value);
+    this.radioFilter=radioChange.value;
+    if(radioChange.value=="vendor"){
+    this.registerForm.addControl('vendorLicense', new FormControl ('', [Validators.required, Validators.minLength(10)]));
+    }
+    else{
+    this.registerForm.removeControl('vendorLicense');
+    }
+ } 
+
   get rf() { return this.registerForm.controls; }
 
   get vf() { return this.verificationForm.controls;}
@@ -105,6 +119,12 @@ export class LoginComponent implements OnInit {
       userFirstName: this.registerForm.get('userFirstName').value,
       userLastName: this.registerForm.get('userLastName').value
     };
+
+    if(this.radioFilter=="vendor"){
+      body['vendorLicense'] = this.registerForm.get('vendorLicense').value;
+    }
+
+    console.log(body);
 
     if(this.registerForm.valid){
         this.appservice.post<userResponse>('US-AU', body).subscribe(y => {
@@ -244,6 +264,13 @@ getRegisterErrorMessage(x: any) {
         if (this.registerForm.get('userType').hasError('required')) {
           return 'You must select a value';
         }
+    case "vendorLicense":
+        if (this.registerForm.get('vendorLicense').hasError('required')) {
+            return 'You must select a value';
+        } else
+        if (this.registerForm.get('vendorLicense').hasError('minlength')){
+          return this.registerForm.get('vendorLicense').hasError('minlength') ? 'License Length Invalid' : '';
+        }
     case "userPassword":
       if (this.registerForm.get('userPassword').hasError('required')) {
         return 'You must enter a value';
@@ -282,71 +309,7 @@ getRegisterErrorMessage(x: any) {
 
 
 
-//Dialog PopUp for Register
 
-@Component({
-  selector: 'dialog-popupRegister',
-  templateUrl: 'dialog-popupRegister.html',
-})
-
-export class DialogRegister { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogRegister>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
-
-//Dialog PopUp for Verify
-
-@Component({
-  selector: 'dialog-popupVerify',
-  templateUrl: 'dialog-popupVerify.html',
-})
-
-export class DialogVerify { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogVerify>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
-
-//Dialog PopUp for Resend
-@Component({
-  selector: 'dialog-popupResend',
-  templateUrl: 'dialog-popupResend.html',
-})
-
-export class DialogResend { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogResend>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
-
-//Dialog PopUp for Invalid Token
-@Component({
-  selector: 'dialog-invalidtoken',
-  templateUrl: 'dialog-invalidToken.html',
-})
-
-export class DialogInvalidToken { 
-  constructor(
-    public dialogRef: MatDialogRef<DialogInvalidToken>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-}
 
 
 
