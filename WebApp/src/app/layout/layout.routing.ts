@@ -5,6 +5,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RequestVendorComponent } from './request-vendor/request-vendor.component';
 import { AuthGuard } from '../auth-guard.service';
 import { UserRequestComponent } from './user-request/user-request.component';
+import { RequestDetailsComponent } from './request-details/request-details.component';
 
 const routes: Routes = [
     {
@@ -14,6 +15,7 @@ const routes: Routes = [
         {path: 'Profile', component: ProfileComponent},
         {path: 'RequestVendor', component: RequestVendorComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
         {path: 'UserRequestComponent', component: UserRequestComponent,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
+        {path: 'RequestDetailsComponent', component:RequestDetailsComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
         {path: '**', canActivate : [AuthGuard], data: {isRoute : "true"}}
       ],
     },
