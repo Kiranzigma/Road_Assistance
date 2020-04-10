@@ -24,3 +24,13 @@ export interface IUserRequest{
     description: string;
     user: Iuser
 }
+
+export interface userResponse{
+    userEmail: String;
+    userPassword: String;
+}
+
+export interface verificationResponse{
+    userEmail: String;
+    verificationCode: String;
+}
