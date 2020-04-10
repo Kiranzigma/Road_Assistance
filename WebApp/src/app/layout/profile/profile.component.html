@@ -6,7 +6,7 @@
     <div fxLayout = "row" class="profileImage">
         <<img fxFlex="128px" src="http://placehold.it/128x128" class="profileIcon" onclick="openUploadImageDialogue()"> -->
         <!-- <label class="hoverable" for="fileInput">
-            <!-- <img [src]= "upload/{{upload.url}}" *ngFor="let upload of uploads"> -->
+            <<img [src]= "upload/{{upload.url}}" *ngFor="let upload of uploads"> -->
             <!-- <img src = "{{upload.url}}" *ngFor="let upload of uploads"/> -->
             <!-- <img [src]="url ? url : 'https://www.w3schools.com/howto/img_avatar.png'"> 
             <div class="hover-text">Choose file</div>
@@ -99,7 +99,7 @@
         <!-- <img fxFlex="128px" src="http://placehold.it/128x128" class="profileIcon" onclick="openUploadImageDialogue()"> -->
         <label class="hoverable" for="fileInput">
             <!-- <img src="./assets/empty-profile.png"/> -->
-            <img src = "{{blobUrl}}"/>
+            <img src = "{{blobUrl ? blobUrl : 'https://www.w3schools.com/howto/img_avatar.png'}}"/>
             <!-- <img src="url ? url : '{{blobUrl}}'"/> -->
             <!-- url ? url : 'https://www.w3schools.com/howto/img_avatar.png'" form>  -->
             <div class="hover-text">Choose file</div>

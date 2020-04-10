@@ -89,7 +89,10 @@ export class ProfileComponent implements OnInit{
       if (this.userService.getUser().userType === "vendor"){
         this.rightBtn = "Add Address";
       }
-      
+      if(this.user.userImage===null){
+
+      }
+
       this.blobUrl=this.user.userImage;
   }
  
@@ -104,7 +107,7 @@ export class ProfileComponent implements OnInit{
       reader.readAsDataURL(event.target.files[0]); // read file as data url
   
       reader.onload = (event) => { // called once readAsDataURL is completed
-        this.url=reader.result as string; 
+        this.blobUrl=reader.result as string; 
         // console.log(window.URL)
         // let bloburl = window.URL.createObjectURL(this.url);
         // console.log(bloburl);     
@@ -113,7 +116,7 @@ export class ProfileComponent implements OnInit{
   }
 
   public delete(){
-    this.url = null;
+    this.blobUrl = null;
   }
 
   updateUser(){
@@ -123,7 +126,7 @@ export class ProfileComponent implements OnInit{
       userGender: this.updateForm.get('gender').value,
       userMobileNumber: this.updateForm.get('mobile').value,
       userPassword:this.updateForm.get('newPassword').value ? this.EncrDecr.set('123456$#@$^@1ERF',this.updateForm.get('newPassword').value) : this.userService.getUser().userPassword ,
-      userImage: this.url
+      userImage: this.blobUrl
     };
     
   
