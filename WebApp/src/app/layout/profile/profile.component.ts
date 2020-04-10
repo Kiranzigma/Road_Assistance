@@ -9,7 +9,7 @@ import { Iuser } from 'src/app/interface/IResponse';
 import { UserServiceService } from 'src/app/shared/user-service.service';
 import { MustMatch } from '../../helpers/must-match.validator';
 import { EncryptServiceService } from 'src/app/encrypt-service.service';
-import { userResponse } from 'src/app/interface/userResponse';
+import { userResponse } from 'src/app/interface/IResponse';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {routerTransition} from '../../shared/router-animations';
 
