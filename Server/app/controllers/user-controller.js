@@ -82,44 +82,6 @@ exports.resendTokenPost = function (req, res) {
 
 };
 
-//use the multer for image storage
-// var storage = multer.diskStorage({
-//     destination:function(req,file,cb){
-//         cb(null,'../WebApp/src/assets/')
-//     },
-//     filename:function(req,file,cb){
-//         cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-//     }
-// })
-
-// var upload = multer({
-//     storage:storage
-// }).single('file');
-
-//configuring image upload to the database
-
-// app.post("/uploadPhoto", upload.single('myImage'),(req,res)=> {
-// --const userId = req.params.id;   -- 
-// var img = fs.readFileSync(req.file.path);
-//     var encode_image = img.toString('base64');
-
-// //define a JSON object for the image
-
-
-
-// //insert the image into the database
-// db.collection('userSchema').insertOne(finalImg,(err,result) => {
-//     console.log(result);
-    
-//     if(err) return console.log(err);
-//     var finalImg = {
-//         imagePath: req.file.path,
-//         imageBinary: new Buffer(encode_image,'base64')
-//     }
-
-//     res.send(finalImg);
-// })
-// }
 
 
 exports.updateUser = (request, response) => {
@@ -136,49 +98,6 @@ exports.updateUser = (request, response) => {
     const promise = userService.update(user);
     promise.then(result).catch(renderErrorResponse(response));
 };
-
-// exports.updateUser = (request, response) => {
-//     const userId = request.params.id;
-//     var img = fs.readFileSync(request.file.path);
-//     var encode_image = img.toString('base64');
-    
-//     var finalImg = {
-//                 imagePath: req.file.path,
-//                 imageBinary: new Buffer(encode_image,'base64')
-//             }
-//     const user = Object.assign({}, request.body);
-//     const newuser = new usermodel(user);
-//     newuser.imagePath(imagePath);
-//     newuser.imageBinary(imageBinary);
-//     console.log(userId)
-
-    
-
-//     // get the body fRom the req
-//     user.id = userId;
-//     const result = (todo) => {
-//         response.status(200);
-//         response.json(todo);
-//     };
-//     const promise = userService.update(newuser);
-//     promise.then(result).catch(renderErrorResponse(response));
-// };
-
-// exports.updateImg = (request, response) => {
-//     const userId = request.params.id;
-//     const userImg = Object.assign({}, request.body);
-//     console.log(userId)
-
-//     // get the body fRom the req
-//     user.id = userId;
-//     const result = (user) => {
-//         response.status(200);
-//         response.json(user);
-//     };
-//     const promise = userService.updateImg(userImg);
-//     promise.then(result).catch(renderErrorResponse(response));
-// };
-
 
 
 
