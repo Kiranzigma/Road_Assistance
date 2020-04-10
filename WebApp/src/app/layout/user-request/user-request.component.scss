@@ -7,7 +7,7 @@
   
   .example-table-container {
     position: relative;
-    max-height: 400px;
+    max-height: 2000px;
     overflow: auto;
   }
   
@@ -36,4 +36,8 @@
   
   .mat-column-created {
     max-width: 124px;
+  }
+
+  .primary{
+    color: rgb(247, 146, 22);
   }

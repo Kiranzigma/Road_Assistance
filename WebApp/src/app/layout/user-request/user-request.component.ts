@@ -7,6 +7,7 @@ import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { routerTransition } from 'src/app/shared/router-animations';
+import { Router } from '@angular/router';
 
 
 
@@ -33,14 +34,15 @@ export class UserRequestComponent implements OnInit {
       this.dataSource.paginator = this.paginator;  
       this.dataSource.sort = this.sort;  
       console.log(this.data);
+      this.data.reverse();
     })  
   }
-  constructor(private appservice: AppServiceService) {
-  
-  }
+  constructor(private appservice: AppServiceService,private router: Router ) {}
 
 
-  public redirectToDetails = (id: string) => {
-    
-  }
+  redirectToDetails = (element:object) => {
+    console.log("harish")
+   console.log(element);
+    this.router.navigate(['/Profile'], { state: { rowData:element } })
+      }
 }

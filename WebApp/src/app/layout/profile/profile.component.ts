@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit{
   title : string = "Update Profile";
   firstName:any;
   updateForm : FormGroup;
-
+  user : Iuser;
   // validationMessages= {
   //   'firstName' :{
   //     'required' : 'First Name is required',
@@ -52,22 +52,24 @@ export class ProfileComponent implements OnInit{
   constructor(private fb: FormBuilder,
     private userService: UserServiceService,
     private appservice: AppServiceService,
-    private EncrDecr: EncryptServiceService) {}
+    private EncrDecr: EncryptServiceService) {
+      this.user = this.userService.getUser();
+      this.updateForm = this.fb.group({
+        firstName : [this.user.userFirstName,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
+        lastName : [this.user.userLastName,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
+        email : [this.user.userEmail],
+        mobile : [this.user.userMobileNumber,[Validators.minLength(10),Validators.maxLength(10)]],
+        gender : [this.user.userGender],
+        password : [this.user.userPassword],
+        newPassword : ['', [Validators.minLength(6)]],
+        confirmPassword : ['',[Validators.minLength(6)]]
+      }, {
+        validator: MustMatch('newPassword','confirmPassword')
+        });
+    }
   
   ngOnInit():void{
-    this.updateForm = this.fb.group({
-      firstName : [this.userService.getUser().userFirstName,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
-      lastName : [this.userService.getUser().userLastName,[Validators.required,Validators.minLength(2),Validators.maxLength(30)]],
-      email : [this.userService.getUser().userEmail],
-      mobile : [this.userService.getUser().userMobileNumber,[Validators.minLength(10),Validators.maxLength(10)]],
-      gender : [this.userService.getUser().userGender],
-      password : [this.userService.getUser().userPassword],
-      newPassword : ['', [Validators.minLength(6)]],
-      confirmPassword : ['',[Validators.minLength(6)]]
-    }, {
-      validator: MustMatch('newPassword','confirmPassword')
-      });
- 
+  
   }
  
   get rf() { return this.updateForm.controls; }
@@ -100,12 +102,11 @@ updateUser(){
 
   if(this.updateForm.valid){
     let arr=[];
-    arr.push(this.userService.getUser().id);
+    arr.push(this.user.id);
     this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
-      console.log(y);
-      alert('Details have been updated successfully')
+      this.userService.reloadUser(y);
+      alert('Details have been updated successfully');
     });
-
   }
 }
 
