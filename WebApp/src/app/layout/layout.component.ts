@@ -15,7 +15,8 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
      if(this.userService.getUser().userType == "user"){
       this.Nav = [
-        { icon: 'commute', displayName : 'Request Repair', route : 'RequestVendor', data: 'user'},
+        { icon: 'commute', displayName : 'Request Mechanic', route : 'RequestVendor', data: 'user'},
+        { icon:'storage', displayName : 'History', route : 'history', data: 'user'}, 
         { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
         { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
     }else if(this.userService.getUser().userType == "vendor"){
