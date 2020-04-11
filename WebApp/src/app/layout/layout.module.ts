@@ -15,9 +15,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FindVendorComponent } from './find-vendor/find-vendor.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserRequestComponent } from './user-request/user-request.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
-  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent],
+  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent, HistoryComponent],
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,ReactiveFormsModule,
     FlexLayoutModule.withConfig({useColumnBasisZero: false}), HttpClientModule,FormsModule,
