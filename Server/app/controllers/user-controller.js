@@ -162,6 +162,16 @@ exports.updateUser = (request, response) => {
     promise.then(result).catch(renderErrorResponse(response));
 };
 
+exports.getUser = (request, response) => {
+    const userid = request.params.id;
+    const result = (user) => {
+        response.status(200);
+        response.json(user);
+    };
+    const promise = userService.get(userid);
+    promise.then(result)
+    .catch(renderErrorResponse(response));
+};
 
 // method to handle the error response
 // @params - resp

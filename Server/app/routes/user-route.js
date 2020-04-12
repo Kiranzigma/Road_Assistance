@@ -23,7 +23,9 @@ module.exports = (app) => {
   app.route('/user/resendConfirmation')
   .post(userController.resendTokenPost );
   // route the get, put, delete method to the controller
+
   app.route('/user/:id')
   .post(userController.authenticate)
-  .put(jwtAuth, userController.updateUser);
+  .put(jwtAuth, userController.updateUser)
+  .get(userController.getUser);
 };

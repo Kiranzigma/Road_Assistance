@@ -13,6 +13,11 @@ exports.save = (user) => {
     
 }
 
+exports.get = (user) => {
+    const getpromise = usermodel.findById(user).exec();
+    return getpromise;
+};
+
 exports.update = (user) => {
     const promise = usermodel.findByIdAndUpdate({
         _id: user.id

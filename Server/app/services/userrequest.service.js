@@ -18,7 +18,7 @@ exports.save = (user) => {
 
 exports.update = (updatereq) => {
     const promise = userreq.findByIdAndUpdate({
-        _id: updatedtoDo.id
+        _id: updatereq.id
     }, updatereq, { new: true }).exec();
     return promise;
 };

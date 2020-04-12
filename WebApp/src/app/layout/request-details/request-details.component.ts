@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { UserServiceService } from 'src/app/shared/user-service.service';
+import { AppServiceService } from 'src/app/app-service.service';
+import { Iuser, IUserRequest } from 'src/app/interface/IResponse';
+import { google } from 'google-maps';
+import { Observable, Subscriber, Subject } from 'rxjs';
+declare var google: any;
+
 
 @Component({
   selector: 'app-request-details',
@@ -6,10 +15,125 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./request-details.component.scss']
 })
 export class RequestDetailsComponent implements OnInit {
+  @Input()
+  title: string = "Request Details";
+  rightBtn: string;
+  leftBtn: string = "Back";
+  arr: any;
+  data: Iuser;
+  form: FormGroup;
+  lat: Number;
+  long: Number;
+  address: any;
+  icon: string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
 
-  constructor() { }
 
-  ngOnInit(): void {
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
+    private appservice: AppServiceService) {
+    this.arr = this.router.getCurrentNavigation().extras.state.rowData;
+    let body = [];
+    body.push(this.arr.user_id);
+    this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
+      this.data = res;
+      this.form = this.fb.group({
+        latitude: [this.arr.latitude],
+        longitude: [this.arr.longitude],
+        state: [this.arr.state],
+        userid: [this.arr.user_id],
+        firstName: [this.data.userFirstName],
+        lastName: [this.data.userLastName],
+        mobile: [this.data.userMobileNumber],
+        vin: [this.arr.vin],
+        register_no: [this.arr.register_no],
+        message: [this.arr.message],
+        description: [this.arr.description],
+        name: [this.data.userFirstName + ' ' + this.data.userLastName],
+        time: [this.arr.estimated_time]
+      });
+    }))
+
+
+    //console.log(this.data.userFirstName); 
   }
+
+
+  ngOnInit() {
+
+    if (this.arr.state === "In Progress") {
+      this.rightBtn = "Complete Request";
+    }
+    if (this.arr.state === "open") {
+      this.rightBtn = "Confirm Request";
+    }
+    if (this.arr.state === "Completed") {
+      this.rightBtn = "";
+    }
+
+    this.lat = this.arr.latitude;
+    this.long = this.arr.longitude;
+    console.log(this.lat);
+    console.log(this.long);
+    this.addresspoint();
+  }
+
+  addresspoint() {
+    this.appservice.getExternal("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + this.lat + "," + this.long + "&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
+    x => {
+      x.results.slice(0, 1).forEach(y => this.address = y);
+      this.address = this.address.formatted_address;
+    }
+  );
+  }
+
+  getLatLong() {
+    this.appservice.getExternal("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.address + "&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
+      x => {
+        x.results.slice(0, 1).forEach(y => {
+          this.lat = y.geometry.location.lat;
+          this.long = y.geometry.location.lng;
+        });
+      }
+    )
+  }
+
+  confirm() {
+    let body = {
+      state: "In Progress"
+    }
+    let ar = [];
+    ar.push(this.arr.id);
+    this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
+      alert("Request Confirmed");
+    }))
+  }
+
+  complete() {
+    let body = {
+      state: "Completed"
+    }
+    let ar = [];
+    ar.push(this.arr.id);
+    this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
+      alert("Request Completed");
+    }))
+  }
+
+  back() {
+    this.router.navigate(['/layout/UserRequestComponent']);
+  }
+
+  outputemitted(x: string) {
+    if (this.rightBtn === "Confirm Request" && x == "right") {
+      this.confirm();
+    }
+    if (this.rightBtn === "Complete Request" && x == "right") {
+      this.complete();
+    }
+    if (this.leftBtn == "Back" && x == "left") {
+      this.back();
+    }
+  }
+
+
 
 }

@@ -43,7 +43,7 @@ exports.update = (req, res) => {
         res.json(user);
     };
     const promise = userService.update(reqbody);
-    promise.then(result).catch(errorRes(res));
+    promise.then(result).catch(renderErrorResponse(res));
 };
 
 
