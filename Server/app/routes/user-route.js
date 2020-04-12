@@ -28,4 +28,5 @@ module.exports = (app) => {
   .post(userController.authenticate)
   .put(jwtAuth, userController.updateUser)
   .get(userController.getUser);
+
 };

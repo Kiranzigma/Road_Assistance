@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter, AfterContentInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter, AfterContentInit, Input, SimpleChanges } from '@angular/core';
 import { AppServiceService } from 'src/app/app-service.service';
 import { google } from 'google-maps';
 import { Observable, Subscriber, Subject } from 'rxjs';
@@ -56,11 +56,14 @@ export class FindVendorComponent {
     });
     this.coordinates.sort((a,b)=> (a.numDistance > b.numDistance) ? 1 : (b.numDistance > a.numDistance)? -1 : 0 );
     this.coordinates = this.coordinates.slice(0,1);
+    //yet to immplemetn
+    this.coordinates.forEach(x => console.log(x));
   }
-  @Output() switcher = new EventEmitter<string>();
+  @Output() switcher = new EventEmitter<any>();
   showPosition(position) {
     this.lat = position.coords.latitude;
     this.long = position.coords.longitude;
+    this.emit();
     this.appService.getExternal("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + this.lat + "," + this.long + "&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
       x => {
         x.results.slice(0, 1).forEach(y => this.address = y);
@@ -89,7 +92,12 @@ export class FindVendorComponent {
   }
 
   emit() {
-    this.switcher.emit();
+    let loc = {
+      "lat" : this.lat,
+      "long" : this.long,
+      "vendorId": ""
+    }
+    this.switcher.emit(loc);
   }
   getLatLong() {
     this.appService.getExternal("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.address + "&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
@@ -97,6 +105,7 @@ export class FindVendorComponent {
         x.results.slice(0, 1).forEach(y => {
           this.lat = y.geometry.location.lat;
           this.long = y.geometry.location.lng;
+          this.emit();
         });
         this.getCordinateDistance();
       }

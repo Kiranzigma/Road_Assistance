@@ -15,6 +15,7 @@ export interface Iuser{
     userMobileNumber: Number;
     userGender: Number;
     vendorLicense: String;
+    userImage:String;
 }
 
 export interface IUserRequest{
@@ -23,4 +24,14 @@ export interface IUserRequest{
     state: string;
     description: string;
     user: Iuser
+}
+
+export interface userResponse{
+    userEmail: String;
+    userPassword: String;
+}
+
+export interface verificationResponse{
+    userEmail: String;
+    verificationCode: String;
 }

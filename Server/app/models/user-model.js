@@ -26,8 +26,8 @@ let userSchema = new Schema({
         required: true
     },
     isVerified: {
-         type: Boolean, 
-         default: false 
+        type: Boolean,
+        default: false
     },
     userType: {
         type: String,
@@ -42,17 +42,17 @@ let userSchema = new Schema({
     vendorLicense: {
         type: String
     },
-    image:{
+    userImage: {
         type: String
     },
-    vendorLatitude:{
+    vendorLatitude: {
         type: String
     },
-    vendorLongitude:{
-        type:String
+    vendorLongitude: {
+        type: String
     },
-    vendorCompanyName:{
-        type:String
+    vendorCompanyName: {
+        type: String
     }
 
 }, {
