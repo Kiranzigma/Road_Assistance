@@ -1,0 +1,38 @@
+div {
+    mat-form-field {
+        width: 55%;
+    }
+}
+
+.details{
+    margin-top: 2%;
+}
+.map {
+    margin-left: 2%;
+    width: 100%;
+    min-height: 50vh;
+    agm-map {
+        height: 100%;
+        width: 80%;
+    }
+}
+
+.button{
+    margin-left: 35%;
+    background-color:orange;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+    width : 30%;
+}
+
+.pics{
+    margin-left: 20%;
+    width: 60%;
+    height:50%;
+}
+
+
+
+
+

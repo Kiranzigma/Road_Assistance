@@ -13,6 +13,7 @@ exports.auth = (userId) => {
     return promise;
 };
 
+
 // method to register an user
 exports.save = (newuser) => {
     return new Promise((resolve,reject) =>{
@@ -125,6 +126,11 @@ exports.resendToken = (umail) =>{
         });
     })
 }
+
+exports.get = (user) => {
+    const getpromise = usermodel.findById(user).exec();
+    return getpromise;
+};
 
 exports.update = (user) => {
 

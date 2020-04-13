@@ -33,6 +33,19 @@ exports.save = (req, res) => {
         .catch(renderErrorResponse(res));
 };
 
+exports.update = (req, res) => {
+    const reqID = req.params.id;
+    const reqbody = Object.assign({}, req.body);
+    // get the body fRom the req
+    reqbody.id = reqID;
+    const result = (user) => {
+        res.status(200);
+        res.json(user);
+    };
+    const promise = userService.update(reqbody);
+    promise.then(result).catch(renderErrorResponse(res));
+};
+
 
 // method to handle the error response
 // @params - resp
