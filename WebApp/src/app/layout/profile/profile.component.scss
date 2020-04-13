@@ -94,3 +94,20 @@ p {
     cursor: pointer;
     
   }
+
+  .map {
+    margin-top: 5%;
+    width: 100%;
+    min-height: 50vh;
+    agm-map {
+        height: 100%;
+        width: 80%;
+    }
+}
+
+.addAddress{
+  width: 61%;
+    margin-top: 30%;
+    margin-left: 20%;
+}
+

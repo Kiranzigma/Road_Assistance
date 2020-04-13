@@ -16,6 +16,8 @@ export interface Iuser{
     userGender: Number;
     vendorLicense: String;
     userImage:String;
+    vendorLatitude:string;
+    vendorLongitude:string;
 }
 
 export interface IUserRequest{
