@@ -6,13 +6,15 @@ import { AppServiceService } from 'src/app/app-service.service';
 import { Iuser, IUserRequest } from 'src/app/interface/IResponse';
 import { google } from 'google-maps';
 import { Observable, Subscriber, Subject } from 'rxjs';
+import { routerTransition } from 'src/app/shared/router-animations';
 declare var google: any;
 
 
 @Component({
   selector: 'app-request-details',
   templateUrl: './request-details.component.html',
-  styleUrls: ['./request-details.component.scss']
+  styleUrls: ['./request-details.component.scss'],
+  animations: [routerTransition()]
 })
 export class RequestDetailsComponent implements OnInit {
   @Input()
@@ -64,17 +66,17 @@ export class RequestDetailsComponent implements OnInit {
     if (this.arr.state === "In Progress") {
       this.rightBtn = "Complete Request";
     }
-    if (this.arr.state === "open") {
+    if (this.arr.state === "Open") {
       this.rightBtn = "Confirm Request";
     }
     if (this.arr.state === "Completed") {
       this.rightBtn = "";
     }
     this.image = this.arr.image;
-    // this.lat = parseFloat(this.arr.latitude);
-    // this.long = parseFloat(this.arr.longitude);
-    this.lat = 42.361145;
-    this.long = -71.057083;
+    this.lat = parseFloat(this.arr.latitude);
+    this.long = parseFloat(this.arr.longitude);
+    // this.lat = 42.361145;
+    // this.long = -71.057083;
     console.log(this.lat);
     console.log(this.long);
     this.addresspoint();
@@ -134,7 +136,7 @@ export class RequestDetailsComponent implements OnInit {
       this.leftBtn = "Back";
       return;
     }
-    if (this.arr.state === "open") {
+    if (this.arr.state === "Open") {
       this.rightBtn = "Confirm Request";
       this.leftBtn = "Back";
       return;
@@ -144,7 +146,6 @@ export class RequestDetailsComponent implements OnInit {
       this.leftBtn = "Back";
       return;
     }
-
     else{
       this.rightBtn = "";
       this.leftBtn = "Back";

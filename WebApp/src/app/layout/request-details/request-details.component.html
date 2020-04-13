@@ -2,7 +2,7 @@
 </app-navbar>
 
 <br>
-<form [formGroup]="form" *ngIf="form && switch == false" >
+<form [formGroup]="form" *ngIf="form && switch == false">
     <div fxLayout="row" class="details">
         <div  fxLayout="column" fxFlex="50%">
         <div fxLayoutAlign="center">
@@ -71,7 +71,7 @@
 </form>
 
 <div *ngIf="switch == true" class="pics">
-    <div  *ngFor="let image of image" >
+    <div  *ngFor="let image of image">
         <img mat-card-image src='{{image}}'/>
       </div>
 </div>
