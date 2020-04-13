@@ -9,7 +9,6 @@ const usermodel = mongoose.model('UserSchema');
 const userreqmodel = mongoose.model('UserRequestSchema');
 let CryptoJS = require("crypto-js");
 const tokenmodel = mongoose.model('TokenSchema');
-const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
@@ -109,7 +108,6 @@ exports.getUser = (request, response) => {
     promise.then(result)
     .catch(renderErrorResponse(response));
 };
-
 
 // method to handle the error response
 // @params - resp

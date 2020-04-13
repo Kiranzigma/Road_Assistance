@@ -6,8 +6,10 @@ const userrequestController = require('../controllers/user-request-controller');
 module.exports = (app) => {
 
   // route the get and post method to the controller
+
   app.route('/user')
   .post(userController.register);
+  
 
 
   app.route('/vendor')

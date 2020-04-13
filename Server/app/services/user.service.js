@@ -13,6 +13,7 @@ exports.auth = (userId) => {
     return promise;
 };
 
+
 // method to register an user
 exports.save = (newuser) => {
     return new Promise((resolve,reject) =>{

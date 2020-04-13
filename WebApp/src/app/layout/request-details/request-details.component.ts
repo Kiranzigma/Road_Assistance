@@ -22,9 +22,11 @@ export class RequestDetailsComponent implements OnInit {
   arr: any;
   data: Iuser;
   form: FormGroup;
-  lat: Number;
-  long: Number;
+  lat: any;
+  long: any;
+  switch: boolean = false;
   address: any;
+  image : [];
   icon: string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
 
 
@@ -48,11 +50,11 @@ export class RequestDetailsComponent implements OnInit {
         message: [this.arr.message],
         description: [this.arr.description],
         name: [this.data.userFirstName + ' ' + this.data.userLastName],
-        time: [this.arr.estimated_time]
+        time: [this.arr.estimated_time],
+        image:[this.arr.image]
       });
     }))
-
-
+    
     //console.log(this.data.userFirstName); 
   }
 
@@ -68,9 +70,11 @@ export class RequestDetailsComponent implements OnInit {
     if (this.arr.state === "Completed") {
       this.rightBtn = "";
     }
-
-    this.lat = this.arr.latitude;
-    this.long = this.arr.longitude;
+    this.image = this.arr.image;
+    // this.lat = parseFloat(this.arr.latitude);
+    // this.long = parseFloat(this.arr.longitude);
+    this.lat = 42.361145;
+    this.long = -71.057083;
     console.log(this.lat);
     console.log(this.long);
     this.addresspoint();
@@ -85,16 +89,6 @@ export class RequestDetailsComponent implements OnInit {
   );
   }
 
-  getLatLong() {
-    this.appservice.getExternal("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.address + "&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
-      x => {
-        x.results.slice(0, 1).forEach(y => {
-          this.lat = y.geometry.location.lat;
-          this.long = y.geometry.location.lng;
-        });
-      }
-    )
-  }
 
   confirm() {
     let body = {
@@ -118,19 +112,66 @@ export class RequestDetailsComponent implements OnInit {
     }))
   }
 
+  getImages(){
+    if(this.image.length == 0){
+      this.switch = false;
+      alert("No pictures to display");
+      return;
+    }
+    else{
+      this.switch = true;
+      this.rightBtn = "Close";
+      this.leftBtn = "";
+      return;
+    }
+    
+  }
+
+  close(){
+    this.switch = false;
+    if (this.arr.state === "In Progress") {
+      this.rightBtn = "Complete Request";
+      this.leftBtn = "Back";
+      return;
+    }
+    if (this.arr.state === "open") {
+      this.rightBtn = "Confirm Request";
+      this.leftBtn = "Back";
+      return;
+    }
+    if (this.arr.state === "Completed") {
+      this.rightBtn = "";
+      this.leftBtn = "Back";
+      return;
+    }
+
+    else{
+      this.rightBtn = "";
+      this.leftBtn = "Back";
+      return;
+    }
+  }
+
   back() {
     this.router.navigate(['/layout/UserRequestComponent']);
   }
 
   outputemitted(x: string) {
+    if (this.rightBtn === "Close" && x == "right") {
+      this.close();
+      return;
+    }
     if (this.rightBtn === "Confirm Request" && x == "right") {
       this.confirm();
+      return;
     }
     if (this.rightBtn === "Complete Request" && x == "right") {
       this.complete();
+      return;
     }
     if (this.leftBtn == "Back" && x == "left") {
       this.back();
+      return;
     }
   }
 

@@ -2,7 +2,7 @@
 </app-navbar>
 
 <br>
-<form [formGroup]="form" *ngIf="form">
+<form [formGroup]="form" *ngIf="form && switch == false" >
     <div fxLayout="row" class="details">
         <div  fxLayout="column" fxFlex="50%">
         <div fxLayoutAlign="center">
@@ -19,7 +19,7 @@
 
         <div fxLayoutAlign="center" >
             <mat-form-field class="addAddress">
-                <input type="text" readonly cdkTextareaAutosize (ngModelChange)="getLatLong()" [ngModel]="address" [ngModelOptions]="{standalone: true}" width="200px" matInput placeholder="Customer Address" [value]="address">
+                <input type="text" readonly cdkTextareaAutosize [ngModel]="address" [ngModelOptions]="{standalone: true}" width="200px" matInput placeholder="Customer Address" [value]="address">
             </mat-form-field>
         </div>   
 
@@ -54,6 +54,9 @@
             </mat-form-field>
         </div>
 
+        <div fxLayoutAlign="center" class="button">
+                <button (click)="getImages()" mat-button> View Images </button>
+        </div>
         
     </div>
 
@@ -61,12 +64,16 @@
         <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">
             <agm-marker [iconUrl]="icon" [latitude]="lat" [longitude]="long">
             </agm-marker>
-            <agm-marker [latitude]="lat" [longitude]="long">
-            </agm-marker>
         </agm-map>
     </div>
 </div>
     
 </form>
+
+<div *ngIf="switch == true" class="pics">
+    <div  *ngFor="let image of image" >
+        <img mat-card-image src='{{image}}'/>
+      </div>
+</div>
 
 
