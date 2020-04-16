@@ -7,7 +7,7 @@ import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { routerTransition } from 'src/app/shared/router-animations';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 
 
@@ -41,8 +41,7 @@ export class UserRequestComponent implements OnInit {
 
 
   redirectToDetails = (element:object) => {
-    console.log("harish")
-   console.log(element);
-    this.router.navigate(['/Profile'], { state: { rowData:element } })
+    const navigationExtras: NavigationExtras = { state: { rowData:element }};
+    this.router.navigate(['/layout/RequestDetailsComponent'], navigationExtras);
       }
 }

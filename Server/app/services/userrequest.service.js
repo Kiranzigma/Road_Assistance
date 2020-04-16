@@ -15,3 +15,10 @@ exports.save = (user) => {
     newuser.set("created_Date", currentdate.toLocaleString());
     return newuser.save();
 };
+
+exports.update = (updatereq) => {
+    const promise = userreq.findByIdAndUpdate({
+        _id: updatereq.id
+    }, updatereq, { new: true }).exec();
+    return promise;
+};
