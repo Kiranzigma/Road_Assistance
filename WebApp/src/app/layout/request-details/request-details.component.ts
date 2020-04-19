@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserServiceService } from 'src/app/shared/user-service.service';
 import { AppServiceService } from 'src/app/app-service.service';
@@ -70,8 +70,9 @@ export class RequestDetailsComponent implements OnInit {
       this.rightBtn = "Confirm Request";
     }
     if (this.arr.state === "Completed") {
-      this.rightBtn = "";
+      this.rightBtn = "Generate Bill";
     }
+
     this.image = this.arr.image;
     this.lat = parseFloat(this.arr.latitude);
     this.long = parseFloat(this.arr.longitude);
@@ -157,6 +158,11 @@ export class RequestDetailsComponent implements OnInit {
     this.router.navigate(['/layout/UserRequestComponent']);
   }
 
+  generateBill(){
+    const navigationExtras: NavigationExtras = { state: { rowData:this.arr }};
+    this.router.navigate(['/layout/bill'], navigationExtras);
+  }
+
   outputemitted(x: string) {
     if (this.rightBtn === "Close" && x == "right") {
       this.close();
@@ -168,6 +174,10 @@ export class RequestDetailsComponent implements OnInit {
     }
     if (this.rightBtn === "Complete Request" && x == "right") {
       this.complete();
+      return;
+    }
+    if (this.rightBtn == "Generate Bill" && x == "right") {
+      this.generateBill();
       return;
     }
     if (this.leftBtn == "Back" && x == "left") {
