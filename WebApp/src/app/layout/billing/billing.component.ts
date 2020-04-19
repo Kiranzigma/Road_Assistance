@@ -15,7 +15,7 @@ export interface BillingElement {
 }
 
 const ELEMENT_DATA: BillingElement[] = [];
-const FINAL_BILL: BillingElement[] = [];
+let FINAL_BILL: BillingElement[] = [];
 
 
 @Component({
@@ -32,8 +32,10 @@ export class BillingComponent implements OnInit {
   leftBtn: string = "Back";
   arr: any;
   i: number = 0;
+  rightBtn: string = "Checkout";
 
   displayedColumns: string[] = ['position', 'desc', 'estimatedCost','select'];
+  footerColumns: string[] = ['desc', 'estimatedCost'];
   dataSource = new MatTableDataSource<BillingElement>(ELEMENT_DATA);
   finalBill = new MatTableDataSource<BillingElement>(FINAL_BILL);
   selection = new SelectionModel<BillingElement>(true, []);
@@ -47,7 +49,8 @@ export class BillingComponent implements OnInit {
     billingData.data.forEach(e => {
       ELEMENT_DATA.push({position: ++this.i, desc: e.desc, estimatedCost: e.repair.total_cost});
     })
-    console.log(this.dataSource);
+    // console.log(this.dataSource);
+    // console.log(this.getTotalCost());
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -96,6 +99,7 @@ export class BillingComponent implements OnInit {
   }
 
   back() {
+    FINAL_BILL = [];
     this.router.navigate(['/layout/RequestDetailsComponent'], { state: { rowData:this.arr }});
   }
 
