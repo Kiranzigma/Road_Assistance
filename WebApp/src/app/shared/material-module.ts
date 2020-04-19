@@ -16,6 +16,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 // import the modules from the angular material using the full path as it got changed in the version 9
@@ -36,6 +37,7 @@ const modules = [
     MatPaginatorModule,
     MatRadioModule,
     MatDialogModule,
+    MatCheckboxModule,
     MatSortModule
 ];
 
