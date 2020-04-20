@@ -5,7 +5,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { RequestVendorComponent } from './request-vendor/request-vendor.component';
 import { AuthGuard } from '../auth-guard.service';
 import { UserRequestComponent } from './user-request/user-request.component';
+import { HistoryComponent } from './history/history.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
+import { BillingComponent } from './billing/billing.component';
 
 const routes: Routes = [
     {
@@ -15,7 +17,9 @@ const routes: Routes = [
         {path: 'Profile', component: ProfileComponent},
         {path: 'RequestVendor', component: RequestVendorComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
         {path: 'UserRequestComponent', component: UserRequestComponent,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
+        {path: 'history', component: HistoryComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
         {path: 'RequestDetailsComponent', component:RequestDetailsComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
+        {path: 'bill', component:BillingComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
         {path: '**', canActivate : [AuthGuard], data: {isRoute : "true"}}
       ],
     },

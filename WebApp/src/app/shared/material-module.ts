@@ -16,6 +16,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 
@@ -37,6 +38,7 @@ const modules = [
     MatPaginatorModule,
     MatRadioModule,
     MatDialogModule,
+    MatCheckboxModule,
     MatSortModule
 ];
 
