@@ -5,6 +5,11 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 .layout {
     background-color: orange !important;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%  !important;
 }
 
 html,
