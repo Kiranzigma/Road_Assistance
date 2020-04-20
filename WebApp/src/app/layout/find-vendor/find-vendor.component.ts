@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, Output, EventEmitter, AfterContentIni
 import { AppServiceService } from 'src/app/app-service.service';
 import { google } from 'google-maps';
 import { Observable, Subscriber, Subject } from 'rxjs';
+import { Iuser } from 'src/app/interface/IResponse';
 declare var google: any;
 
 @Component({
@@ -15,49 +16,40 @@ export class FindVendorComponent {
   address: any;
   lat: string;
   long: string;
+  vendorId : String;
   icon: string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
   constructor(private appService: AppServiceService) {
-       navigator.geolocation.getCurrentPosition((position) => {
+    let params = [];
+    params.push("vendor")
+    this.appService.get<Iuser>('US-UT',params).subscribe(x=>{
+      this.coordinates = x;
+      navigator.geolocation.getCurrentPosition((position) => {
         this.showPosition(position);
         this.getCordinateDistance();
       });
+    })
   }
-  coordinates: any = [
-    {
-      latitude: "42.3371621"
-      , longitude: "-71.1059823",
-      company: 'XYZ Mech',
-      distance: "",
-      duration: "",
-      numDistance: ""
-    },
-    {
-      latitude: "42.3391621"
-      , longitude: "-71.1099825",
-      company: 'ABC Mech',
-      distance: "",
-      duration: "",
-      numDistance : ""
-    },
-  ];
+  coordinates: Iuser[];
   getCordinateDistance(){
     this.coordinates.forEach(x => {
-      let origin = x.latitude + "," + x.longitude;
+      let origin = x.vendorLatitude + "," + x.vendorLongitude;
       let destination = this.lat + "," + this.long;
       this.getDistance(origin, destination).subscribe(y => {
         y.rows.filter(z => {
           z.elements.filter(k => { 
-            x.distance = k.distance.text;
-            x.numDistance = k.distance.text.replace(',','.').replace(/[^0-9\.]+/g,"");
-            x.duration = k.duration.text;
+            x.distance = k.distance?.text;
+            x.numDistance = k.distance?.text.replace(',','.').replace(/[^0-9\.]+/g,"");
+            x.duration = k.duration?.text;
              });
         });
       })
     });
     this.coordinates.sort((a,b)=> (a.numDistance > b.numDistance) ? 1 : (b.numDistance > a.numDistance)? -1 : 0 );
     this.coordinates = this.coordinates.slice(0,1);
-    //yet to immplemetn
-    this.coordinates.forEach(x => console.log(x));
+    this.coordinates.forEach(x => {
+      this.vendorId = x.id;
+      this.emit();
+    });
   }
   @Output() switcher = new EventEmitter<any>();
   showPosition(position) {
@@ -95,7 +87,7 @@ export class FindVendorComponent {
     let loc = {
       "lat" : this.lat,
       "long" : this.long,
-      "vendorId": ""
+      "vendorId": this.vendorId
     }
     this.switcher.emit(loc);
   }
