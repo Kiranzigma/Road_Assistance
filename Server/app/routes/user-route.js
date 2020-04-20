@@ -14,8 +14,12 @@ module.exports = (app) => {
         .get(userrequestController.list)
         .post(userrequestController.save);
 
-    app.route('/vendor/:id')
-        .put(userrequestController.update);
+  app.route('/vendor')
+  .post(userrequestController.save);
+  
+  app.route('/vendor/:id')
+  .get(userrequestController.list)
+  .put(userrequestController.update);
 
     app.route('/user/confirmation')
         .post(userController.confirmationPost);

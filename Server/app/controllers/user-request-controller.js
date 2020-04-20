@@ -11,7 +11,8 @@ let CryptoJS = require("crypto-js");
 const tokenmodel = mongoose.model('TokenSchema');
 
 exports.list = (request, response) => {
-    const promise = userService.search();
+    const userId = request.params.id;
+    const promise = userService.search(userId);
     const result = (user) => {
         //set response to 200
         response.status(200);
