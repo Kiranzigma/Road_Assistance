@@ -19,13 +19,14 @@ import { HistoryComponent } from './history/history.component';
 import { RequestDetailsComponent } from './request-details/request-details.component';
 import { BillingComponent } from './billing/billing.component';
 import { VendorAnalyticsComponent } from './vendor-analytics/vendor-analytics.component';
+import { ChartModule } from 'angular-highcharts';
 
 
 @NgModule({
   declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent, RequestDetailsComponent, HistoryComponent, BillingComponent, VendorAnalyticsComponent],
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,ReactiveFormsModule,
-    FlexLayoutModule.withConfig({useColumnBasisZero: false}), HttpClientModule,FormsModule,
+    FlexLayoutModule.withConfig({useColumnBasisZero: false}), HttpClientModule,FormsModule,ChartModule,
     AgmCoreModule.forRoot({
       apiKey : 'AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo'
     })
