@@ -46,7 +46,6 @@ export class HistoryComponent implements OnInit {
       this.dataSource.sort = this.sort;  
       console.log(this.data);
       this.data.reverse(); 
-      
     })  
   }
   //constructor(private appservice: AppServiceService,private router: Router ) {}

@@ -29,7 +29,9 @@ export interface IUserRequest{
     id: string;
     state: string;
     description: string;
-    user: Iuser
+    user: Iuser;
+    listofServices : [];
+    totalCost: Number;
 }
 
 export interface userResponse{
