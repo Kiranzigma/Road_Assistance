@@ -53,7 +53,16 @@ let userRequestSchema = new Schema({
     longitude: {
         type: String,
         required: true
+    },
+
+    listOfServices: {
+        type:[]
+    },
+
+    totalCost: {
+        type: String,
     }
+
 }, {
     versionKey: false
 });
