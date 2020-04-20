@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserServiceService } from 'src/app/shared/user-service.service';
@@ -12,6 +12,15 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { BillingElement } from '../billing/billing.component';
 import { billingData } from 'src/app/helpers/billingData';
+import { MatPaginator } from '@angular/material/paginator';
+
+export interface HistoryDetailsElement {
+  desc: string;
+  position: number;
+  estimatedCost: number;
+}
+
+const ELEMENT_DATA: HistoryDetailsElement[] = [];
 
 
 
@@ -42,15 +51,19 @@ export class HistoryDetailsComponent implements OnInit {
     desc: string;
     position: number;
     estimatedCost: number;
+    totalCost:number;
+
+  
+
     //icon: string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
   
 
-    displayedColumns: string[] = ['position', 'desc', 'estimatedCost','select'];
-    footerColumns: string[] = ['desc', 'estimatedCost'];
+    displayedColumns: string[] = ['position', 'desc', 'estimatedCost'];
     dataSource = new MatTableDataSource<BillingElement>(ELEMENT_DATA);
-    finalBill = new MatTableDataSource<BillingElement>(FINAL_BILL);
-    selection = new SelectionModel<BillingElement>(true, []);
-  
+
+    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+
     constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
       private appservice: AppServiceService) {
       this.arr = this.router.getCurrentNavigation().extras.state.rowData;
@@ -58,6 +71,7 @@ export class HistoryDetailsComponent implements OnInit {
       body.push(this.arr.user_id);
       this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
         this.data = res;
+        console.log(this.arr);
           this.form = this.fb.group({
           userid: [this.arr.user_id],
           register_no: [this.arr.register_no],
@@ -77,9 +91,7 @@ export class HistoryDetailsComponent implements OnInit {
       if (this.arr.state === "Completed") {
         this.btnDisabled = false;
       }
-      billingData.data.forEach(e => {
-        ELEMENT_DATA.push({position: ++this.i, desc: e.desc, estimatedCost: e.repair.total_cost});
-      })
+     
   
  
     }
@@ -151,10 +163,8 @@ export class HistoryDetailsComponent implements OnInit {
     // }
   
     /** Gets the total bill of everything transactions. */
-  getTotalCost() {
-    return this.finalBill.filteredData.map(t => t.estimatedCost).reduce((acc, value) => acc + value, 0);
-  }
-  
+ 
+
     back() {
       this.router.navigate(['/layout/history']);
     }
@@ -181,11 +191,19 @@ export class HistoryDetailsComponent implements OnInit {
       //   this.generateBill();
       //   return;
       // }
+      if(this.rightBtn == "Pay" && x == "right"){
+        this.pay(this.arr.totalCost);
+      }
       if (this.leftBtn == "Back" && x == "left") {
         this.back();
         return;
       }
     }
+
+  pay = (totalCost:any) => {
+    const navigationExtras: NavigationExtras = { state: { rowData : totalCost }};
+    this.router.navigate(['/layout/RequestDetailsComponent'], navigationExtras);
+  }
   
     
   }
