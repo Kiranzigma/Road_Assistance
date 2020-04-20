@@ -62,7 +62,7 @@ export class RequestDetailsComponent implements OnInit {
     
     //console.log(this.data.userFirstName); 
   }
-
+  rowImages : any = [];
 
   ngOnInit() {
 
@@ -77,12 +77,26 @@ export class RequestDetailsComponent implements OnInit {
     }
 
     this.image = this.arr.image;
+    let rows = Math.floor((this.image.length / 3));
+    let remainder = this.image.length % 3;
+    if(remainder > 0){
+      rows = rows + 1;
+    }
+    let k = 0;
+    for(let i = 1; i <= rows; i++){
+      let data = [];
+      for(let j =1; j<= 3; j++){
+        let col = {
+          image : this.image[k]
+        }
+        data.push(col)
+        k++;
+      }
+      this.rowImages.push(data);
+    }
+
     this.lat = parseFloat(this.arr.latitude);
     this.long = parseFloat(this.arr.longitude);
-    // this.lat = 42.361145;
-    // this.long = -71.057083;
-    console.log(this.lat);
-    console.log(this.long);
     this.addresspoint();
   }
 
