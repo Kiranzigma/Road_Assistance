@@ -31,12 +31,13 @@ export class HistoryComponent implements OnInit {
   dataSource: MatTableDataSource<IUserRequest>;
   user:Iuser;  
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, {static:true}) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
     let body = [];
     body.push(this.user.id);
+    body.push("user");
     this.appservice.get<IUserRequest>('US-VEN',body).subscribe((res: any[])=>{
       this.data = res;
       this.dataSource = new MatTableDataSource(this.data);
@@ -53,6 +54,6 @@ export class HistoryComponent implements OnInit {
 
   redirectToDetails = (element:object) => {
     const navigationExtras: NavigationExtras = { state: { rowData:element }};
-    this.router.navigate(['/layout/RequestDetailsComponent'], navigationExtras);
+    this.router.navigate(['/layout/history-details'], navigationExtras);
       }
 }
