@@ -78,10 +78,8 @@ export class BillingComponent implements OnInit {
     if(x.checked==false){
       FINAL_BILL.splice(FINAL_BILL.findIndex(v => v.position === row.position), 1);
     }
-    
-    console.log(this.finalBill.filteredData);
+
     console.log("Total Cost = " + this.getTotalCost());
-    
 
   }
 
@@ -103,9 +101,25 @@ export class BillingComponent implements OnInit {
     this.router.navigate(['/layout/RequestDetailsComponent'], { state: { rowData:this.arr }});
   }
 
+  checkout() {
+      console.log("List Of Services");
+      let i =0;
+      this.finalBill.filteredData.forEach(e => {
+        console.log(++i + " : " + e.desc);
+      });
+      console.log("Total Cost : " + this.getTotalCost());
+      console.log("User Details Info : ");
+      console.log(this.arr);
+  }
+
   outputemitted(x: string) {
     if (this.leftBtn == "Back" && x == "left") {
       this.back();
+      return;
+    }
+
+    if (this.rightBtn == "Checkout" && x == "right") {
+      this.checkout();
       return;
     }
   }

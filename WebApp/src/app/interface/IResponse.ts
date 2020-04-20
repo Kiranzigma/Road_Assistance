@@ -18,6 +18,10 @@ export interface Iuser{
     userImage:String;
     vendorLatitude:string;
     vendorLongitude:string;
+    distance:string;
+    numDistance:string;
+    duration:string;
+    company: string;
 }
 
 export interface IUserRequest{

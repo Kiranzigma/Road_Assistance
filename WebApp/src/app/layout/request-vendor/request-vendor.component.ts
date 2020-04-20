@@ -3,7 +3,8 @@ import { AppServiceService } from 'src/app/app-service.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import {routerTransition} from '../../shared/router-animations'
 import { UserServiceService } from 'src/app/shared/user-service.service';
-import { Iuser } from 'src/app/interface/IResponse';
+import { Iuser, IResponse } from 'src/app/interface/IResponse';
+import { Router } from '@angular/router';
 // https://vingenerator.org/
 // https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/5XYKT3A17BG157871?format=json
 @Component({
@@ -23,7 +24,7 @@ export class RequestVendorComponent implements OnInit {
   lat : "";
   long : "";
   vendorId : any;
-  constructor(private appService: AppServiceService, private userService: UserServiceService) {
+  constructor(private _routes: Router, private appService: AppServiceService, private userService: UserServiceService) {
     this.user = this.userService.getUser();
    }
   switcher : any;
@@ -42,7 +43,7 @@ export class RequestVendorComponent implements OnInit {
 
   checkInput(){
     let vin = this.requestForm?.get('vehicleNumber')?.value;
-    if(vin?.length == 17){
+    if(vin?.length == 17 && this.requestForm.get('vehicleRegNumber').value != '' && this.requestForm.get('description').value != ''){
       this.appService.getExternal("https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/" + vin +"?format=json").subscribe(
          x=>{
           this.vinData = x.Results.filter(y=> {
@@ -50,7 +51,8 @@ export class RequestVendorComponent implements OnInit {
               return y;
             }
           })
-          if(this.vinData.length > 1){
+          if(this.vinData.length > 1 ){
+            console.log(this.requestForm.get('vehicleRegNumber').value);
             this.btndisabled = false;
           }
          }          
@@ -70,8 +72,10 @@ export class RequestVendorComponent implements OnInit {
     this.rightBtn = "Find Mechanic";
   }
   outputemit(x : any){
+    console.log(x);
    this.lat = x.lat;
    this.long = x.long;
+   this.vendorId = x.vendorId;
   }
   outputemitted(x: string){
     if(this.rightBtn == "Submit Request" && x == "right"){
@@ -86,7 +90,7 @@ export class RequestVendorComponent implements OnInit {
   }
   submit(){
     let body = {
-      "user_id" :  this.user.userEmail,
+      "user_id" :  this.user.id,
       "message" : this.requestForm.get('message')?.value,
       "description": this.requestForm.get('description')?.value,
       "vin" : this.requestForm.get('vehicleNumber')?.value,
@@ -94,9 +98,11 @@ export class RequestVendorComponent implements OnInit {
       "image": this.fileUpload,
       "latitude": this.lat,
       "longitude":this.long,
-      "vendor_id": this.vendorId
+      "vendor_id": this.vendorId,
+      "state": "Open"
     }
-    console.log(body);
+    this._routes.navigate(['/layout/history']);
+    this.appService.post('US-VEN',body).subscribe();
   }
   onUploadClicked(x){
    for(let i = 0; i < x.length; i++){

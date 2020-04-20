@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const userreq = mongoose.model('UserRequestSchema');
 
 exports.search = (user) => {
-    const promise = userreq.find({vendor_id:user}).exec();
+    const promise = userreq.find({user_id:user}).exec();
     return promise;
 };
 

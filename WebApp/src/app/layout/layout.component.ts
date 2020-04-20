@@ -11,6 +11,8 @@ import { UserServiceService } from '../shared/user-service.service';
 export class LayoutComponent implements OnInit {
   opened: boolean = false;
   Nav:any[];
+  public blobUrl;
+
   constructor(private _routes: Router, private Appservice : AppServiceService, private userService : UserServiceService) { }
   ngOnInit(): void {
      if(this.userService.getUser().userType == "user"){
@@ -19,11 +21,14 @@ export class LayoutComponent implements OnInit {
         { icon:'storage', displayName : 'History', route : 'history', data: 'user'}, 
         { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
         { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
+        this.blobUrl=this.userService.getUser().userImage;
     }else if(this.userService.getUser().userType == "vendor"){
       this.Nav = [
         { icon: 'commute', displayName : 'Requests', route : 'UserRequestComponent', data: 'vendor'},
+        { icon: 'bar_chart', displayName : 'Analytics', route : 'vendorAnalytics', data: 'vendor'},
         { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
         { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
+        this.blobUrl=this.userService.getUser().userImage;
     }
   } 
  
