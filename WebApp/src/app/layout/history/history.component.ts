@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
-import {MatSort, MatSortable} from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import { IUserRequest, Iuser } from '../../interface/IResponse';
 import { AppServiceService } from 'src/app/app-service.service';
 import {merge, Observable, of as observableOf} from 'rxjs';
@@ -18,42 +18,41 @@ import { UserServiceService } from 'src/app/shared/user-service.service';
   styleUrls: ['./history.component.scss'],
   animations: [routerTransition()]
 })
-export class HistoryComponent implements OnInit {
 
+export class HistoryComponent implements OnInit {
 
   constructor(private userService: UserServiceService ,private appservice: AppServiceService,private router: Router ) {
     this.user = this.userService.getUser();
   }
-
-  title : string = "History";
-  displayedColumns: string[] = ['id','created','description','state','details'];
+  
+  title : string = "Request History";
+  displayedColumns: string[] = ['id', 'created', 'description', 'state', 'details'];
   data: IUserRequest[] = [];
   dataSource: MatTableDataSource<IUserRequest>;
-  user:Iuser;
+  user:Iuser;  
 
-  @ViewChild(MatPaginator) paginator : MatPaginator;
-  @ViewChild(MatSort) sort : MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  ngOnInit(){
+  ngOnInit() {
     let body = [];
     body.push(this.user.id);
     this.appservice.get<IUserRequest>('US-VEN',body).subscribe((res: any[])=>{
       this.data = res;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
-      //this.sort.sort({ id: 'created', start: 'desc', disableClear: false });  
-      this.dataSource.sort = this.sort;
-      //this.sort.sort(({id: 'created',start:'desc'}) as MatSortable);
-      //this.sort.sortChange=this.data
+      this.data.reverse();  
+      this.dataSource.sort = this.sort;  
       console.log(this.data);
-      this.data.reverse();
-    }) 
+      this.data.reverse(); 
+      
+    })  
   }
+  //constructor(private appservice: AppServiceService,private router: Router ) {}
+
 
   redirectToDetails = (element:object) => {
     const navigationExtras: NavigationExtras = { state: { rowData:element }};
-    this.router.navigate(['/layout/HistoryDetailsComponent'], navigationExtras);
+    this.router.navigate(['/layout/RequestDetailsComponent'], navigationExtras);
       }
-
 }
-
