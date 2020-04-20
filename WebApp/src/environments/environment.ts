@@ -13,7 +13,10 @@ export const environment = {
     //UserVerification
     {code:"US-VE",url:"user/confirmation"},
     //ResendToken
-    {code:"US-RVE",url:"user/resendConfirmation"}
+    {code:"US-RVE",url:"user/resendConfirmation"},
+
+    {code:"US-UT",url:"users"}
+
 
   ]
 };

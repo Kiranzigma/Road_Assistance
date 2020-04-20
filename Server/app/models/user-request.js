@@ -21,7 +21,6 @@ let userRequestSchema = new Schema({
 
     description: {
         type: String,
-        required: true
     },
 
     created_Date: {
@@ -30,16 +29,15 @@ let userRequestSchema = new Schema({
 
     state: {
         type: String,
-        required: true
     },
 
     vin: {
-        type: Number,
+        type: String,
         required: true
     },
 
     register_no: {
-        type: Number,
+        type: String,
         required: true
     },
 
@@ -48,12 +46,12 @@ let userRequestSchema = new Schema({
     },
 
     latitude: {
-        type: Number,
+        type: String,
         required: true
     },
 
     longitude: {
-        type: Number,
+        type: String,
         required: true
     }
 }, {
