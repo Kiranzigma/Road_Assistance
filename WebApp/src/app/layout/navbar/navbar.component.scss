@@ -1,7 +1,12 @@
 .container {
     background-color: #454441;
     color: white;
-    height: 8%;
+   // height: 10%;
+    position: sticky;
+    top: 8%;
+    left: 0;
+    z-index: 2;
+    width: 100%  !important;
 }
 
 button {
