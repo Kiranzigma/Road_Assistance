@@ -1,49 +1,48 @@
-.loginCardSize{
-
-    width: 25%;
+.loginCardSize {
+    margin-top: 8%;
+    width: 30%;
     height: 40%;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    margin-top: 50px;
 }
 
-.registerCardSize{
-    width: 25%;
+.registerCardSize {
+    margin-top: 3%;
+    width: 30%;
     height: 70%;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    margin-top: 50px;
 }
 
-.verificationCardSize{
+.verificationCardSize {
     width: 25%;
     height: 40%;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     margin-top: 50px;
 }
 
-.loginField{
+.loginField {
     margin-top: 10%;
 }
 
-.registerField{
+.registerField {
     margin-top: 5%;
 }
 
-.verificationField{
+.verificationField {
     margin-top: 5%;
 }
 
-.loginButton{
+.loginButton {
     margin-top: 5%;
 }
 
-.registerButton{
+.registerButton {
     margin-top: 5%;
 }
 
-.verificationButton{
+.verificationButton {
     margin-top: 5%;
 }
 
@@ -51,10 +50,18 @@
     margin-top: 5%;
 }
 
-.mat-radio-button ~ .mat-radio-button {
+.mat-radio-button~.mat-radio-button {
     margin: 10px 0px 10px 40px
-  }
+}
 
 mat-error {
-      font-size: 10px;
+    font-size: 10px;
+}
+
+.loginPage {
+    background-image: url('../../assets/RoadSideAssistance.jpg');
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
