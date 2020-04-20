@@ -22,6 +22,7 @@ export class LayoutComponent implements OnInit {
     }else if(this.userService.getUser().userType == "vendor"){
       this.Nav = [
         { icon: 'commute', displayName : 'Requests', route : 'UserRequestComponent', data: 'vendor'},
+        { icon: 'bar_chart', displayName : 'Analytics', route : 'vendorAnalytics', data: 'vendor'},
         { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
         { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
     }
