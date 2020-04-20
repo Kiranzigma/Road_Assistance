@@ -148,8 +148,7 @@ export class ProfileComponent implements OnInit{
     this.switch = true;
     this.rightBtn = "Submit";
     this.leftBtn = "Back";
-
-    if(this.userService.getUser().vendorLatitude === null && this.userService.getUser().vendorLongitude === null){
+    if(this.userService.getUser().vendorLatitude == null && this.userService.getUser().vendorLongitude == null){
       navigator.geolocation.getCurrentPosition((position) => {
       this.showPosition(position);
     });
