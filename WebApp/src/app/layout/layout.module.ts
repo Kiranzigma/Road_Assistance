@@ -20,10 +20,11 @@ import { RequestDetailsComponent } from './request-details/request-details.compo
 import { BillingComponent } from './billing/billing.component';
 import { VendorAnalyticsComponent } from './vendor-analytics/vendor-analytics.component';
 import { ChartModule } from 'angular-highcharts';
+import { PaymentComponent } from './payment/payment.component';
 
 
 @NgModule({
-  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent, RequestDetailsComponent, HistoryComponent, BillingComponent, VendorAnalyticsComponent],
+  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent, RequestDetailsComponent, HistoryComponent, BillingComponent, VendorAnalyticsComponent, PaymentComponent],
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,ReactiveFormsModule,
     FlexLayoutModule.withConfig({useColumnBasisZero: false}), HttpClientModule,FormsModule,ChartModule,

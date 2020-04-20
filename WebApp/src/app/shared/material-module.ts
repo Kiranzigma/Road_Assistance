@@ -17,6 +17,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 
 
@@ -39,7 +40,8 @@ const modules = [
     MatRadioModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatSortModule
+    MatSortModule,
+    NgxPayPalModule
 ];
 
 @NgModule({
