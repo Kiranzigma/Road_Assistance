@@ -13,7 +13,12 @@ export class LayoutComponent implements OnInit {
   Nav:any[];
   public blobUrl;
 
-  constructor(private _routes: Router, private Appservice : AppServiceService, private userService : UserServiceService) { }
+  constructor(private _routes: Router, private Appservice : AppServiceService, private userService : UserServiceService) { 
+    this.userService.getSubj().subscribe(x=>{
+      this.blobUrl = x.userImage;
+    })
+    this.userService.getUser();
+  }
   ngOnInit(): void {
      if(this.userService.getUser().userType == "user"){
       this.Nav = [
@@ -28,7 +33,6 @@ export class LayoutComponent implements OnInit {
         { icon: 'bar_chart', displayName : 'Analytics', route : 'vendorAnalytics', data: 'vendor'},
         { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
         { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
-        this.blobUrl=this.userService.getUser().userImage;
     }
   } 
  
