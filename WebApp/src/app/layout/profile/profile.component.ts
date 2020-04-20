@@ -189,6 +189,7 @@ export class ProfileComponent implements OnInit{
       this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
         this.userService.reloadUser(y);
         console.log(body)
+
       });
       alert('Details have been updated successfully');
       this.btnDisabled=true;
