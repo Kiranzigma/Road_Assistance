@@ -1,11 +1,13 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Input } from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Router, NavigationExtras } from '@angular/router';
 import { routerTransition } from 'src/app/shared/router-animations';
 import { billingData } from '../../helpers/billingData';
 import {MatPaginator} from '@angular/material/paginator';
+import { AppServiceService } from 'src/app/app-service.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatCheckboxChange} from '@angular/material/checkbox';
+import { IUserRequest } from 'src/app/interface/IResponse';
 
 
 export interface BillingElement {
@@ -40,7 +42,10 @@ export class BillingComponent implements OnInit {
   finalBill = new MatTableDataSource<BillingElement>(FINAL_BILL);
   selection = new SelectionModel<BillingElement>(true, []);
   
-  constructor(private router: Router) { 
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  
+
+  constructor(private router: Router, private appService: AppServiceService) { 
   this.arr = this.router.getCurrentNavigation().extras.state.rowData;
 
   }
@@ -51,6 +56,7 @@ export class BillingComponent implements OnInit {
     })
     // console.log(this.dataSource);
     // console.log(this.getTotalCost());
+    this.dataSource.paginator = this.paginator;
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -102,14 +108,28 @@ export class BillingComponent implements OnInit {
   }
 
   checkout() {
-      console.log("List Of Services");
-      let i =0;
+     // console.log("List Of Services");
+     let i =0;
+     let listOfServices = [];
       this.finalBill.filteredData.forEach(e => {
         console.log(++i + " : " + e.desc);
+        listOfServices.push(e.desc);
       });
-      console.log("Total Cost : " + this.getTotalCost());
-      console.log("User Details Info : ");
+      // console.log("Total Cost : " + this.getTotalCost());
+      // console.log("User Details Info : ");
       console.log(this.arr);
+      let totalCost = this.getTotalCost().toString();
+      let body = {
+        "listOfServices": this.finalBill.filteredData,
+        "totalCost": totalCost
+      }
+      // console.log(typeof(totalCost));
+      let ar = [];
+      ar.push(this.arr.id);
+      this.appService.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
+        alert("Request Confirmed");
+        console.log(res);
+      }))
   }
 
   outputemitted(x: string) {

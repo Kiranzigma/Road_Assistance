@@ -26,15 +26,8 @@ div {
     width : 30%;
 }
 
-
-ul {
-    display: flex;
-  }
-
-li {
-    list-style-type: none;
-    padding: 20px;
-    position: relative;
+.items{
+    padding: 2%;
 }
 
 
@@ -43,7 +36,8 @@ li {
 .modal-content {
     background-color: rgba(255,255,255,0.6);
     margin: auto;
-    padding: 20px;
+    padding: 30px;
+    height:100%;
     width: 96%;
 }
 

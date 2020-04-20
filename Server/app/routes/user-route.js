@@ -10,7 +10,7 @@ module.exports = (app) => {
     app.route('/user')
         .post(userController.register);
 
-  app.route('/vendor')
+  app.route('/userrequest')
   .post(userrequestController.save);
   
   app.route('/userrequest/:id/:type')
