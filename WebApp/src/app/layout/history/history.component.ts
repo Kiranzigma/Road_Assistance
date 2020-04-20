@@ -37,6 +37,7 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     let body = [];
     body.push(this.user.id);
+    body.push("user");
     this.appservice.get<IUserRequest>('US-VEN',body).subscribe((res: any[])=>{
       this.data = res;
       this.dataSource = new MatTableDataSource(this.data);
@@ -45,7 +46,6 @@ export class HistoryComponent implements OnInit {
       this.dataSource.sort = this.sort;  
       console.log(this.data);
       this.data.reverse(); 
-      
     })  
   }
   //constructor(private appservice: AppServiceService,private router: Router ) {}

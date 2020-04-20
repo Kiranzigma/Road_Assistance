@@ -101,8 +101,11 @@ export class RequestVendorComponent implements OnInit {
       "vendor_id": this.vendorId,
       "state": "Open"
     }
-    this._routes.navigate(['/layout/history']);
-    this.appService.post('US-VEN',body).subscribe();
+    this.appService.post('US-VEN',body).subscribe((res: any[]) => {
+      this._routes.navigate(['/layout/history']);
+    });
+    
+   
   }
   onUploadClicked(x){
    for(let i = 0; i < x.length; i++){
