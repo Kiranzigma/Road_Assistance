@@ -3,7 +3,7 @@
 </app-navbar>
 <br>
 <div *ngIf="switch == false" @routerTransition>
-    <form id="reqForm" fxLayout="column" [formGroup]="requestForm">
+    <form id="reqForm" class="reqForm" fxLayout="column" [formGroup]="requestForm">
         <div fxLayoutAlign="center">
             <mat-form-field>
                 <input type="text" (ngModelChange)="checkInput()" matInput formControlName="vehicleNumber" maxlength="17" placeholder="Vehicle Identification Number">
