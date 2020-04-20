@@ -31,7 +31,9 @@ export class UserRequestComponent implements OnInit {
    
   ngOnInit() {
     let body= [];
+    let type = "vendor";
     body.push(this.user.id);
+    body.push(type);
     this.appservice.get<IUserRequest>('US-VEN',body).subscribe((res: any[])=>{
       this.data = res;
       this.dataSource = new MatTableDataSource(this.data);

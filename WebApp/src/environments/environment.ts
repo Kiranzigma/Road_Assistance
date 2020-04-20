@@ -8,7 +8,7 @@ export const environment = {
   "services":[
     //UserAuthentication
     {code:"US-AU",url:"user"},
-    {code:"US-VEN",url:"Vendor"},
+    {code:"US-VEN",url:"userrequest"},
 
     //UserVerification
     {code:"US-VE",url:"user/confirmation"},
