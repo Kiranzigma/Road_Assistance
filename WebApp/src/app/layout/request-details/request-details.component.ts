@@ -7,6 +7,7 @@ import { Iuser, IUserRequest } from 'src/app/interface/IResponse';
 import { google } from 'google-maps';
 import { Observable, Subscriber, Subject } from 'rxjs';
 import { routerTransition } from 'src/app/shared/router-animations';
+import { NgxImageGalleryComponent, GALLERY_IMAGE, GALLERY_CONF } from "ngx-image-gallery";
 declare var google: any;
 
 
@@ -28,7 +29,9 @@ export class RequestDetailsComponent implements OnInit {
   long: any;
   switch: boolean = false;
   address: any;
+  expan: boolean = false;
   image : [];
+  imag:any;
   icon: string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
 
 
@@ -39,7 +42,7 @@ export class RequestDetailsComponent implements OnInit {
     body.push(this.arr.user_id);
     this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
       this.data = res;
-      this.form = this.fb.group({
+        this.form = this.fb.group({
         latitude: [this.arr.latitude],
         longitude: [this.arr.longitude],
         state: [this.arr.state],
@@ -92,7 +95,6 @@ export class RequestDetailsComponent implements OnInit {
   );
   }
 
-
   confirm() {
     let body = {
       state: "In Progress"
@@ -116,6 +118,7 @@ export class RequestDetailsComponent implements OnInit {
   }
 
   getImages(){
+
     if(this.image.length == 0){
       this.switch = false;
       alert("No pictures to display");
@@ -127,9 +130,25 @@ export class RequestDetailsComponent implements OnInit {
       this.leftBtn = "";
       return;
     }
-    
   }
 
+  expand(x: any) {
+    this.expan = true;
+    this.imag = x;
+    let modal = document.getElementById("myModal");
+    modal.style.display = "block";
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  }
+
+  spanClick(){
+    let modal = document.getElementById("myModal");
+    modal.style.display = "none";
+  }
+  
   close(){
     this.switch = false;
     if (this.arr.state === "In Progress") {
@@ -186,6 +205,5 @@ export class RequestDetailsComponent implements OnInit {
     }
   }
 
-
-
+  
 }

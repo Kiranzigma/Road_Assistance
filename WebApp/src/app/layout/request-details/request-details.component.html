@@ -66,14 +66,23 @@
             </agm-marker>
         </agm-map>
     </div>
-</div>
-    
+</div>  
 </form>
 
-<div *ngIf="switch == true" class="pics">
-    <div  *ngFor="let image of image">
-        <img mat-card-image src='{{image}}'/>
-      </div>
+<div class="container" *ngIf="switch == true" >
+<ul>
+    <div *ngFor="let image of image" class="items">
+    <li>
+      <img src="{{image}}" class="item" width="300px" (click)="expand(image)" height="300px">
+    </li>
+    </div>
+</ul>
+<div id="myModal" class="modal">
+    <div class="modal-content" *ngIf="expan == true">
+        <span (click)="spanClick()" class="close">&times;</span> 
+        <div class="center"> 
+            <img src="{{imag}}" width="500px" height="500px" class="image">
+    </div>
 </div>
-
-
+</div>
+</div>

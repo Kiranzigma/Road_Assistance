@@ -12,7 +12,9 @@ const tokenmodel = mongoose.model('TokenSchema');
 
 exports.list = (request, response) => {
     const userId = request.params.id;
-    const promise = userService.search(userId);
+    const type = request.params.type;
+    const promise = userService.search(userId,type);
+
     const result = (user) => {
         //set response to 200
         response.status(200);
