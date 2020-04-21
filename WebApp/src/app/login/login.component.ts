@@ -151,9 +151,8 @@ export class LoginComponent implements OnInit {
         this.appservice.post<userResponse>('US-AU', body).subscribe(y => {
           //  console.log("Posted User");
           const dialogRef = this.dialog.open(DialogRegister, {
-            width: '250px',
+            panelClass: 'custom-dialog-container',
             data: {
-              panelClass: 'custom-dialog-container',
               mail: this.registerForm.get('userEmail').value
             }
           });

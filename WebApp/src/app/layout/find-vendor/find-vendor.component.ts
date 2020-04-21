@@ -31,7 +31,25 @@ export class FindVendorComponent {
     })
   }
   coordinates: Iuser[];
+  coo : Iuser[]
+
   getCordinateDistance(){
+    let subj = new Subject();
+    this.coo = []
+    subj.subscribe(
+      (y:Iuser)=>{
+      this.coo.push(y)
+      if(this.coo.length == this.coordinates.length ){
+            this.coo.sort((a,b)=> (a.numDistance > b.numDistance) ? 1 : (b.numDistance > a.numDistance)? -1 : 0 );
+            this.coo = this.coo.slice(0,1);
+              this.coo.forEach(x => {
+                this.vendorId = x.id;
+                this.duration = x.duration
+                this.emit();
+              });
+          }
+      }
+    );
     this.coordinates.forEach(x => {
       let origin = x.vendorLatitude + "," + x.vendorLongitude;
       let destination = this.lat + "," + this.long;
@@ -41,17 +59,23 @@ export class FindVendorComponent {
             x.distance = k.distance?.text;
             x.numDistance = k.distance?.text.replace(',','.').replace(/[^0-9\.]+/g,"");
             x.duration = k.duration?.text;
+            subj.next(x);
              });
         });
       })
     });
-    this.coordinates.sort((a,b)=> (a.numDistance > b.numDistance) ? 1 : (b.numDistance > a.numDistance)? -1 : 0 );
-    this.coordinates = this.coordinates.slice(0,1);
-    this.coordinates.forEach(x => {
-      this.vendorId = x.id;
-      this.duration = x.duration
-      this.emit();
-    });
+   
+    // subj.subscribe((x:any)=> {
+    //   console.log(x);
+    //  x.sort((a,b)=> (a.numDistance > b.numDistance) ? 1 : (b.numDistance > a.numDistance)? -1 : 0 );
+    //  x = x.slice(0,1);
+    //  x.forEach(x => {
+    //    this.vendorId = x.id;
+    //    this.duration = x.duration
+    //    this.emit();
+    //  });
+    // })
+    // subj.next(this.coordinates);
   }
   @Output() switcher = new EventEmitter<any>();
   showPosition(position) {

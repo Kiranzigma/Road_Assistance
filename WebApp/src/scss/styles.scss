@@ -106,7 +106,7 @@ color: orange  !important;
     .message{
         margin: 0px;
         padding: 0px;
-        height: 65px;
+        height: 80px;
         p { 
             margin: 0px;
             padding: 5px;
@@ -119,10 +119,11 @@ color: orange  !important;
 
     .confirm{
         text-align: center;
-         button {
+        button {
         background-color: orange;  
-            
-    }
+        cursor: pointer;
+        border: none;
+        }
     }
    
 }
