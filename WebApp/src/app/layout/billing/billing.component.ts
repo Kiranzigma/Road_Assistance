@@ -35,6 +35,7 @@ export class BillingComponent implements OnInit {
   arr: any;
   i: number = 0;
   rightBtn: string = "Checkout";
+  btnDisabled : boolean = true;
 
   displayedColumns: string[] = ['position', 'desc', 'estimatedCost','select'];
   footerColumns: string[] = ['desc', 'estimatedCost'];
@@ -47,7 +48,6 @@ export class BillingComponent implements OnInit {
 
   constructor(private router: Router, private appService: AppServiceService) { 
   this.arr = this.router.getCurrentNavigation().extras.state.rowData;
-
   }
 
   ngOnInit(): void {
@@ -86,6 +86,12 @@ export class BillingComponent implements OnInit {
     }
 
     console.log("Total Cost = " + this.getTotalCost());
+    if(Number(this.getTotalCost())!=0){
+       this.btnDisabled = false;
+    }
+    else{
+      this.btnDisabled = true;
+    }
 
   }
 
@@ -110,6 +116,7 @@ export class BillingComponent implements OnInit {
   checkout() {
      // console.log("List Of Services");
      let i =0;
+     debugger
      let listOfServices = [];
       this.finalBill.filteredData.forEach(e => {
         console.log(++i + " : " + e.desc);
@@ -128,9 +135,11 @@ export class BillingComponent implements OnInit {
       let ar = [];
       ar.push(this.arr.id);
       this.appService.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
-        alert("Request Confirmed");
+        alert("Request Sent");
         console.log(res);
       }))
+      this.router.navigate(['/layout']);
+
   }
 
   outputemitted(x: string) {

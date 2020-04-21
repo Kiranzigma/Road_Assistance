@@ -10,6 +10,7 @@ import { RequestDetailsComponent } from './request-details/request-details.compo
 import { BillingComponent } from './billing/billing.component';
 import { VendorAnalyticsComponent } from './vendor-analytics/vendor-analytics.component';
 import {HistoryDetailsComponent} from './history-details/history-details.component';
+import { PaymentComponent } from './payment/payment.component';
 
 const routes: Routes = [
     {
@@ -21,6 +22,7 @@ const routes: Routes = [
         {path: 'UserRequestComponent', component: UserRequestComponent,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
         {path: 'history', component: HistoryComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
         {path: 'history-details', component: HistoryDetailsComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
+        {path: 'pay', component: PaymentComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
         {path: 'RequestDetailsComponent', component:RequestDetailsComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
         {path: 'vendorAnalytics', component: VendorAnalyticsComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
         {path: 'bill', component:BillingComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
