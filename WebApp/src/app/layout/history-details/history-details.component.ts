@@ -104,12 +104,7 @@ export class HistoryDetailsComponent implements OnInit {
         element.estimatedCost;
         ELEMENT_DATA.push({desc: element.desc, estimatedCost:element.estimatedCost});
 
-      });
-
-    
-
-     console.log(this.totalCost);
- 
+      }); 
     }
   
 

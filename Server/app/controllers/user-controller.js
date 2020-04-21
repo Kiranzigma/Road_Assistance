@@ -22,23 +22,21 @@ exports.authenticate = (request, response) => {
     // check for pwd match 
     // https://developer.okta.com/blog/2019/05/16/angular-authentication-jwt
     const result = (authSuccess) => {
-        if(authSuccess!=null){
-        //set response to 200
-        //console.log(authSuccess)
-        response.status(200);
-        let userPwd = CryptoJS.AES.decrypt(authSuccess.userPassword.toString(), '123456$#@$^@1ERF');
-        let pwd = CryptoJS.AES.decrypt(usermodels.userPassword.toString(), '123456$#@$^@1ERF')
-        if (pwd.toString(CryptoJS.enc.Utf8) == userPwd.toString(CryptoJS.enc.Utf8) && authSuccess.isVerified) {
-            var jwt = nJwt.create({ id: userId }, config.secret);
-            jwt.setExpiration(new Date().getTime() + (24 * 60 * 60 * 1000));
-            response.json({ auth: true, token: jwt.compact(), user: authSuccess });
+        if (authSuccess != null) {
+            //set response to 200
+            response.status(200);
+            let userPwd = CryptoJS.AES.decrypt(authSuccess.userPassword.toString(), '123456$#@$^@1ERF');
+            let pwd = CryptoJS.AES.decrypt(usermodels.userPassword.toString(), '123456$#@$^@1ERF')
+            if (pwd.toString(CryptoJS.enc.Utf8) == userPwd.toString(CryptoJS.enc.Utf8) && authSuccess.isVerified) {
+                var jwt = nJwt.create({ id: userId }, config.secret);
+                jwt.setExpiration(new Date().getTime() + (24 * 60 * 60 * 1000));
+                response.json({ auth: true, token: jwt.compact(), user: authSuccess });
+            } else {
+                response.json({ auth: false, message: "Invalid User" });
+            }
         } else {
-            response.json({ auth: false, message: "Invalid User" });
+            response.json({ auth: false, message: "User Not Found" });
         }
-    }
-    else{
-        response.json({ auth: false, message: "User Not Found" });
-    }
     };
     promise.then(result)
         .catch(renderErrorResponse(response));
@@ -50,7 +48,6 @@ exports.register = (req, res) => {
     newuser.userPassword = CryptoJS.AES.encrypt(newuser.userPassword.toString(), '123456$#@$^@1ERF');
 
     const result = (register) => {
-        console.log(register);
         res.json(register);
     };
 
@@ -64,7 +61,6 @@ exports.confirmationPost = (req, res) => {
     const userEmail = req.body.userEmail;
 
     const result = (confirmation) => {
-        console.log(confirmation);
         res.json(confirmation);
     };
 
@@ -77,7 +73,6 @@ exports.resendTokenPost = function(req, res) {
     const userEmail = req.body.userEmail;
 
     const result = (resend) => {
-        console.log(resend);
         res.json(resend);
     };
 
@@ -92,7 +87,6 @@ exports.resendTokenPost = function(req, res) {
 exports.updateUser = (request, response) => {
     const userId = request.params.id;
     const user = Object.assign({}, request.body);
-    console.log(userId)
 
     // get the body fRom the req
     user.id = userId;
@@ -131,7 +125,6 @@ exports.getAllUsers = (request, response) => {
 // @params - resp
 let renderErrorResponse = (response) => {
     const errorCallBack = (error) => {
-        console.log(error);
         if (error) {
             if (error.message.includes("unable") || error.message.includes("already")) {
                 response.status(400);

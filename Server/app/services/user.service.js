@@ -63,7 +63,6 @@ exports.confirmToken = (verificationCode, umail) => {
             if (!token) {
                 return reject(new Error('We were unable to find a valid token. Your token my have expired.'));
             }
-            console.log("Here2");
             // If we found a token, find a matching user
             usermodel.findOne({ _id: token._userId, userEmail: umail }, function(err, user) {
                 if (!user) return reject(new Error('We were unable to find a user for this token.'));
