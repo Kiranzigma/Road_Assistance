@@ -11,6 +11,7 @@ import { BillingComponent } from './billing/billing.component';
 import { VendorAnalyticsComponent } from './vendor-analytics/vendor-analytics.component';
 import {HistoryDetailsComponent} from './history-details/history-details.component';
 import { PaymentComponent } from './payment/payment.component';
+import {RequestServicesComponent} from './request-services/request-services.component'
 
 const routes: Routes = [
     {
@@ -24,6 +25,7 @@ const routes: Routes = [
         {path: 'history-details', component: HistoryDetailsComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
         {path: 'pay', component: PaymentComponent,canActivate: [AuthGuard], data:{expectedRole : 'user'}},
         {path: 'RequestDetailsComponent', component:RequestDetailsComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
+        {path: 'services', component: RequestServicesComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
         {path: 'vendorAnalytics', component: VendorAnalyticsComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
         {path: 'bill', component:BillingComponent ,canActivate: [AuthGuard], data:{expectedRole : 'vendor'}},
         {path: '**', canActivate : [AuthGuard], data: {isRoute : "true"}}
