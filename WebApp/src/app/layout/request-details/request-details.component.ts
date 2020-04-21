@@ -57,11 +57,12 @@ export class RequestDetailsComponent implements OnInit {
         message: [this.arr.message],
         description: [this.arr.description],
         name: [this.data.userFirstName + ' ' + this.data.userLastName],
-        time: [this.arr.estimated_time],
+        time: [this.arr.duration],
         image:[this.arr.image]
+        
       });
     }))
-    
+    console.log(this.arr.duration);
     //console.log(this.data.userFirstName); 
   }
   rowImages : any = [];
@@ -78,6 +79,9 @@ export class RequestDetailsComponent implements OnInit {
       this.rightBtn = "Generate Bill";
     }
     if (this.arr.state === "Payment Pending") {
+      this.rightBtn = "Services";
+    }
+    if (this.arr.state === "Paid") {
       this.rightBtn = "Services";
     }
 
@@ -124,7 +128,7 @@ export class RequestDetailsComponent implements OnInit {
       const dialogRef = this.dialog.open(DialogPassword, {
         panelClass: 'custom-dialog-container',
         data: {
-          msg: "Request Completed"
+          msg: "Request Confirmed"
         }
 
       });
@@ -217,6 +221,16 @@ export class RequestDetailsComponent implements OnInit {
     }
     if (this.arr.state === "Completed") {
       this.rightBtn = "Generate Bill";
+      this.leftBtn = "Back";
+      return;
+    }
+    if (this.arr.state === "Payment Pending") {
+      this.rightBtn = "Services";
+      this.leftBtn = "Back";
+      return;
+    }
+    if (this.arr.state === "Paid") {
+      this.rightBtn = "Services";
       this.leftBtn = "Back";
       return;
     }

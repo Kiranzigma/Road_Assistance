@@ -1,7 +1,9 @@
+<!-- Nav bar header-->
 <app-navbar [title]="title" [leftBtn]="leftBtn" [rightBtn]="rightBtn" (eventEmit)="outputemitted($event)">
 </app-navbar>
 
 <br>
+<!-- mat form field to display the user request details -->
 <form [formGroup]="form" *ngIf="form && switch == false">
     <div fxLayout="row" class="details">
         <div fxLayout="column" fxFlex="50%">
@@ -59,7 +61,7 @@
             </div>
 
         </div>
-
+<!-- google maps div to show the user location -->
         <div class="map" fxFlex="50%">
             <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">
                 <agm-marker [iconUrl]="icon" [latitude]="lat" [longitude]="long">
@@ -69,6 +71,7 @@
     </div>
 </form>
 
+<!-- div to view images -->
 <div class="container" *ngIf="switch == true">
     <div fxLayout="column" *ngFor="let i of rowImages">
         <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="20px">
