@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit{
       
 
       this.blobUrl=this.user.userImage;
-      
+
 
   }
  
@@ -128,7 +128,7 @@ export class ProfileComponent implements OnInit{
   
       reader.onload = (event) => { // called once readAsDataURL is completed
         this.blobUrl=reader.result as string; 
-        // console.log(window.URL)
+        //   console.log(window.URL)
         // let bloburl = window.URL.createObjectURL(this.url);
         // console.log(bloburl);     
       }
@@ -187,7 +187,7 @@ export class ProfileComponent implements OnInit{
       arr.push(this.user.id);
       this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
         this.userService.reloadUser(y);
-        console.log(body)
+        //  console.log(body)
 
       });
       alert('Details have been updated successfully');
@@ -317,7 +317,7 @@ emit() {
         x.results.slice(0, 1).forEach(y => {
           this.lat = y.geometry.location.lat;
           this.long = y.geometry.location.lng;
-          console.log(this.lat)
+          //  console.log(this.lat)
         });
       }
     )
