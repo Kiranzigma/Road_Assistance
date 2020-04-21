@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserServiceService } from 'src/app/shared/user-service.service';
 import { AppServiceService } from 'src/app/app-service.service';
+import { DialogPassword} from '../../shared/dialog-components/dialog.component';
+import { MatDialog} from '@angular/material/dialog';
 declare var paypal;
 
 @Component({
@@ -26,7 +28,7 @@ export class PaymentComponent implements OnInit {
 
  
   constructor(private router: Router,private userService: UserServiceService,
-    private appservice: AppServiceService) {
+    private appservice: AppServiceService,public dialog: MatDialog) {
     this.arr = this.router.getCurrentNavigation().extras.state.rowData;
     this.total= this.arr?.totalCost;
     }
@@ -43,7 +45,18 @@ export class PaymentComponent implements OnInit {
       },  
       onApprove: function (data, actions) {  
         //  console.log(data); 
-        alert('You have successfully created subscription ' + data.subscriptionID);  
+        const dialogRef = this.dialog.open(DialogPassword, {
+          panelClass: 'custom-dialog-container',
+          data: {
+            msg: "You have successfully created subscription : " + data.subscriptionID
+          }
+  
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+          //  console.log('The dialog was closed');
+        }); 
+  
         self.getSubcriptionDetails(data.subscriptionID);  
       },  
       onCancel: function (data) {  
