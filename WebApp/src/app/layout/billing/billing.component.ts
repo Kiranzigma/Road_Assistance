@@ -128,7 +128,8 @@ export class BillingComponent implements OnInit {
       let body = {
         "listOfServices": this.finalBill.filteredData,
         "totalCost": totalCost,
-        "state" : "Payment Pending"
+        "state" : "Payment Pending",
+        "company": this.arr.company
       }
       // console.log(typeof(totalCost));
       let ar = [];
