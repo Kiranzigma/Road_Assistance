@@ -11,8 +11,8 @@ declare var paypal;
 })
 export class PaymentComponent implements OnInit {
   @ViewChild('paypal',{static:true}) paypalElement: ElementRef;
-  title:"Payment Portal";
-  leftBtn:"Back"
+  title:string="Payment Portal";
+  leftBtn:string="Back"
   arr: any;
   planId: any;  
   subcripId: any;  
