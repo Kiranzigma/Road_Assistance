@@ -1,38 +1,22 @@
-div {
-    mat-form-field {
-        width: 60%;
+
+::ng-deep mat-form-field {
+    div {
+        width: 75%;
     }
 }
 
-.details{
-    margin-top: 2%;
-}
-.map {
-    margin-left: 2%;
+
+table {
     width: 100%;
-    min-height: 50vh;
-    agm-map {
-        height: 100%;
-        width: 80%;
-    }
-}
-
-.button{
-    margin-left: 35%;
-    background-color:orange;
-    border-radius: 5px;
-    color: black;
-    cursor: pointer;
-    width : 30%;
-}
-
-.pics{
-    margin-left: 20%;
-    width: 60%;
-    height:50%;
-}
-
-
-
+    text-align: center;
+  }
+  
+  th {
+    text-align: center;
+  }
+  
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
 
 
