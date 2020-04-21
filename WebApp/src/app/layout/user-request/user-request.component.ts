@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
+import { Component, OnInit, ViewChild, AfterViewInit,Input,Output, EventEmitter } from '@angular/core';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import { IUserRequest, Iuser } from '../../interface/IResponse';
 import { AppServiceService } from 'src/app/app-service.service';
@@ -26,10 +26,17 @@ export class UserRequestComponent implements OnInit {
   dataSource: MatTableDataSource<IUserRequest>;  
   user : Iuser;
 
+  @Input()
+  pageIndex: number
+
+  @Output()
+  page: EventEmitter<PageEvent>
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
    
   ngOnInit() {
+    this.pageIndex = 1;
     let body= [];
     let type = "vendor";
     body.push(this.user.id);
@@ -48,6 +55,16 @@ export class UserRequestComponent implements OnInit {
     this.user = this.userService.getUser();
   }
 
+  pageLoad(event){
+    // console.log(event);
+    if(event.previousPageIndex>event.pageIndex){
+      this.pageIndex = event.pageIndex+1;
+    }
+    else{
+      this.pageIndex = event.pageIndex+10;
+    }
+    
+  }
 
   redirectToDetails = (element:object) => {
     const navigationExtras: NavigationExtras = { state: { rowData : element }};
