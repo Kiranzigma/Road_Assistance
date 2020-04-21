@@ -1,21 +1,18 @@
 <!-- example for column wise arrangement using fxlayout -->
-<div class="loginPage">
-    <mat-toolbar class="layout" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
-        <div fxLayoutAlign="center" fxFlex="10%"></div>
-        <div fxLayoutAlign="center center" fxFlex="80%" class="header"> Road Side Assistance</div>
-        <div *ngIf="view=='login'; else notShow" fxLayoutAlign="right" fxFlex="10%"><button (click)="signUp()" mat-button>User Registration</button></div>
-        <ng-template #notShow>
-            <div fxLayoutAlign="center" fxFlex="10%"><button (click)="login()" mat-button>Login</button></div>
-        </ng-template>
-    </mat-toolbar>
-
+<div class="loginPage" fxFlexFill>
     <!-- reference for fx layout -->
     <!-- https://github.com/angular/flex-layout/wiki/fxLayoutGap-API -->
-
-
     <!-- example for row wise fx -->
-    <div fxLayout="column" fxLayoutAlign="center center" [ngSwitch]="view">
-        <mat-card *ngSwitchCase="'signUp'" class="registerCardSize">
+    <mat-card class="loginCardSize" fxLayout="column" [ngSwitch]="view">
+        <mat-toolbar class="layout" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+            <div fxLayoutAlign="center" fxFlex="10%"></div>
+            <div fxLayoutAlign="center center" fxFlex="80%" class="header"> Road Side Assistance</div>
+            <div *ngIf="view=='login'; else notShow" fxLayoutAlign="right" fxFlex="10%"><button (click)="signUp()" mat-button>User Registration</button></div>
+            <ng-template #notShow>
+                <div fxLayoutAlign="center" fxFlex="10%"><button (click)="login()" mat-button>Login</button></div>
+            </ng-template>
+        </mat-toolbar>
+        <div class="register" *ngSwitchCase="'signUp'" fxLayoutAlign="center center">
             <form [formGroup]="registerForm" (ngSubmit)="register()">
                 <div fxLayoutAlign="center">
                     <mat-card-title> Register</mat-card-title>
@@ -72,9 +69,9 @@
                 </div>
                 <div fxLayoutAlign="center"><button type="submit" mat-button>Sign Up</button></div>
             </form>
-        </mat-card>
+        </div>
 
-        <mat-card *ngSwitchCase="'verification'" class="verificationCardSize">
+        <div *ngSwitchCase="'verification'" class="verification">
             <form [formGroup]="verificationForm">
                 <div fxLayoutAlign="center">
                     <mat-card-title> Please Verify</mat-card-title>
@@ -94,9 +91,8 @@
                 <div fxLayoutAlign="center"><button type="submit" (click)="verifyOrResend('Verify')" mat-button>Verify</button></div>
                 <div fxLayoutAlign="center"><button type="submit" (click)="verifyOrResend('Resend')" mat-button>Resend Code</button></div>
             </form>
-        </mat-card>
-
-        <mat-card *ngSwitchDefault class="loginCardSize">
+        </div>
+        <div *ngSwitchDefault class="login">
             <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
                 <div fxLayoutAlign="center">
                     <mat-card-title> Login</mat-card-title>
@@ -115,6 +111,6 @@
                 </div>
                 <div fxLayoutAlign="center"><button type="submit" mat-button>Sign In</button></div>
             </form>
-        </mat-card>
-    </div>
+        </div>
+    </mat-card>
 </div>

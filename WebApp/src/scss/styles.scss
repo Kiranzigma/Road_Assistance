@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     z-index: 2;
-    width: 100%  !important;
+    width: 100% !important;
 }
 
 html,
@@ -33,3 +33,50 @@ mat-sidenav-container {
     width: 100%;
     margin: 0;
 }
+
+.loginCardSize{
+
+.mat-form-field-label{
+  color: orange !important;
+}
+
+.mat-button {
+    background-color: orange  !important;
+}
+
+.mat-card-title {
+    color: orange  !important;
+}
+  
+
+.mat-radio-button{
+color: orange  !important;
+}
+
+.mat-radio-button~.mat-radio-button {
+        margin: 10px 0px 10px 60px;
+
+}
+
+.mat-form-field-underline, .mat-form-field-underline.mat-focused {
+    background-color:orange;
+  }
+
+.mat-form-field-ripple {
+    background-color: orange !important;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
