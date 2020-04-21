@@ -18,13 +18,12 @@ export class UserServiceService {
 
   getUser(): Iuser{
     this.user = JSON.parse(this.encdec.get('123456$#@$^@1ERF',sessionStorage.getItem('auth')));
-    this.userSubj.next(this.user);
     return this.user;
   }
 
   reloadUser(modUser: Iuser){
     sessionStorage.removeItem('auth');
     sessionStorage.setItem("auth", this.encdec.set('123456$#@$^@1ERF',JSON.stringify(modUser)));
-    this.getUser();
+    this.userSubj.next(this.user);
   }
 }

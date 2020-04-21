@@ -116,7 +116,10 @@ export class RequestDetailsComponent implements OnInit {
     let ar = [];
     ar.push(this.arr.id);
     this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
-      alert("Request Confirmed");
+      alert("Request Confirmed");   
+      this.rightBtn="Complete Request";   
+ 
+
     }))
   }
 
@@ -128,6 +131,8 @@ export class RequestDetailsComponent implements OnInit {
     ar.push(this.arr.id);
     this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
       alert("Request Completed");
+      this.rightBtn="Generate Bill";   
+
     }))
   }
 
@@ -176,7 +181,7 @@ export class RequestDetailsComponent implements OnInit {
       return;
     }
     if (this.arr.state === "Completed") {
-      this.rightBtn = "";
+      this.rightBtn = "Generate Bill";
       this.leftBtn = "Back";
       return;
     }
@@ -191,10 +196,12 @@ export class RequestDetailsComponent implements OnInit {
     this.router.navigate(['/layout/UserRequestComponent']);
   }
 
-  generateBill(){
-    const navigationExtras: NavigationExtras = { state: { rowData:this.arr }};
+  generateBill = (result:any) => {
+    const navigationExtras: NavigationExtras = { state: { rowData : result}};
     this.router.navigate(['/layout/bill'], navigationExtras);
   }
+
+  
 
   outputemitted(x: string) {
     if (this.rightBtn === "Close" && x == "right") {
@@ -210,7 +217,7 @@ export class RequestDetailsComponent implements OnInit {
       return;
     }
     if (this.rightBtn == "Generate Bill" && x == "right") {
-      this.generateBill();
+      this.generateBill(this.arr);
       return;
     }
     if (this.leftBtn == "Back" && x == "left") {

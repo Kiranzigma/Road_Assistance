@@ -33,6 +33,8 @@ export class LayoutComponent implements OnInit {
         { icon: 'bar_chart', displayName : 'Analytics', route : 'vendorAnalytics', data: 'vendor'},
         { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
         { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
+        this.blobUrl=this.userService.getUser().userImage;
+
     }
   } 
  

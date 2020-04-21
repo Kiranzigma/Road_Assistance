@@ -216,7 +216,7 @@ export class HistoryDetailsComponent implements OnInit {
 
   pay = (totalCost:any) => {
     const navigationExtras: NavigationExtras = { state: { rowData : totalCost }};
-    this.router.navigate(['/layout/RequestDetailsComponent'], navigationExtras);
+    this.router.navigate(['/layout/pay'], navigationExtras);
   }
   
     
