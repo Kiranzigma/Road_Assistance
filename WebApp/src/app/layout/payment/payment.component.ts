@@ -40,17 +40,17 @@ export class PaymentComponent implements OnInit {
         });  
       },  
       onApprove: function (data, actions) {  
-        console.log(data); 
+        //  console.log(data); 
         alert('You have successfully created subscription ' + data.subscriptionID);  
         self.getSubcriptionDetails(data.subscriptionID);  
       },  
       onCancel: function (data) {  
         // Show a cancel page, or return to cart  
-        console.log(data);  
+        //  console.log(data);  
       },  
       onError: function (err) {  
         // Show an error page here, when an error occurs  
-        console.log(err);  
+        //  console.log(err);  
       }  
   
     })
@@ -61,7 +61,7 @@ export class PaymentComponent implements OnInit {
     const xhttp = new XMLHttpRequest();  
     xhttp.onreadystatechange = function () {  
       if (this.readyState === 4 && this.status === 200) {  
-        console.log(JSON.parse(this.responseText));  
+        //  console.log(JSON.parse(this.responseText));  
         alert(JSON.stringify(this.responseText));  
       }  
     };  

@@ -36,10 +36,11 @@ export class UserRequestComponent implements OnInit {
     body.push(type);
     this.appservice.get<IUserRequest>('US-VEN',body).subscribe((res: any[])=>{
       this.data = res;
+  
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;  
       this.dataSource.sort = this.sort;  
-      console.log(this.data);
+      //  console.log(this.data);
       this.data.reverse();
     })  
   }
