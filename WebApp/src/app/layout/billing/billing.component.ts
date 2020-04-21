@@ -85,7 +85,6 @@ export class BillingComponent implements OnInit {
       FINAL_BILL.splice(FINAL_BILL.findIndex(v => v.position === row.position), 1);
     }
 
-    console.log("Total Cost = " + this.getTotalCost());
     if(Number(this.getTotalCost())!=0){
        this.btnDisabled = false;
     }
@@ -119,12 +118,10 @@ export class BillingComponent implements OnInit {
      debugger
      let listOfServices = [];
       this.finalBill.filteredData.forEach(e => {
-        console.log(++i + " : " + e.desc);
         listOfServices.push(e.desc);
       });
       // console.log("Total Cost : " + this.getTotalCost());
       // console.log("User Details Info : ");
-      console.log(this.arr);
       let totalCost = this.getTotalCost().toString();
       let body = {
         "listOfServices": this.finalBill.filteredData,
@@ -136,7 +133,6 @@ export class BillingComponent implements OnInit {
       ar.push(this.arr.id);
       this.appService.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
         alert("Request Sent");
-        console.log(res);
       }))
       this.router.navigate(['/layout']);
   }

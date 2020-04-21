@@ -47,7 +47,6 @@ export class RequestServicesComponent implements OnInit {
   constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
     private appservice: AppServiceService) {
     this.arr = this.router.getCurrentNavigation().extras.state.rowData;
-    console.log(this.arr); 
     this.totalCost = this.arr.totalCost;
     this.dataSource.paginator = this.paginator;
   }

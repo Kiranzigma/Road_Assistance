@@ -4,7 +4,6 @@ import { routerTransition } from 'src/app/shared/router-animations';
 import { AppServiceService } from 'src/app/app-service.service';
 import { IUserRequest } from 'src/app/interface/IResponse';
 import { UserServiceService } from 'src/app/shared/user-service.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vendor-analytics',
@@ -25,7 +24,6 @@ export class VendorAnalyticsComponent implements OnInit {
       this.requests = x.filter(y => y.listOfServices?.length > 0);
       this.requests.forEach(y => {
         y.listOfServices.forEach(z =>{
-          console.log(z);
           if(this.pieChartData.has(z.desc)){
             this.pieChartData.set(z.desc, this.pieChartData.get(z.desc) + Number.parseInt(z.estimatedCost))
           }else{
@@ -40,32 +38,32 @@ export class VendorAnalyticsComponent implements OnInit {
         }
           this.pieChartDataDisp.push(body);  
       }
-      console.log(this.pieChartDataDisp);
       this.getPieChart(this.pieChartDataDisp)
+      let months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+      months.forEach(x=>{
+        this.lineChartData.set(x, 0);
+      })
+      this.requests.forEach(y=>{
+           let date =  y.created_Date.split("-");
+           let month_index =  parseInt(date[1],10) - 1;
+           if(this.lineChartData.has(months[month_index])){
+            this.lineChartData.set(months[month_index], Number.parseFloat(this.lineChartData.get(months[month_index])) + Number.parseFloat(y.totalCost.toString()))
+           }
+      })
+      for (let [key, value] of this.lineChartData) {
+          this.lineChartDataDisp.push(Math.floor(value));  
+      }
+      this.getLineChart(this.lineChartDataDisp)
     })
-    
-    this.lineChart = new Chart({
-      chart: {
-        type: 'line'
-      },
-      title: {
-        text: 'Income Analytics'
-      },
-      credits: {
-        enabled: false
-      },
-      series: [{
-        type: 'line',
-        name: 'Service',
-        data: [100, 2000, 30, 2500, 15]
-    }]
-    });
    }
    pieChart : any;
    lineChart : any;
    title : string = "Analytics";
    requests : IUserRequest[];
    pieChartData = new Map();
+   lineChartData = new Map();
+   lineChartDataDisp = [];
    pieChartDataDisp = [];
 
    getPieChart(dataDisp:any){
@@ -99,6 +97,29 @@ export class VendorAnalyticsComponent implements OnInit {
     }]
     });
    }
+
+   getLineChart(datadisp : any){
+    this.lineChart = new Chart({
+      chart: {
+        type: 'line'
+      },
+      title: {
+        text: 'Income Analytics'
+      },
+      xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      credits: {
+        enabled: false
+      },
+      series: [{
+        type: 'line',
+        name: 'Income',
+        data: datadisp
+    }]
+    });
+  }
+  
 
   ngOnInit(): void {
   }
