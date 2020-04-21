@@ -22,7 +22,9 @@ exports.authenticate = (request, response) => {
     // check for pwd match 
     // https://developer.okta.com/blog/2019/05/16/angular-authentication-jwt
     const result = (authSuccess) => {
+        if(authSuccess!=null){
         //set response to 200
+        console.log(authSuccess)
         response.status(200);
         let userPwd = CryptoJS.AES.decrypt(authSuccess.userPassword.toString(), '123456$#@$^@1ERF');
         let pwd = CryptoJS.AES.decrypt(usermodels.userPassword.toString(), '123456$#@$^@1ERF')
@@ -33,6 +35,10 @@ exports.authenticate = (request, response) => {
         } else {
             response.json({ auth: false, message: "Invalid User" });
         }
+    }
+    else{
+        response.json({ auth: false, message: "User Not Found" });
+    }
     };
     promise.then(result)
         .catch(renderErrorResponse(response));
