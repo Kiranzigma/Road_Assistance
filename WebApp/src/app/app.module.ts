@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import {EncryptServiceService} from '../app/encrypt-service.service';
 import { UserServiceService } from './shared/user-service.service';
+import { DialogRegister,DialogResend,DialogInvalidToken,DialogVerify,DialogPassword} from './shared/dialog-components/dialog.component';
 
 
 @NgModule({
@@ -30,6 +31,13 @@ import { UserServiceService } from './shared/user-service.service';
     BrowserAnimationsModule,
     HttpClientModule
     ],
+  entryComponents: [
+    DialogRegister,
+    DialogResend,
+    DialogInvalidToken,
+    DialogVerify,
+    DialogPassword
+  ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: APIInterceptorService, multi: true },
     AppServiceService, EncryptServiceService, UserServiceService],
   bootstrap: [AppComponent]

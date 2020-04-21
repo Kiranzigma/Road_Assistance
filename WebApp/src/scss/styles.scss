@@ -74,14 +74,60 @@ color: orange  !important;
     div {
         width: 200px;
     }
+
 }
+
 }
 
 
+.custom-dialog-container {
+    
+    .mat-dialog-container {
+    /* add your styles */
+    margin : 0px;
+    width: 300px;
+    height: 150px;
+    background-color: white;
+    padding: 0px;
+    .alert{
+        margin: 0px;
+        padding: 0px;
+        height: 35px;
+        background-color: black;
+        p { 
+            margin: 0px;
+            padding: 5px;
+            color: orange;
+            font-size: 20px;
+            text-align: center;
+        }
+    }
 
+    .message{
+        margin: 0px;
+        padding: 0px;
+        height: 65px;
+        p { 
+            margin: 0px;
+            padding: 5px;
+            color:black;
+            font-size: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+    }
 
+    .confirm{
+        text-align: center;
+         button {
+        background-color: orange;  
+            
+    }
+    }
+   
+}
 
-
+}   
 
 
 
