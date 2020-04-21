@@ -24,6 +24,6 @@ export class UserServiceService {
   reloadUser(modUser: Iuser){
     sessionStorage.removeItem('auth');
     sessionStorage.setItem("auth", this.encdec.set('123456$#@$^@1ERF',JSON.stringify(modUser)));
-    this.userSubj.next(this.user);
+    this.userSubj.next(this.getUser());
   }
 }
