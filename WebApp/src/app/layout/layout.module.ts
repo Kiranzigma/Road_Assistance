@@ -26,7 +26,7 @@ import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
 
-  declarations: [LayoutComponent, ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent, RequestDetailsComponent, HistoryComponent, HistoryDetailsComponent, BillingComponent, VendorAnalyticsComponent],
+  declarations: [LayoutComponent, PaymentComponent,ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent, RequestDetailsComponent, HistoryComponent, HistoryDetailsComponent, BillingComponent, VendorAnalyticsComponent],
 
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,ReactiveFormsModule,
