@@ -8,6 +8,8 @@ import { google } from 'google-maps';
 import { Observable, Subscriber, Subject } from 'rxjs';
 import { routerTransition } from 'src/app/shared/router-animations';
 import { NgxImageGalleryComponent, GALLERY_IMAGE, GALLERY_CONF } from "ngx-image-gallery";
+import { MatDialog} from '@angular/material/dialog';
+import { DialogPassword} from '../../shared/dialog-components/dialog.component';
 declare var google: any;
 
 
@@ -36,7 +38,7 @@ export class RequestDetailsComponent implements OnInit {
 
 
   constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
-    private appservice: AppServiceService) {
+    private appservice: AppServiceService, public dialog: MatDialog) {
     this.arr = this.router.getCurrentNavigation().extras.state.rowData;
     let body = [];
     body.push(this.arr.user_id);
@@ -119,7 +121,17 @@ export class RequestDetailsComponent implements OnInit {
     let ar = [];
     ar.push(this.arr.id);
     this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
-      alert("Request Confirmed");   
+      const dialogRef = this.dialog.open(DialogPassword, {
+        panelClass: 'custom-dialog-container',
+        data: {
+          msg: "Request Completed"
+        }
+
+      });
+      
+      dialogRef.afterClosed().subscribe(result => {
+        //  console.log('The dialog was closed');
+      });  
       this.rightBtn="Complete Request";   
  
 
@@ -133,7 +145,17 @@ export class RequestDetailsComponent implements OnInit {
     let ar = [];
     ar.push(this.arr.id);
     this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
-      alert("Request Completed");
+      const dialogRef = this.dialog.open(DialogPassword, {
+        panelClass: 'custom-dialog-container',
+        data: {
+          msg: "Request Completed"
+        }
+
+      });
+      
+      dialogRef.afterClosed().subscribe(result => {
+        //  console.log('The dialog was closed');
+      }); 
       this.rightBtn="Generate Bill";   
 
     }))
@@ -143,7 +165,17 @@ export class RequestDetailsComponent implements OnInit {
 
     if(this.image.length == 0){
       this.switch = false;
-      alert("No pictures to display");
+       const dialogRef = this.dialog.open(DialogPassword, {
+        panelClass: 'custom-dialog-container',
+        data: {
+          msg: "No pictures to display"
+        }
+
+      });
+      
+      dialogRef.afterClosed().subscribe(result => {
+        //  console.log('The dialog was closed');
+      }); 
       return;
     }
     else{
