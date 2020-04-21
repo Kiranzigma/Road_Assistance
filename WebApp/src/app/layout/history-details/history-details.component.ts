@@ -71,7 +71,7 @@ export class HistoryDetailsComponent implements OnInit {
       body.push(this.arr.user_id);
       this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
         this.data = res;
-        console.log(this.arr);
+        //  console.log(this.arr);
           this.form = this.fb.group({
           userid: [this.arr.user_id],
           register_no: [this.arr.register_no],
@@ -80,7 +80,7 @@ export class HistoryDetailsComponent implements OnInit {
         });
       }))
       
-      //console.log(this.data.userFirstName); 
+      // console.log(this.data.userFirstName); 
     }
   
   
