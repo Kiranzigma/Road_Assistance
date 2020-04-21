@@ -62,6 +62,9 @@ export class HistoryDetailsComponent implements OnInit {
 
   //data source for table
   dataSource = new MatTableDataSource<HistoryDetailsElement>(ELEMENT_DATA);
+  companyName: any;
+  register_no: any;
+  data1: any;
 
 
 
@@ -75,20 +78,31 @@ export class HistoryDetailsComponent implements OnInit {
       this.data = res;
       this.state = this.arr.state;
       this.totalCost = this.arr.totalCost;
+      this.register_no = this.arr.register_no;
+      
+    }))
 
+    let body1 = [];
+    body1.push(this.arr.vendor_id);
+    this.appservice.get<Iuser>('US-AU', body1).subscribe((res1 => {
+      this.data1 = res1;
+      this.companyName=this.data1.companyName;
+    }
+    ));
 
-
-      //  console.log(this.arr);
+      console.log(this.companyName);
+      console.log(this.arr);
 
       //form group
       this.form = this.fb.group({
         userid: [this.arr.user_id],
         register_no: [this.arr.register_no],
         message: [this.arr.message],
-        description: [this.arr.description]
+        description: [this.arr.description],
+        companyName:[this.companyName]
 
       });
-    }))
+  
 
   }
 
@@ -103,6 +117,8 @@ export class HistoryDetailsComponent implements OnInit {
       this.btnDisabled = true;
     }
 
+    
+    
     //load the data source from the array into the table
 
     this.arr.listOfServices.forEach(element => {
@@ -116,69 +132,7 @@ export class HistoryDetailsComponent implements OnInit {
 
 
 
-  // confirm() {
-  //   let body = {
-  //     state: "In Progress"
-  //   }
-  //   let ar = [];
-  //   ar.push(this.arr.id);
-  //   this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
-  //     alert("Request Confirmed");
-  //   }))
-  // }
-
-  // complete() {
-  //   let body = {
-  //     state: "Completed"
-  //   }
-  //   let ar = [];
-  //   ar.push(this.arr.id);
-  //   this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
-  //     alert("Request Completed");
-  //   }))
-  // }
-
-
-  // expand(x: any) {
-  //   this.expan = true;
-  //   this.imag = x;
-  //   let modal = document.getElementById("myModal");
-  //   modal.style.display = "block";
-  //   window.onclick = function (event) {
-  //     if (event.target == modal) {
-  //       modal.style.display = "none";
-  //     }
-  //   }
-  // }
-
-  // spanClick(){
-  //   let modal = document.getElementById("myModal");
-  //   modal.style.display = "none";
-  // }
-
-  // close(){
-  //   this.switch = false;
-  //   if (this.arr.state === "In Progress") {
-  //     this.rightBtn = "Complete Request";
-  //     this.leftBtn = "Back";
-  //     return;
-  //   }
-  //   if (this.arr.state === "Open") {
-  //     this.rightBtn = "Confirm Request";
-  //     this.leftBtn = "Back";
-  //     return;
-  //   }
-  //   if (this.arr.state === "Completed") {
-  //     this.rightBtn = "";
-  //     this.leftBtn = "Back";
-  //     return;
-  //   }
-  //   else{
-  //     this.rightBtn = "";
-  //     this.leftBtn = "Back";
-  //     return;
-  //   }
-  // }
+  
 
   /** Gets the total bill of everything transactions. */
 
@@ -187,28 +141,10 @@ export class HistoryDetailsComponent implements OnInit {
     this.router.navigate(['/layout/history']);
   }
 
-  // generateBill(){
-  //   const navigationExtras: NavigationExtras = { state: { rowData:this.arr }};
-  //   this.router.navigate(['/layout/bill'], navigationExtras);
-  // }
+ 
 
   outputemitted(x: string) {
-    // if (this.rightBtn === "Close" && x == "right") {
-    //   this.close();
-    //   return;
-    // }
-    // if (this.rightBtn === "Confirm Request" && x == "right") {
-    //   this.confirm();
-    //   return;
-    // }
-    // if (this.rightBtn === "Complete Request" && x == "right") {
-    //   this.complete();
-    //   return;
-    // }
-    // if (this.rightBtn == "Generate Bill" && x == "right") {
-    //   this.generateBill();
-    //   return;
-    // }
+    
 
 
 
