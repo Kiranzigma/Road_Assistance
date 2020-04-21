@@ -7,7 +7,7 @@
             </mat-form-field>
         </div>
         <div fxLayoutAlign="center">
-            <mat-form-field *ngFor="let marker of coordinates;">
+            <mat-form-field *ngFor="let marker of coo;">
                 <input type="text" readonly matInput placeholder="Estimated Arrival" [value]="marker.duration">
             </mat-form-field>
         </div>
@@ -21,7 +21,7 @@
         <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">
             <agm-marker [iconUrl]="icon" [latitude]="lat" [longitude]="long">
             </agm-marker>
-            <agm-marker *ngFor="let marker of coordinates;" [latitude]="marker.latitude" [longitude]="marker.longitude" [markerClickable]="true" (markerClick)="markerClicked(marker)">
+            <agm-marker *ngFor="let marker of coordinates;" [latitude]="marker.vendorLatitude" [longitude]="marker.vendorLongitude" [markerClickable]="true" (markerClick)="markerClicked(marker)">
             </agm-marker>
         </agm-map>
     </div>
