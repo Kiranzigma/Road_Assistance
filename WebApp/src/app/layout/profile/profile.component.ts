@@ -229,7 +229,6 @@ export class ProfileComponent implements OnInit{
 //     this.appservice.put<Iuser>('US-AU',body,arr).subscribe(y=> {
 
 //       this.userService.reloadUser(y);
-//       alert('Details have been updated successfully');
 //     });
 
 //   }
