@@ -1,5 +1,5 @@
 .loginCardSize {
-    margin-top: 8%;
+    margin-top: 10%;
     width: 30%;
     height: 40%;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -7,7 +7,7 @@
 }
 
 .registerCardSize {
-    margin-top: 3%;
+    margin-top: 0;
     width: 30%;
     height: 70%;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -64,4 +64,24 @@ mat-error {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.mat-card {
+    background-color: rgba(0, 0, 0, 0.5);
+    mat-card-title {
+        color: white;
+    }
+     ::ng-deep.mat-form-field-ripple {
+        /*change color of underline when focused*/
+        background-color: white !important;
+        ;
+    }
+     ::ng-deep.mat-form-field-underline {
+        /*change color of underline*/
+        background-color: white !important;
+    }
+     ::ng-deep .mat-focused .mat-form-field-label {
+        /*change color of label*/
+        color: white !important;
+    }
 }

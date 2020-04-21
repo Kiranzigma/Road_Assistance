@@ -24,7 +24,7 @@ exports.authenticate = (request, response) => {
     const result = (authSuccess) => {
         if(authSuccess!=null){
         //set response to 200
-        console.log(authSuccess)
+        //console.log(authSuccess)
         response.status(200);
         let userPwd = CryptoJS.AES.decrypt(authSuccess.userPassword.toString(), '123456$#@$^@1ERF');
         let pwd = CryptoJS.AES.decrypt(usermodels.userPassword.toString(), '123456$#@$^@1ERF')

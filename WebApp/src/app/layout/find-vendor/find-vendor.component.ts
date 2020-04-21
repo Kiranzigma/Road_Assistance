@@ -65,7 +65,7 @@ export class FindVendorComponent {
   }
 
   markerClicked(marker) {
-    console.log(marker.company);
+    // console.log(marker.company);
   }
   getDistance(origin, destination): Observable<any> {
     let x = new Subject<any>();
