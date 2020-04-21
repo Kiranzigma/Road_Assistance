@@ -9,7 +9,7 @@ import { userResponse } from '../interface/IResponse'
 import { verificationResponse } from '../interface/IResponse';
 import { MustMatch } from '../../app/helpers/must-match.validator';
 import { MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import { DialogRegister,DialogResend,DialogInvalidToken,DialogVerify} from '../shared/dialog-components/dialog.component';
+import { DialogRegister,DialogResend,DialogInvalidToken,DialogVerify,DialogPassword} from '../shared/dialog-components/dialog.component';
 import { MatRadioChange, MatRadioButton}  from '@angular/material/radio';
 
 @Component({
@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
     ) { }
 
   loginForm = new FormGroup({
-    userEmail: new FormControl(''),
-    userPassword: new FormControl(''),
+    userEmail: new FormControl('', [Validators.required, Validators.email]),
+    userPassword: new FormControl('', Validators.required),
   });
 
   ngOnInit(): void {
@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
     userFirstName: ['', Validators.required],
     userLastName: ['', Validators.required],
     userType: ['', Validators.required],
+    
     userEmail: ['', [Validators.required, Validators.email]],
     userPassword: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', Validators.required]
@@ -70,30 +71,48 @@ export class LoginComponent implements OnInit {
       userPassword: this.EncrDecr.set('123456$#@$^@1ERF', this.loginForm.get('userPassword').value)
     }
     // authenticate the user and let him login
+    if(this.loginForm.valid){
     const val = this.appservice.post<IResponse>('US-AU', body, params).subscribe(x => {
       if (x.auth == true) {
         sessionStorage.setItem("auth", this.EncrDecr.set('123456$#@$^@1ERF',JSON.stringify(x.user)));
         delete x.user
         sessionStorage.setItem("jwt_token", JSON.stringify(x));
         this._routes.navigate(['/layout']);
+      } else {
+        const dialogRef = this.dialog.open(DialogPassword, {
+          width: '250px',
+          data: {
+            msg: "Email/Password is incorrect."
+        }
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          this.mail = '';
+        });
       }
     });
   }
+}
 
   onChangeRadio(radioChange: MatRadioChange) {
     console.log(radioChange.value);
     this.radioFilter=radioChange.value;
     if(radioChange.value=="vendor"){
     this.registerForm.addControl('vendorLicense', new FormControl ('', [Validators.required, Validators.minLength(10)]));
+    this.registerForm.addControl('companyName', new FormControl ('', [Validators.required]));
     }
     else{
     this.registerForm.removeControl('vendorLicense');
+    this.registerForm.removeControl('companyName');
     }
  } 
 
   get rf() { return this.registerForm.controls; }
 
   get vf() { return this.verificationForm.controls;}
+  
+  get lf() { return this.loginForm.controls;}
 
   urlReader() {
     this.route.url.subscribe(params => {
@@ -122,6 +141,7 @@ export class LoginComponent implements OnInit {
 
     if(this.radioFilter=="vendor"){
       body['vendorLicense'] = this.registerForm.get('vendorLicense').value;
+      body['companyName'] = this.registerForm.get('companyName').value;
     }
 
     console.log(body);
@@ -260,6 +280,10 @@ getRegisterErrorMessage(x: any) {
       if (this.registerForm.get('userLastName').hasError('required')) {
         return 'You must enter a value';
       }
+    case "companyName":
+      if (this.registerForm.get('companyName').hasError('required')) {
+          return 'You must enter a value';
+      }
     case "userType":
         if (this.registerForm.get('userType').hasError('required')) {
           return 'You must select a value';
@@ -303,6 +327,21 @@ getRegisterErrorMessage(x: any) {
       }
     }
   }
+
+  getLoginErrorMessage(x: any) {
+    switch(x) {
+      case "userEmail":
+        if (this.loginForm.get('userEmail').hasError('required')) {
+          return 'You must enter a value';
+        } else if (this.loginForm.get('userEmail').hasError('email')){
+          return this.loginForm.get('userEmail').hasError('email') ? 'Not a valid email' : '';
+        }
+      case "userPassword":
+        if (this.loginForm.get('userPassword').hasError('required')) {
+          return 'You must enter a value';
+        }
+      }
+    }
 
 }
 

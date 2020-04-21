@@ -46,6 +46,12 @@
                         <mat-error *ngIf="rf.vendorLicense.invalid">{{getRegisterErrorMessage('vendorLicense')}}</mat-error>
                     </mat-form-field>
                 </div>
+                <div *ngIf="radioFilter=='vendor'" fxLayoutAlign="center">
+                    <mat-form-field>
+                        <input type="text" formControlName="companyName" matInput placeholder="Company Name">
+                        <mat-error *ngIf="rf.companyName.invalid">{{getRegisterErrorMessage('companyName')}}</mat-error>
+                    </mat-form-field>
+                </div>
                 <div fxLayoutAlign="center">
                     <mat-form-field>
                         <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
@@ -98,11 +104,13 @@
                 <div fxLayoutAlign="center">
                     <mat-form-field>
                         <input type="text" formControlName="userEmail" matInput placeholder="Email ID">
+                        <mat-error *ngIf="lf.userEmail.invalid">{{getLoginErrorMessage('userEmail')}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayoutAlign="center">
                     <mat-form-field>
                         <input type="password" formControlName="userPassword" matInput placeholder="Password">
+                        <mat-error *ngIf="lf.userPassword.invalid">{{getLoginErrorMessage('userPassword')}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayoutAlign="center"><button type="submit" mat-button>Sign In</button></div>

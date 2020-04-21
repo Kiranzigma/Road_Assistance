@@ -30,8 +30,14 @@ export interface IUserRequest{
     state: string;
     description: string;
     user: Iuser;
-    listofServices : [];
+    listOfServices : IListofServices[];
     totalCost: Number;
+}
+
+export interface IListofServices{
+    desc: any;
+    estimatedCost : any;
+    position:any;
 }
 
 export interface userResponse{
