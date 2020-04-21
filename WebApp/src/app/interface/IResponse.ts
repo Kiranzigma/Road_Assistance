@@ -31,7 +31,7 @@ export interface IUserRequest{
     description: string;
     user: Iuser;
     listOfServices : IListofServices[];
-    totalCost: Number;
+    totalCost: number;
 }
 
 export interface IListofServices{

@@ -80,10 +80,11 @@ export class LoginComponent implements OnInit {
         this._routes.navigate(['/layout']);
       } else {
         const dialogRef = this.dialog.open(DialogPassword, {
-          width: '250px',
+          panelClass: 'custom-dialog-container',
           data: {
             msg: "Email/Password is incorrect."
-        }
+          }
+
         });
         
         dialogRef.afterClosed().subscribe(result => {
@@ -152,6 +153,7 @@ export class LoginComponent implements OnInit {
           const dialogRef = this.dialog.open(DialogRegister, {
             width: '250px',
             data: {
+              panelClass: 'custom-dialog-container',
               mail: this.registerForm.get('userEmail').value
             }
           });
@@ -167,7 +169,7 @@ export class LoginComponent implements OnInit {
           if(error.error.msg.includes("E11000")){
             //  console.log(error.error.msg);
             const dialogRef = this.dialog.open(DialogInvalidToken, {
-               width: '250px',
+              panelClass: 'custom-dialog-container',
                data: { 
                msg: this.registerForm.get('userEmail').value + " already exists."
               }
@@ -195,7 +197,7 @@ verifyOrResend(buttontype){
       //  console.log(y); 
       //  console.log("User Verified");
       const dialogRef = this.dialog.open(DialogVerify, {
-        width: '250px',
+        panelClass: 'custom-dialog-container',
         data: {
           mail: this.verificationForm.get('userEmail').value
       }
@@ -210,7 +212,7 @@ verifyOrResend(buttontype){
   error => {
     //  console.log(error.error.msg);
     const dialogRef = this.dialog.open(DialogInvalidToken, {
-      width: '250px',
+      panelClass: 'custom-dialog-container',
       data: { 
         msg: error.error.msg
     }
@@ -231,7 +233,7 @@ verifyOrResend(buttontype){
       this.appservice.post<verificationResponse>('US-RVE', body).subscribe(y => {
         //  console.log("User Verified");
         const dialogRef = this.dialog.open(DialogResend, {
-          width: '250px',
+          panelClass: 'custom-dialog-container',
           data: {
             mail: this.verificationForm.get('userEmail').value
         }
@@ -246,7 +248,7 @@ verifyOrResend(buttontype){
     error => {
       //  console.log(error.error.msg);
       const dialogRef = this.dialog.open(DialogInvalidToken, {
-      width: '250px',
+      panelClass: 'custom-dialog-container',
       data: { 
         msg: error.error.msg
     }
