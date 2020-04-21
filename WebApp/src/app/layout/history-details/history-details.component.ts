@@ -60,7 +60,6 @@ export class HistoryDetailsComponent implements OnInit {
     displayedColumns: string[] = ['position', 'desc', 'estimatedCost'];
     dataSource = new MatTableDataSource<HistoryDetailsElement>(ELEMENT_DATA);
 
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
     constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
@@ -71,7 +70,8 @@ export class HistoryDetailsComponent implements OnInit {
       this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
         this.data = res;
         this.totalCost=this.arr.totalCost;
-        this.dataSource.paginator = this.paginator;
+        
+
         console.log(this.arr);
           this.form = this.fb.group({
           userid: [this.arr.user_id],

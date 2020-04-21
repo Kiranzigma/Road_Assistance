@@ -111,8 +111,7 @@ export class ProfileComponent implements OnInit{
       
 
       this.blobUrl=this.user.userImage;
-      console.log(this.lat);
-      console.log(this.long);
+      
 
   }
  
