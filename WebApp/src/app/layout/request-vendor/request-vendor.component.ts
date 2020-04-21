@@ -24,6 +24,7 @@ export class RequestVendorComponent implements OnInit {
   lat : "";
   long : "";
   vendorId : any;
+  duration : any;
   constructor(private _routes: Router, private appService: AppServiceService, private userService: UserServiceService) {
     this.user = this.userService.getUser();
    }
@@ -76,6 +77,7 @@ export class RequestVendorComponent implements OnInit {
    this.lat = x.lat;
    this.long = x.long;
    this.vendorId = x.vendorId;
+   this.duration = x.duration;
   }
   outputemitted(x: string){
     if(this.rightBtn == "Submit Request" && x == "right"){
@@ -99,7 +101,8 @@ export class RequestVendorComponent implements OnInit {
       "latitude": this.lat,
       "longitude":this.long,
       "vendor_id": this.vendorId,
-      "state": "Open"
+      "state": "Open",
+      "duration" : this.duration
     }
     this.appService.post('US-VEN',body).subscribe((res: any[]) => {
       this._routes.navigate(['/layout/history']);

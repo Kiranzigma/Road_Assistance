@@ -17,6 +17,7 @@ export class FindVendorComponent {
   lat: string;
   long: string;
   vendorId : String;
+  duration : string;
   icon: string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
   constructor(private appService: AppServiceService) {
     let params = [];
@@ -48,6 +49,7 @@ export class FindVendorComponent {
     this.coordinates = this.coordinates.slice(0,1);
     this.coordinates.forEach(x => {
       this.vendorId = x.id;
+      this.duration = x.duration
       this.emit();
     });
   }
@@ -87,7 +89,8 @@ export class FindVendorComponent {
     let loc = {
       "lat" : this.lat,
       "long" : this.long,
-      "vendorId": this.vendorId
+      "vendorId": this.vendorId,
+      "duration" : this.duration
     }
     this.switcher.emit(loc);
   }

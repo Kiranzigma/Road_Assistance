@@ -8,6 +8,8 @@ import { AppServiceService } from 'src/app/app-service.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import { IUserRequest } from 'src/app/interface/IResponse';
+import { MatDialog} from '@angular/material/dialog';
+import { DialogPassword} from '../../shared/dialog-components/dialog.component';
 
 
 export interface BillingElement {
@@ -46,7 +48,7 @@ export class BillingComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   
 
-  constructor(private router: Router, private appService: AppServiceService) { 
+  constructor(private router: Router, private appService: AppServiceService,public dialog: MatDialog) { 
   this.arr = this.router.getCurrentNavigation().extras.state.rowData;
   }
 
@@ -132,7 +134,17 @@ export class BillingComponent implements OnInit {
       let ar = [];
       ar.push(this.arr.id);
       this.appService.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
-        alert("Request Sent");
+        const dialogRef = this.dialog.open(DialogPassword, {
+          panelClass: 'custom-dialog-container',
+          data: {
+            msg: "Request Sent"
+          }
+  
+        });
+        
+        dialogRef.afterClosed().subscribe(result => {
+          //  console.log('The dialog was closed');
+        }); 
       }))
       this.router.navigate(['/layout']);
   }
