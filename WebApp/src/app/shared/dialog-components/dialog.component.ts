@@ -66,3 +66,19 @@ import { Component, Inject } from '@angular/core';
         this.dialogRef.close();
       }
   }
+
+  //Dialog PopUp for Invalid Token
+  @Component({
+    selector: 'dialog-invalidPassword',
+    templateUrl: 'dialog-invalidPassword.html',
+  })
+  
+  export class DialogPassword { 
+    constructor(
+      public dialogRef: MatDialogRef<DialogPassword>,
+      @Inject(MAT_DIALOG_DATA) public data: any) {}
+  
+      onNoClick(): void {
+        this.dialogRef.close();
+      }
+  }

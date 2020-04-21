@@ -51,7 +51,7 @@ let userSchema = new Schema({
     vendorLongitude: {
         type: String
     },
-    vendorCompanyName: {
+    companyName: {
         type: String
     }
 
