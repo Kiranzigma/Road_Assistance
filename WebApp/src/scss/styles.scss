@@ -119,10 +119,11 @@ color: orange  !important;
 
     .confirm{
         text-align: center;
-         button {
+        button {
         background-color: orange;  
-            
-    }
+        cursor: pointer;
+        border: none;
+        }
     }
    
 }
