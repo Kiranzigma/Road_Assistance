@@ -11,6 +11,8 @@ declare var paypal;
 })
 export class PaymentComponent implements OnInit {
   @ViewChild('paypal',{static:true}) paypalElement: ElementRef;
+  title:"Payment Portal";
+  leftBtn:"Back"
   arr: any;
   planId: any;  
   subcripId: any;  
@@ -69,8 +71,17 @@ export class PaymentComponent implements OnInit {
     xhttp.setRequestHeader('Authorization', this.basicAuth);  
   
     xhttp.send();  
-  }  
+  }
+  
+  back(){
+      this.router.navigate(['/layout/history']);
+  }
+
+  outputemitted(x: string) {
+    if (this.leftBtn === "Back" && x == "left") {
+      this.back();
+      return;
+    }
 
 }
-
-
+}

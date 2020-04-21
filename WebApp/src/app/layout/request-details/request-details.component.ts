@@ -75,6 +75,9 @@ export class RequestDetailsComponent implements OnInit {
     if (this.arr.state === "Completed") {
       this.rightBtn = "Generate Bill";
     }
+    if (this.arr.state === "Payment Pending") {
+      this.rightBtn = "Services";
+    }
 
     this.image = this.arr.image;
     let rows = Math.floor((this.image.length / 3));
@@ -201,7 +204,11 @@ export class RequestDetailsComponent implements OnInit {
     this.router.navigate(['/layout/bill'], navigationExtras);
   }
 
-  
+  services = (result:any) => {
+    const navigationExtras: NavigationExtras = { state: { rowData : result}};
+    this.router.navigate(['/layout/services'], navigationExtras);
+  }
+
 
   outputemitted(x: string) {
     if (this.rightBtn === "Close" && x == "right") {
@@ -224,6 +231,11 @@ export class RequestDetailsComponent implements OnInit {
       this.back();
       return;
     }
+    if (this.rightBtn == "Services" && x == "right") {
+      this.services(this.arr);
+      return;
+    }
+
   }
 
   

@@ -22,11 +22,12 @@ import { BillingComponent } from './billing/billing.component';
 import { VendorAnalyticsComponent } from './vendor-analytics/vendor-analytics.component';
 import { ChartModule } from 'angular-highcharts';
 import { PaymentComponent } from './payment/payment.component';
+import { RequestServicesComponent } from './request-services/request-services.component';
 
 
 @NgModule({
 
-  declarations: [LayoutComponent, PaymentComponent,ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent, RequestDetailsComponent, HistoryComponent, HistoryDetailsComponent, BillingComponent, VendorAnalyticsComponent],
+  declarations: [LayoutComponent, PaymentComponent,ProfileComponent, RequestVendorComponent, FindVendorComponent, NavbarComponent, UserRequestComponent, RequestDetailsComponent, HistoryComponent, HistoryDetailsComponent, BillingComponent, VendorAnalyticsComponent, RequestServicesComponent],
 
   imports: [
     CommonModule, MaterialModule,LayoutRoutingModule,ReactiveFormsModule,

@@ -34,7 +34,7 @@ export class BillingComponent implements OnInit {
   leftBtn: string = "Back";
   arr: any;
   i: number = 0;
-  rightBtn: string = "Checkout";
+  rightBtn: string = "Send Invoice";
   btnDisabled : boolean = true;
 
   displayedColumns: string[] = ['position', 'desc', 'estimatedCost','select'];
@@ -139,7 +139,6 @@ export class BillingComponent implements OnInit {
         console.log(res);
       }))
       this.router.navigate(['/layout']);
-
   }
 
   outputemitted(x: string) {
@@ -148,7 +147,7 @@ export class BillingComponent implements OnInit {
       return;
     }
 
-    if (this.rightBtn == "Checkout" && x == "right") {
+    if (this.rightBtn == "Send Invoice" && x == "right") {
       this.checkout();
       return;
     }
