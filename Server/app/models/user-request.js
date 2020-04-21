@@ -56,11 +56,14 @@ let userRequestSchema = new Schema({
     },
 
     listOfServices: {
-        type:[]
+        type: []
     },
 
     totalCost: {
         type: String,
+    },
+    duration: {
+        type: String
     }
 
 }, {
