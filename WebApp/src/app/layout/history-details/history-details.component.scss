@@ -1,10 +1,18 @@
 
-::ng-deep mat-form-field {
-    div {
-        width: 75%;
-    }
-}
+// ::ng-deep mat-form-field {
+//     div {
+//         width: 75%;
+//     }
+// }
 
+.matFormField{
+  ::ng-deep mat-form-field {
+      div {
+          width: 90%;
+      } 
+      margin-left: 8%;       
+   } 
+  }
 
 table {
     width: 100%;

@@ -1,3 +1,4 @@
+// CSS for mat form field
 .matFormField{
 ::ng-deep mat-form-field {
     div {
@@ -6,8 +7,6 @@
     margin-left: 8%;       
  } 
 }
-
-
 
 
 button {
@@ -21,6 +20,7 @@ button {
     border-radius: 5px;
 }
 
+//mat radio button
 mat-radio-group mat-radio-button{
     margin-top: 1%;
     margin-left: 0.5%;
@@ -41,7 +41,7 @@ mat-radio-group mat-radio-button{
     cursor: pointer;
 }
 
-
+//css for profile picture
 p {
     font-family: Lato;
   }
