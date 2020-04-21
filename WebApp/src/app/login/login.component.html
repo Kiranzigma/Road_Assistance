@@ -71,7 +71,7 @@
             </form>
         </div>
 
-        <div *ngSwitchCase="'verification'">
+        <div *ngSwitchCase="'verification'" class="verification">
             <form [formGroup]="verificationForm">
                 <div fxLayoutAlign="center">
                     <mat-card-title> Please Verify</mat-card-title>
@@ -92,7 +92,7 @@
                 <div fxLayoutAlign="center"><button type="submit" (click)="verifyOrResend('Resend')" mat-button>Resend Code</button></div>
             </form>
         </div>
-        <div *ngSwitchDefault>
+        <div *ngSwitchDefault class="login">
             <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
                 <div fxLayoutAlign="center">
                     <mat-card-title> Login</mat-card-title>

@@ -1,8 +1,14 @@
+.matFormField{
 ::ng-deep mat-form-field {
     div {
-        width: 75%;
-    }
+        width: 90%;
+    } 
+    margin-left: 8%;       
+ } 
 }
+
+
+
 
 button {
     background-color: orange ;
@@ -17,7 +23,7 @@ button {
 
 mat-radio-group mat-radio-button{
     margin-top: 1%;
-    margin-left: 2%;
+    margin-left: 0.5%;
     color: grey;
 }
 
