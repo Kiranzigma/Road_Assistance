@@ -51,6 +51,7 @@ export class HistoryDetailsComponent implements OnInit {
     position: number;
     estimatedCost: number;
     totalCost:number;
+    state:String;
 
   
 
@@ -69,7 +70,7 @@ export class HistoryDetailsComponent implements OnInit {
       body.push(this.arr.user_id);
       this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
         this.data = res;
-
+        this.state= this.arr.state;
         this.totalCost=this.arr.totalCost;
         
 
@@ -206,8 +207,18 @@ export class HistoryDetailsComponent implements OnInit {
       //   this.generateBill();
       //   return;
       // }
+    
       if(this.rightBtn == "Pay" && x == "right"){
         this.pay(this.arr.totalCost);
+        this.state="Paid";
+        let body = {
+          state: this.state
+        }
+        let ar = [];
+        ar.push(this.arr.id);
+        this.appservice.put<IUserRequest>('US-VEN', body, ar).subscribe((res => {
+          
+        }))
         
       }
       if (this.leftBtn == "Back" && x == "left") {
