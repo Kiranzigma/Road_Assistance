@@ -52,7 +52,7 @@ export class RequestVendorComponent implements OnInit {
             }
           })
           if(this.vinData.length > 1 ){
-            console.log(this.requestForm.get('vehicleRegNumber').value);
+            //  console.log(this.requestForm.get('vehicleRegNumber').value);
             this.btndisabled = false;
           }
          }          
@@ -72,7 +72,7 @@ export class RequestVendorComponent implements OnInit {
     this.rightBtn = "Find Mechanic";
   }
   outputemit(x : any){
-    console.log(x);
+    // console.log(x);
    this.lat = x.lat;
    this.long = x.long;
    this.vendorId = x.vendorId;

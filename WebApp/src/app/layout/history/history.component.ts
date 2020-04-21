@@ -44,7 +44,7 @@ export class HistoryComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.data.reverse();  
       this.dataSource.sort = this.sort;  
-      console.log(this.data);
+      // console.log(this.data);
       this.data.reverse(); 
     })  
   }

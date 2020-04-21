@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
         });
         
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
+          //  console.log('The dialog was closed');
           this.mail = '';
         });
       }
@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
 }
 
   onChangeRadio(radioChange: MatRadioChange) {
-    console.log(radioChange.value);
+    //  console.log(radioChange.value);
     this.radioFilter=radioChange.value;
     if(radioChange.value=="vendor"){
     this.registerForm.addControl('vendorLicense', new FormControl ('', [Validators.required, Validators.minLength(10)]));
@@ -117,7 +117,7 @@ export class LoginComponent implements OnInit {
   urlReader() {
     this.route.url.subscribe(params => {
       this.view=params[0].path;
-      console.log("Current View -- " + this.view);
+      //  console.log("Current View -- " + this.view);
     })
   }
 
@@ -144,11 +144,11 @@ export class LoginComponent implements OnInit {
       body['companyName'] = this.registerForm.get('companyName').value;
     }
 
-    console.log(body);
+    //  console.log(body);
 
     if(this.registerForm.valid){
         this.appservice.post<userResponse>('US-AU', body).subscribe(y => {
-          console.log("Posted User");
+          //  console.log("Posted User");
           const dialogRef = this.dialog.open(DialogRegister, {
             width: '250px',
             data: {
@@ -157,7 +157,7 @@ export class LoginComponent implements OnInit {
           });
           
           dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+            //  console.log('The dialog was closed');
             this.mail = '';
           });
           this._routes.navigate(['/login']);
@@ -165,7 +165,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           if(error.error.msg.includes("E11000")){
-            console.log(error.error.msg);
+            //  console.log(error.error.msg);
             const dialogRef = this.dialog.open(DialogInvalidToken, {
                width: '250px',
                data: { 
@@ -174,13 +174,13 @@ export class LoginComponent implements OnInit {
             });
     
            dialogRef.afterClosed().subscribe(result => {
-           console.log('The dialog was closed');
+           //  console.log('The dialog was closed');
            this.mail = '';
             });
           }
         })
       } else {
-        console.log("Validation Failed");
+        //  console.log("Validation Failed");
   }
 }
 
@@ -192,8 +192,8 @@ verifyOrResend(buttontype){
   };
   if(this.verificationForm.valid){
     this.appservice.post<verificationResponse>('US-VE', body).subscribe(y => {
-      console.log(y); 
-      console.log("User Verified");
+      //  console.log(y); 
+      //  console.log("User Verified");
       const dialogRef = this.dialog.open(DialogVerify, {
         width: '250px',
         data: {
@@ -202,13 +202,13 @@ verifyOrResend(buttontype){
       });
       
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
+        //  console.log('The dialog was closed');
         this.mail = '';
       });
       this._routes.navigate(['/login']);
   },
   error => {
-    console.log(error.error.msg);
+    //  console.log(error.error.msg);
     const dialogRef = this.dialog.open(DialogInvalidToken, {
       width: '250px',
       data: { 
@@ -217,19 +217,19 @@ verifyOrResend(buttontype){
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //  console.log('The dialog was closed');
       this.mail = '';
     });
   })
 }
 } else if(buttontype=="Resend"){
-    console.log("In Resend");
+    //  console.log("In Resend");
     let body = {
       userEmail: this.verificationForm.get('userEmail').value,
     };
     if(this.verificationForm.get('userEmail').valid){
       this.appservice.post<verificationResponse>('US-RVE', body).subscribe(y => {
-        console.log("User Verified");
+        //  console.log("User Verified");
         const dialogRef = this.dialog.open(DialogResend, {
           width: '250px',
           data: {
@@ -238,13 +238,13 @@ verifyOrResend(buttontype){
         });
         
         dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed');
+          //  console.log('The dialog was closed');
           this.mail = '';
         });
         this._routes.navigate(['/login']);
     },
     error => {
-      console.log(error.error.msg);
+      //  console.log(error.error.msg);
       const dialogRef = this.dialog.open(DialogInvalidToken, {
       width: '250px',
       data: { 
@@ -253,7 +253,7 @@ verifyOrResend(buttontype){
     });
     
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //  console.log('The dialog was closed');
       this.mail = '';
     });
     })   
