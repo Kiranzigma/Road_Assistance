@@ -16,7 +16,6 @@ import { MatPaginator } from '@angular/material/paginator';
 
 export interface HistoryDetailsElement {
   desc: string;
-  position: number;
   estimatedCost: number;
 }
 
@@ -59,9 +58,8 @@ export class HistoryDetailsComponent implements OnInit {
   
 
     displayedColumns: string[] = ['position', 'desc', 'estimatedCost'];
-    dataSource = new MatTableDataSource<BillingElement>(ELEMENT_DATA);
+    dataSource = new MatTableDataSource<HistoryDetailsElement>(ELEMENT_DATA);
 
-    @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
 
     constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
@@ -71,28 +69,45 @@ export class HistoryDetailsComponent implements OnInit {
       body.push(this.arr.user_id);
       this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
         this.data = res;
+
+        this.totalCost=this.arr.totalCost;
+        
+
+
         //  console.log(this.arr);
+
           this.form = this.fb.group({
           userid: [this.arr.user_id],
           register_no: [this.arr.register_no],
           message: [this.arr.message],
           description: [this.arr.description]
+          
         });
       }))
-      
-      // console.log(this.data.userFirstName); 
+
     }
   
   
     ngOnInit() {
   
       this.rightBtn="Pay";
-      
-      if (this.arr.state === "Completed") {
-        this.btnDisabled = false;
+      if(this.arr.state=="Payment Pending"){
+        this.btnDisabled=false;
+      }else{
+      this.btnDisabled=true;
       }
-     
-  
+
+      
+      this.arr.listOfServices.forEach(element => {
+        element.desc;
+        element.estimatedCost;
+        ELEMENT_DATA.push({desc: element.desc, estimatedCost:element.estimatedCost});
+
+      });
+
+    
+
+     console.log(this.totalCost);
  
     }
   
@@ -193,6 +208,7 @@ export class HistoryDetailsComponent implements OnInit {
       // }
       if(this.rightBtn == "Pay" && x == "right"){
         this.pay(this.arr.totalCost);
+        
       }
       if (this.leftBtn == "Back" && x == "left") {
         this.back();
