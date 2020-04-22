@@ -65,7 +65,7 @@ export class RequestServicesComponent implements OnInit {
 
   //method to navigate to the back page
   back(){
-    this.router.navigate(['/layout/RequestDetailsComponent'], { state: { rowData:this.arr }});
+    this.router.navigate(['/layout/RequestDetails'], { state: { rowData:this.arr }});
   }
 
   // method to emit the values clicked on the button

@@ -7,15 +7,15 @@ export const environment = {
   "api_url":"http://localhost:3000/",
   "services":[
     //UserAuthentication
-    {code:"US-AU",url:"user"},
-    {code:"US-VEN",url:"userrequest"},
+    {code:"US-AU",url:"users"},
+    {code:"US-VEN",url:"userrequests"},
 
     //UserVerification
-    {code:"US-VE",url:"user/confirmation"},
+    {code:"US-VE",url:"registration"},
     //ResendToken
-    {code:"US-RVE",url:"user/resendConfirmation"},
+    {code:"US-RVE",url:"reregistration"},
 
-    {code:"US-UT",url:"users"}
+    {code:"US-UT",url:"vendors"}
 
 
   ]

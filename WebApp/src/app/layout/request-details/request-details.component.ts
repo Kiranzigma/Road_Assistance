@@ -253,7 +253,7 @@ export class RequestDetailsComponent implements OnInit {
 
   // method to proceed back to the previous page
   back() {
-    this.router.navigate(['/layout/UserRequestComponent']);
+    this.router.navigate(['/layout/UserRequest']);
   }
 
   //method to generate bill
