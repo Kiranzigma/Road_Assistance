@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { AppServiceService } from '../app-service.service';
 import { UserServiceService } from '../shared/user-service.service';
 
@@ -12,13 +12,37 @@ export class LayoutComponent implements OnInit {
   opened: boolean = false;
   Nav:any[];
   public blobUrl;
+  public showOverlay = true;
+  messageSuccess: boolean;
 
   constructor(private _routes: Router, private Appservice : AppServiceService, private userService : UserServiceService) { 
     this.userService.getSubj().subscribe(x=>{
       this.blobUrl = x.userImage;
     })
     this.userService.getUser();
+ debugger
+    _routes.events.subscribe((event: RouterEvent) => {
+      if (event instanceof NavigationStart) {
+        this.showOverlay = true;
+        return;
+      }
+      if (event instanceof NavigationEnd) {
+        this.showOverlay = false;
+        return;
+      }
+  
+      // Set loading state to false in both of the below events to hide the spinner in case a request fails
+      if (event instanceof NavigationCancel) {
+        this.showOverlay = false;
+        return;
+      }
+      if (event instanceof NavigationError) {
+        this.showOverlay = false;
+        return;
+      }
+    })
   }
+  
   ngOnInit(): void {
      if(this.userService.getUser().userType == "user"){
       this.Nav = [
@@ -37,7 +61,7 @@ export class LayoutComponent implements OnInit {
 
     }
   } 
- 
+ //get url of the application while navigating
   getURL(param : any):void{
     this.opened = ! this.opened;
     if(param.route == "logout"){
@@ -48,4 +72,7 @@ export class LayoutComponent implements OnInit {
       this._routes.navigate(["/layout/" + param.route]);
     }
   }
-}
+  
+
+  }
+

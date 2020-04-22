@@ -11,22 +11,24 @@ declare var paypal;
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
+
 export class PaymentComponent implements OnInit {
   @ViewChild('paypal',{static:true}) paypalElement: ElementRef;
-  title:"Payment Portal";
-  leftBtn:"Back"
+  title:string="Payment Portal";
+  leftBtn:string="Back"
   arr: any;
   planId: any;  
   subcripId: any;  
   total:any;
   basicAuth = 'Basic AV-tdAXW3xgH638gCZDrkIMImXU1YCZqmwFzlpY1UCHpdsvnxE6ElFGFosRXoL_lJSWhHc2wwtmCdkmjEJgXQmhwMdpKu2zFHi-Dx0M5iH5sJdpzwNEB0JicpK5__UTbYys2GXOx1TLcUF1SthBkPk1cCMnCYRas';  //Pass your ClientId + scret key
   
+  // to get the total amount to be paid based on the service
   product = {
      price: this.total,
      description: "service"
   };
 
- 
+ // this will navigate the routed value from the history page
   constructor(private router: Router,private userService: UserServiceService,
     private appservice: AppServiceService,public dialog: MatDialog) {
     this.arr = this.router.getCurrentNavigation().extras.state.rowData;
@@ -71,7 +73,7 @@ export class PaymentComponent implements OnInit {
     })
      .render(this.paypalElement.nativeElement);
   }
-
+// get the subscription details
   getSubcriptionDetails(subcriptionId) {  
     const xhttp = new XMLHttpRequest();  
     xhttp.onreadystatechange = function () {  
@@ -85,11 +87,11 @@ export class PaymentComponent implements OnInit {
   
     xhttp.send();  
   }
-  
+  // back to the service history page
   back(){
       this.router.navigate(['/layout/history']);
   }
-
+  // to emit the functions of the button clicked
   outputemitted(x: string) {
     if (this.leftBtn === "Back" && x == "left") {
       this.back();
