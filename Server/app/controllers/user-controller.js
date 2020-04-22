@@ -41,7 +41,6 @@ exports.authenticate = (request, response) => {
     promise.then(result)
         .catch(renderErrorResponse(response));
 };
-x
 // method to register the values to the resource
 // @params - req, resp
 
