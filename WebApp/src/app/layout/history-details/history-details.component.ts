@@ -19,7 +19,7 @@ export interface HistoryDetailsElement {
   estimatedCost: number;
 }
 
-const ELEMENT_DATA: HistoryDetailsElement[] = [];
+var ELEMENT_DATA: HistoryDetailsElement[] = [];
 
 
 
@@ -62,7 +62,7 @@ export class HistoryDetailsComponent implements OnInit {
 
   //data source for table
   dataSource = new MatTableDataSource<HistoryDetailsElement>(ELEMENT_DATA);
-
+  
 
 
   constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
@@ -74,14 +74,14 @@ export class HistoryDetailsComponent implements OnInit {
     this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
       this.data = res;
       console.log(this.data);
-         //form group
-         this.form = this.fb.group({
-          userid: [this.arr.user_id],
-          register_no: [this.arr.register_no],
-          message: [this.arr.message],
-          description: [this.arr.description],
-          companyName:[this.data.companyName]
-        });
+      //form group
+      this.form = this.fb.group({
+        userid: [this.arr.user_id],
+        register_no: [this.arr.register_no],
+        message: [this.arr.message],
+        description: [this.arr.description],
+        companyName: [this.data.companyName]
+      });
 
     }));
 
@@ -89,8 +89,8 @@ export class HistoryDetailsComponent implements OnInit {
     this.totalCost = this.arr.totalCost;
 
 
- 
-      console.log(this.arr);
+
+    console.log(this.arr);
   }
 
 
@@ -103,35 +103,36 @@ export class HistoryDetailsComponent implements OnInit {
     } else {
       this.btnDisabled = true;
     }
-
-    
     
     //load the data source from the array into the table
+    if (this.arr.listOfServices.length > 0) {
+      this.arr.listOfServices.forEach(element => {
+        element.desc;
+        element.estimatedCost;
+        ELEMENT_DATA.push({ desc: element.desc, estimatedCost: element.estimatedCost });
+      });
 
-    this.arr.listOfServices.forEach(element => {
-      element.desc;
-      element.estimatedCost;
-      ELEMENT_DATA.push({ desc: element.desc, estimatedCost: element.estimatedCost });
-
-    });
+    }
+    console.log(ELEMENT_DATA,this.dataSource)
 
   }
 
 
 
-  
+
 
   /** Gets the total bill of everything transactions. */
 
 
   back() {
     this.router.navigate(['/layout/history']);
+    ELEMENT_DATA=[];
   }
 
- 
+
 
   outputemitted(x: string) {
-    
+
 
 
 
