@@ -5,6 +5,8 @@ import {routerTransition} from '../../shared/router-animations'
 import { UserServiceService } from 'src/app/shared/user-service.service';
 import { Iuser, IResponse } from 'src/app/interface/IResponse';
 import { Router } from '@angular/router';
+import { MatDialog} from '@angular/material/dialog';
+import { DialogPassword} from '../../shared/dialog-components/dialog.component';
 
 // https://vingenerator.org/
 // https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/5XYKT3A17BG157871?format=json
@@ -26,7 +28,7 @@ export class RequestVendorComponent implements OnInit {
   long : "";
   vendorId : any;
   duration : any;
-  constructor(private _routes: Router, private appService: AppServiceService, private userService: UserServiceService) {
+  constructor(private _routes: Router, private appService: AppServiceService, private userService: UserServiceService, public dialog: MatDialog) {
     this.user = this.userService.getUser();
    }
   switcher : any;
@@ -106,7 +108,18 @@ export class RequestVendorComponent implements OnInit {
       "duration" : this.duration
     }
     this.appService.post('US-VEN',body).subscribe((res: any[]) => {
-      this._routes.navigate(['/layout/history']);
+      const dialogRef = this.dialog.open(DialogPassword, {
+        panelClass: 'custom-dialog-container',
+        data: {
+          msg: "Mechanic Request Submitted."
+        }
+
+      });
+      
+      dialogRef.afterClosed().subscribe(result => {
+        //  console.log('The dialog was closed');
+        this._routes.navigate(['/layout/history']);
+      }); 
     });
     
    
