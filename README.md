@@ -56,6 +56,7 @@ BackEnd:
 8. CARMD API
 9. VIN API
 10. Distance Matrix API
+11. fxFlex
 
 
 ## Development server
