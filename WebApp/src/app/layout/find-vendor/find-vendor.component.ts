@@ -23,7 +23,7 @@ export class FindVendorComponent {
     let params = [];
     params.push("vendor")
     this.appService.get<Iuser>('US-UT',params).subscribe(x=>{
-      this.coordinates = x;
+      this.coordinates = x.filter(y=> y.vendorLatitude != null && y.vendorLongitude != null);
       navigator.geolocation.getCurrentPosition((position) => {
         this.showPosition(position);
         this.getCordinateDistance();
@@ -39,6 +39,7 @@ export class FindVendorComponent {
     subj.subscribe(
       (y:Iuser)=>{
       this.coo.push(y)
+      debugger
       if(this.coo.length == this.coordinates.length ){
             this.coo.sort((a,b)=> (a.numDistance > b.numDistance) ? 1 : (b.numDistance > a.numDistance)? -1 : 0 );
             this.coo = this.coo.slice(0,1);
