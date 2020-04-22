@@ -103,7 +103,7 @@ exports.resendToken = (umail) => {
                 });
                 var mailOptions = {
                     from: 'roadassistance@roadassistancepullaingo.com',
-                    to: newuser.userEmail,
+                    to: user.userEmail,
                     subject: 'Account Verification Token For Road Assistance',
                     text: 'Hello,\n\n' + 'Please verify your account by entering the code ' + token.token + ' on the link: \nhttp:\/\/' + 'localhost:4200' + '\/verification' + '\n'
 
@@ -124,15 +124,24 @@ exports.resendToken = (umail) => {
     })
 }
 
+
+// method to get a user value in the database
+
 exports.get = (user) => {
     const getpromise = usermodel.findById(user).exec();
     return getpromise;
 };
 
+
+// method to get all the values in the database
+
 exports.getAll = (userTypes) => {
     const promise = usermodel.find({ userType: userTypes }).exec();
     return promise;
 }
+
+
+// method to update the user value in the database
 
 exports.update = (user) => {
 

@@ -41,6 +41,9 @@ exports.authenticate = (request, response) => {
     promise.then(result)
         .catch(renderErrorResponse(response));
 };
+x
+// method to register the values to the resource
+// @params - req, resp
 
 exports.register = (req, res) => {
     const userToReg = Object.assign({}, req.body);
@@ -56,6 +59,10 @@ exports.register = (req, res) => {
         .catch(renderErrorResponse(res));
 };
 
+
+// method to confirm the email from the resource
+// @params - req, resp
+
 exports.confirmationPost = (req, res) => {
     const verificationCode = req.body.verificationCode;
     const userEmail = req.body.userEmail;
@@ -68,6 +75,10 @@ exports.confirmationPost = (req, res) => {
     promise.then(result)
         .catch(renderErrorResponse(res));
 };
+
+
+// method to resend the token generated for email 
+// @params - req, resp
 
 exports.resendTokenPost = function(req, res) {
     const userEmail = req.body.userEmail;
@@ -84,6 +95,9 @@ exports.resendTokenPost = function(req, res) {
 
 
 
+// method to update the values from the resource
+// @params - req, resp
+
 exports.updateUser = (request, response) => {
     const userId = request.params.id;
     const user = Object.assign({}, request.body);
@@ -98,6 +112,9 @@ exports.updateUser = (request, response) => {
     promise.then(result).catch(renderErrorResponse(response));
 };
 
+
+// method to retrieve the values from the resource
+// @params - req, resp
 exports.getUser = (request, response) => {
     const userid = request.params.id;
     const result = (user) => {
@@ -108,6 +125,10 @@ exports.getUser = (request, response) => {
     promise.then(result)
         .catch(renderErrorResponse(response));
 };
+
+
+// method to retrieve all the values from the resource based on type
+// @params - req, resp
 
 exports.getAllUsers = (request, response) => {
     const userType = request.params.type;

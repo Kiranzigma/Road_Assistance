@@ -64,6 +64,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  //Authenticate Function For JWT Login
   authenticate() {
     let params = [];
     params.push(this.loginForm.get('userEmail').value);
@@ -96,6 +97,7 @@ export class LoginComponent implements OnInit {
   }
 }
 
+  // Radio Group Change Trigger
   onChangeRadio(radioChange: MatRadioChange) {
     //  console.log(radioChange.value);
     this.radioFilter=radioChange.value;
@@ -109,12 +111,14 @@ export class LoginComponent implements OnInit {
     }
  } 
 
+  //Form Controls Retrieving Function
   get rf() { return this.registerForm.controls; }
 
   get vf() { return this.verificationForm.controls;}
   
   get lf() { return this.loginForm.controls;}
-
+  
+  //View Retriever
   urlReader() {
     this.route.url.subscribe(params => {
       this.view=params[0].path;
@@ -130,6 +134,7 @@ export class LoginComponent implements OnInit {
     this._routes.navigate(['/login']);
   }
 
+  //Register Function
   register(){
     this.submitted = true;
     let body = {
@@ -145,8 +150,7 @@ export class LoginComponent implements OnInit {
       body['companyName'] = this.registerForm.get('companyName').value;
     }
 
-    //  console.log(body);
-
+    // Register Body Post
     if(this.registerForm.valid){
         this.appservice.post<userResponse>('US-AU', body).subscribe(y => {
           //  console.log("Posted User");
@@ -185,6 +189,8 @@ export class LoginComponent implements OnInit {
   }
 }
 
+
+// Verify/Resend function submission
 verifyOrResend(buttontype){
   if(buttontype=="Verify"){
   let body = {
@@ -264,7 +270,7 @@ verifyOrResend(buttontype){
 }
 
 
-
+//Error Message Retrieval For Register
 getRegisterErrorMessage(x: any) {
   switch(x) {
     case "userFirstName":
@@ -314,6 +320,7 @@ getRegisterErrorMessage(x: any) {
     }
   }
 
+ //Error Message Retrieval For Verification
   getVerificationErrorMessage(x: any) {
   switch(x) {
     case "userEmail":
@@ -329,6 +336,7 @@ getRegisterErrorMessage(x: any) {
     }
   }
 
+  //Error Message Retrieval For Login
   getLoginErrorMessage(x: any) {
     switch(x) {
       case "userEmail":
