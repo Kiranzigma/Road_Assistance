@@ -7,31 +7,27 @@ module.exports = (app) => {
 
     // route the get and post method to the controller
 
-    app.route('/user')
+    app.route('/users')
         .post(userController.register);
 
-  app.route('/userrequest')
-  .post(userrequestController.save);
-  
-  app.route('/userrequest/:id/:type')
-  .get(userrequestController.list);
-
-  app.route('/userrequest/:id')
-  .put(userrequestController.update);
-
-    app.route('/user/confirmation')
-        .post(userController.confirmationPost);
-    app.route('/user/resendConfirmation')
-        .post(userController.resendTokenPost);
-    // route the get, put, delete method to the controller
-
-
-    app.route('/user/:id')
+    app.route('/users/:id')
+        .get(userController.getUser)
         .post(userController.authenticate)
-        .put(jwtAuth,userController.updateUser)
-        .get(userController.getUser);
+        .put(jwtAuth, userController.updateUser);
 
-    app.route('/users/:type')
-        .get(userController.getAllUsers);
+    app.route('/vendors/:type')
+        .get(jwtAuth, userController.getAllUsers);
+
+    app.route('/userrequests/:id/:type')
+        .get(jwtAuth, userrequestController.list);
+    app.route('/userrequests')
+        .post(jwtAuth, userrequestController.save);
+    app.route('/userrequests/:id')
+        .put(jwtAuth, userrequestController.update);
+
+    app.route('/registration')
+        .post(userController.confirmationPost);
+    app.route('/reregistration')
+        .post(userController.resendTokenPost);
 
 };
