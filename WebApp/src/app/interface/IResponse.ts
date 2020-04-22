@@ -21,7 +21,7 @@ export interface Iuser{
     distance:string;
     numDistance:string;
     duration:string;
-    company: string;
+    companyName: string;
 }
 
 export interface IUserRequest{
