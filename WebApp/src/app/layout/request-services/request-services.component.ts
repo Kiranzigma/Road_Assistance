@@ -15,7 +15,7 @@ export interface DetailsElement {
   estimatedCost: number;
 }
 
-const ELEMENT_DATA: DetailsElement[] = [];
+var ELEMENT_DATA: DetailsElement[] = [];
 
 @Component({
   selector: 'app-request-services',
@@ -25,24 +25,24 @@ const ELEMENT_DATA: DetailsElement[] = [];
 })
 
 export class RequestServicesComponent implements OnInit {
-@Input()
-    title: string = "Service Details";
-    btnDisabled : boolean = true
-    leftBtn: string = "Back";
-    arr: any;
-    data: Iuser;
-    form: FormGroup;
-    i: number = 0;
-    desc: string;
-    position: number;
-    estimatedCost: number;
-    totalCost:number;
+  @Input()
+  title: string = "Service Details";
+  btnDisabled: boolean = true
+  leftBtn: string = "Back";
+  arr: any;
+  data: Iuser;
+  form: FormGroup;
+  i: number = 0;
+  desc: string;
+  position: number;
+  estimatedCost: number;
+  totalCost: number;
 
 
   displayedColumns: string[] = ['position', 'desc', 'estimatedCost'];
   dataSource = new MatTableDataSource<DetailsElement>(ELEMENT_DATA);
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
     private appservice: AppServiceService) {
@@ -53,20 +53,22 @@ export class RequestServicesComponent implements OnInit {
 
 
   ngOnInit() {
-
     this.arr.listOfServices.forEach(element => {
       element.desc;
       element.estimatedCost;
-      ELEMENT_DATA.push({desc: element.desc, estimatedCost:element.estimatedCost});
+      ELEMENT_DATA.push({ desc: element.desc, estimatedCost: element.estimatedCost });
     });
+    ELEMENT_DATA=[];
+  }
+
+  //method to navigate to the back page
+  back() {
+    this.router.navigate(['/layout/RequestDetails'], { state: { rowData: this.arr } });
 
     this.dataSource.paginator = this.paginator;
   }
 
-  //method to navigate to the back page
-  back(){
-    this.router.navigate(['/layout/RequestDetails'], { state: { rowData:this.arr }});
-  }
+
 
   // method to emit the values clicked on the button
   outputemitted(x: string) {

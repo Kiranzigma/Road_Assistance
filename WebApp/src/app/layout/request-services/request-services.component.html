@@ -1,6 +1,8 @@
+<!-- Nav bar header-->
 <app-navbar [title]="title" [leftBtn]="leftBtn" (eventEmit)="outputemitted($event)">
 </app-navbar>
 
+<!-- mat table to view the list the list of services-->
 <div class="example-table-container" @routerTransition>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     

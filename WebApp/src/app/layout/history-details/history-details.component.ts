@@ -117,10 +117,6 @@ export class HistoryDetailsComponent implements OnInit {
 
   }
 
-
-
-
-
   /** Gets the total bill of everything transactions. */
 
 
@@ -132,9 +128,6 @@ export class HistoryDetailsComponent implements OnInit {
 
 
   outputemitted(x: string) {
-
-
-
 
     if (this.rightBtn == "Pay" && x == "right") {
       this.pay(this.arr.totalCost);
