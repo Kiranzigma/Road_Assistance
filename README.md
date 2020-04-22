@@ -39,6 +39,7 @@ FrontEnd:
 2. SCSS
 3. TypeScript
 4. RxJS
+5. Angular
 
 BackEnd:
 1. NodeJS
