@@ -13,7 +13,7 @@ export const environment = {
     //UserVerification
     {code:"US-VE",url:"registration"},
     //ResendToken
-    {code:"US-RVE",url:"reregistration"},
+    {code:"US-RVE",url:"resendtoken"},
 
     {code:"US-UT",url:"vendors"}
 
