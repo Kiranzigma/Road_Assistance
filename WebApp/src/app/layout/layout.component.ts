@@ -20,7 +20,6 @@ export class LayoutComponent implements OnInit {
       this.blobUrl = x.userImage;
     })
     this.userService.getUser();
- debugger
     _routes.events.subscribe((event: RouterEvent) => {
       if (event instanceof NavigationStart) {
         this.showOverlay = true;
