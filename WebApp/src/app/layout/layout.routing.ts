@@ -13,6 +13,8 @@ import {HistoryDetailsComponent} from './history-details/history-details.compone
 import { PaymentComponent } from './payment/payment.component';
 import {RequestServicesComponent} from './request-services/request-services.component'
 
+
+// adding all the routing for routing to the components
 const routes: Routes = [
     {
       path:'',

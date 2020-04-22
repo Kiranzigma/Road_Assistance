@@ -36,7 +36,7 @@ export class RequestDetailsComponent implements OnInit {
   imag:any;
   icon: string = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4';
 
-
+// getting the form through the data obtained from the service
   constructor(private router: Router, private fb: FormBuilder, private userService: UserServiceService,
     private appservice: AppServiceService, public dialog: MatDialog) {
     this.arr = this.router.getCurrentNavigation().extras.state.rowData;
@@ -65,8 +65,12 @@ export class RequestDetailsComponent implements OnInit {
     console.log(this.arr.duration);
     //console.log(this.data.userFirstName); 
   }
+
+  //initialising the images array
   rowImages : any = [];
 
+
+  //setting the right buttons based 
   ngOnInit() {
 
     if (this.arr.state === "In Progress") {
@@ -109,6 +113,7 @@ export class RequestDetailsComponent implements OnInit {
     this.addresspoint();
   }
 
+  // method to point the address point on the maps
   addresspoint() {
     this.appservice.getExternal("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + this.lat + "," + this.long + "&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
     x => {
@@ -117,7 +122,7 @@ export class RequestDetailsComponent implements OnInit {
     }
   );
   }
-
+//method to confirm the state 
   confirm() {
     let body = {
       state: "In Progress"
@@ -141,7 +146,7 @@ export class RequestDetailsComponent implements OnInit {
 
     }))
   }
-
+//method to complete the state
   complete() {
     let body = {
       state: "Completed"
@@ -165,6 +170,8 @@ export class RequestDetailsComponent implements OnInit {
     }))
   }
 
+
+  // method to get and display images
   getImages(){
 
     if(this.image.length == 0){
@@ -190,6 +197,7 @@ export class RequestDetailsComponent implements OnInit {
     }
   }
 
+// method to expand the image on click
   expand(x: any) {
     this.expan = true;
     this.imag = x;
@@ -202,11 +210,13 @@ export class RequestDetailsComponent implements OnInit {
     }
   }
 
+  // method to close image with the close image
   spanClick(){
     let modal = document.getElementById("myModal");
     modal.style.display = "none";
   }
   
+  // method to close the wimage window
   close(){
     this.switch = false;
     if (this.arr.state === "In Progress") {
@@ -241,21 +251,25 @@ export class RequestDetailsComponent implements OnInit {
     }
   }
 
+  // method to proceed back to the previous page
   back() {
     this.router.navigate(['/layout/UserRequestComponent']);
   }
 
+  //method to generate bill
   generateBill = (result:any) => {
     const navigationExtras: NavigationExtras = { state: { rowData : result}};
     this.router.navigate(['/layout/bill'], navigationExtras);
   }
 
+  //method to navigate to services on compl,etion of the request
   services = (result:any) => {
     const navigationExtras: NavigationExtras = { state: { rowData : result}};
     this.router.navigate(['/layout/services'], navigationExtras);
   }
 
 
+  //method to emit the action clicked on the buttons
   outputemitted(x: string) {
     if (this.rightBtn === "Close" && x == "right") {
       this.close();

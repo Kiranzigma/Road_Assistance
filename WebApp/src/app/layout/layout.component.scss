@@ -1,22 +1,27 @@
+//styling for map
 agm-map {
     height: 500px;
 }
 
+// color for nav bar
 .navside {
     background-color: rgba(235, 183, 39, 0.993) !important;
 }
 
+// mat nav list styling
 mat-nav-list {
     a:hover {
         background-color: orange;
     }
 }
 
+// nav bar styling
 .navbar {
     top:0%;
     position: sticky;
 }
 
+//image styling
 img {
     height: 70%;
     width: 50px;
@@ -25,6 +30,7 @@ img {
     margin-right: 10px;
   }
 
+  // styling for loading screen
   .my-overlay {
     left: 0 !important;
     top: 0 !important;

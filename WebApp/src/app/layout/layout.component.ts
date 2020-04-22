@@ -61,7 +61,7 @@ export class LayoutComponent implements OnInit {
 
     }
   } 
- 
+ //get url of the application while navigating
   getURL(param : any):void{
     this.opened = ! this.opened;
     if(param.route == "logout"){

@@ -24,6 +24,7 @@ import { ChartModule } from 'angular-highcharts';
 import { PaymentComponent } from './payment/payment.component';
 import { RequestServicesComponent } from './request-services/request-services.component';
 
+// importing all the required modules for the application
 
 @NgModule({
 
