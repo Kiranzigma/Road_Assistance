@@ -41,12 +41,10 @@ exports.authenticate = (request, response) => {
     promise.then(result)
         .catch(renderErrorResponse(response));
 };
-
-<<<<<<< Updated upstream
-=======
+x
 // method to register the values to the resource
 // @params - req, resp
->>>>>>> Stashed changes
+
 exports.register = (req, res) => {
     const userToReg = Object.assign({}, req.body);
     const newuser = new usermodel(userToReg);
@@ -61,11 +59,10 @@ exports.register = (req, res) => {
         .catch(renderErrorResponse(res));
 };
 
-<<<<<<< Updated upstream
-=======
+
 // method to confirm the email from the resource
 // @params - req, resp
->>>>>>> Stashed changes
+
 exports.confirmationPost = (req, res) => {
     const verificationCode = req.body.verificationCode;
     const userEmail = req.body.userEmail;
@@ -79,11 +76,10 @@ exports.confirmationPost = (req, res) => {
         .catch(renderErrorResponse(res));
 };
 
-<<<<<<< Updated upstream
-=======
+
 // method to resend the token generated for email 
 // @params - req, resp
->>>>>>> Stashed changes
+
 exports.resendTokenPost = function(req, res) {
     const userEmail = req.body.userEmail;
 
@@ -98,12 +94,10 @@ exports.resendTokenPost = function(req, res) {
 };
 
 
-<<<<<<< Updated upstream
 
-=======
 // method to update the values from the resource
 // @params - req, resp
->>>>>>> Stashed changes
+
 exports.updateUser = (request, response) => {
     const userId = request.params.id;
     const user = Object.assign({}, request.body);
@@ -118,11 +112,9 @@ exports.updateUser = (request, response) => {
     promise.then(result).catch(renderErrorResponse(response));
 };
 
-<<<<<<< Updated upstream
-=======
+
 // method to retrieve the values from the resource
 // @params - req, resp
->>>>>>> Stashed changes
 exports.getUser = (request, response) => {
     const userid = request.params.id;
     const result = (user) => {
@@ -134,11 +126,10 @@ exports.getUser = (request, response) => {
         .catch(renderErrorResponse(response));
 };
 
-<<<<<<< Updated upstream
-=======
+
 // method to retrieve all the values from the resource based on type
 // @params - req, resp
->>>>>>> Stashed changes
+
 exports.getAllUsers = (request, response) => {
     const userType = request.params.type;
     // const usertype = request.params.type;

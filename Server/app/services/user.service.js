@@ -124,28 +124,25 @@ exports.resendToken = (umail) => {
     })
 }
 
-<<<<<<< Updated upstream
-=======
+
 // method to get a user value in the database
->>>>>>> Stashed changes
+
 exports.get = (user) => {
     const getpromise = usermodel.findById(user).exec();
     return getpromise;
 };
 
-<<<<<<< Updated upstream
-=======
+
 // method to get all the values in the database
->>>>>>> Stashed changes
+
 exports.getAll = (userTypes) => {
     const promise = usermodel.find({ userType: userTypes }).exec();
     return promise;
 }
 
-<<<<<<< Updated upstream
-=======
+
 // method to update the user value in the database
->>>>>>> Stashed changes
+
 exports.update = (user) => {
 
     const promise = usermodel.findByIdAndUpdate({
