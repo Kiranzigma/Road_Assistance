@@ -27,7 +27,7 @@ module.exports = (app) => {
 
     app.route('/registration')
         .post(userController.confirmationPost);
-    app.route('/reregistration')
+    app.route('/resendtoken')
         .post(userController.resendTokenPost);
 
 };

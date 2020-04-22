@@ -103,7 +103,7 @@ exports.resendToken = (umail) => {
                 });
                 var mailOptions = {
                     from: 'roadassistance@roadassistancepullaingo.com',
-                    to: newuser.userEmail,
+                    to: user.userEmail,
                     subject: 'Account Verification Token For Road Assistance',
                     text: 'Hello,\n\n' + 'Please verify your account by entering the code ' + token.token + ' on the link: \nhttp:\/\/' + 'localhost:4200' + '\/verification' + '\n'
 
