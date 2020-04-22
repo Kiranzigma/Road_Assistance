@@ -12,6 +12,7 @@ import { MatDialog} from '@angular/material/dialog';
 import { DialogPassword} from '../../shared/dialog-components/dialog.component';
 
 
+//Bill Interface
 export interface BillingElement {
   desc: string;
   position: number;
@@ -73,13 +74,10 @@ export class BillingComponent implements OnInit {
     this.isAllSelected() ? this.selection.clear():this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
+  //Selects bill based on Checkbox selected
   isSomeSelected(x:MatCheckboxChange,row?: BillingElement) {
     
     this.selection.toggle(row)
-    // console.log(x.checked);
-    // console.log(this.selection);
-    // console.log(row);
-    // const checkDuplicate = obj => obj.position === row.position;
     if(x.checked===true){
       FINAL_BILL.push(row);
     }
@@ -109,11 +107,14 @@ export class BillingComponent implements OnInit {
     return this.finalBill.filteredData.map(t => t.estimatedCost).reduce((acc, value) => acc + value, 0);
   }
 
+
+  //Button function to get back
   back() {
     FINAL_BILL = [];
     this.router.navigate(['/layout/RequestDetails'], { state: { rowData:this.arr }});
   }
 
+  //Checkout Function For Invoice Generation
   checkout() {
      // console.log("List Of Services");
      let i =0;
@@ -149,6 +150,8 @@ export class BillingComponent implements OnInit {
       this.router.navigate(['/layout']);
   }
 
+
+  //Event Emitter
   outputemitted(x: string) {
     if (this.leftBtn == "Back" && x == "left") {
       this.back();
