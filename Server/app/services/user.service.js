@@ -124,15 +124,24 @@ exports.resendToken = (umail) => {
     })
 }
 
+
+// method to get a user value in the database
+
 exports.get = (user) => {
     const getpromise = usermodel.findById(user).exec();
     return getpromise;
 };
 
+
+// method to get all the values in the database
+
 exports.getAll = (userTypes) => {
     const promise = usermodel.find({ userType: userTypes }).exec();
     return promise;
 }
+
+
+// method to update the user value in the database
 
 exports.update = (user) => {
 

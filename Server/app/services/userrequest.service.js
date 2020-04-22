@@ -2,6 +2,9 @@
 const mongoose = require('mongoose');
 const userreq = mongoose.model('UserRequestSchema');
 
+
+// method to search a user in the database
+
 exports.search = (user,type) => {
     if(type == "user"){
         const promise = userreq.find({user_id:user}).exec();
@@ -13,6 +16,9 @@ exports.search = (user,type) => {
     
 };
 
+
+// method to register a value in the database
+
 exports.save = (user) => {
     const newuser = new userreq(user);
     // get the current utc datetime
@@ -21,6 +27,9 @@ exports.save = (user) => {
     newuser.set("created_Date", currentdate.toLocaleString());
     return newuser.save();
 };
+
+
+// method to update a value in the database
 
 exports.update = (updatereq) => {
     const promise = userreq.findByIdAndUpdate({
