@@ -7,10 +7,10 @@ TEAM - Pullingo
 GROUP MEMBERS:
 NU ID - 001347216
         001310589
-        000144424
+        001344424
         001427809
 
-mail -  panneerselvam.s@northeastern.edu
+Email -  panneerselvam.s@northeastern.edu
         mahalakshmidharani.s@northeastern.edu
         sekar.h@northeastern.edu
         kathiresan.k@northeastern.edu

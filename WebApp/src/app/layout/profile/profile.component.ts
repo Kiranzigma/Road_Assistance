@@ -14,6 +14,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { routerTransition } from '../../shared/router-animations';
 import { google } from 'google-maps';
 import { Observable, Subscriber, Subject } from 'rxjs';
+import { MatDialog} from '@angular/material/dialog';
+import { DialogPassword} from '../../shared/dialog-components/dialog.component';
 declare var google: any;
 
 @Component({
@@ -45,7 +47,8 @@ export class ProfileComponent implements OnInit {
     private userService: UserServiceService,
     private appservice: AppServiceService,
     private EncrDecr: EncryptServiceService,
-    private appService: AppServiceService) {
+    private appService: AppServiceService,
+    public dialog: MatDialog) {
 
     this.user = this.userService.getUser();
     this.updateForm = this.fb.group({
@@ -82,7 +85,6 @@ export class ProfileComponent implements OnInit {
 
     //extracting image in blob format from the db
     this.blobUrl = this.user.userImage;
-
 
   }
 
@@ -163,10 +165,20 @@ export class ProfileComponent implements OnInit {
       arr.push(this.user.id);
       this.appservice.put<Iuser>('US-AU', body, arr).subscribe(y => {
         this.userService.reloadUser(y);
-        //  console.log(body)
+        console.log(body)
 
       });
-      alert('Details have been updated successfully');
+      const dialogRef = this.dialog.open(DialogPassword, {
+        panelClass: 'custom-dialog-container',
+        data: {
+          msg: "Details have been updated successfully."
+        }
+
+      });
+      
+      dialogRef.afterClosed().subscribe(result => {
+        //  console.log('The dialog was closed');
+      }); 
       this.btnDisabled = true;
     }
   }

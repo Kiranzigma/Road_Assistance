@@ -61,10 +61,12 @@ export class RequestServicesComponent implements OnInit {
     });
   }
 
+  //method to navigate to the back page
   back(){
     this.router.navigate(['/layout/RequestDetails'], { state: { rowData:this.arr }});
   }
 
+  // method to emit the values clicked on the button
   outputemitted(x: string) {
     if (this.leftBtn === "Back" && x == "left") {
       this.back();

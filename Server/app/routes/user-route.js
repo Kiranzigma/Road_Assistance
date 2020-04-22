@@ -30,7 +30,4 @@ module.exports = (app) => {
     app.route('/reregistration')
         .post(userController.resendTokenPost);
 
-
-
-
 };
