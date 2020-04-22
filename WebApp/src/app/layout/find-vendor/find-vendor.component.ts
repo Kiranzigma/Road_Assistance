@@ -33,6 +33,8 @@ export class FindVendorComponent {
   coordinates: Iuser[];
   coo : Iuser[]
 
+
+  //get the distance between the user and vendor co-ordinates
   getCordinateDistance(){
     let subj = new Subject();
     this.coo = []
@@ -66,19 +68,10 @@ export class FindVendorComponent {
       })
     });
    
-    // subj.subscribe((x:any)=> {
-    //   console.log(x);
-    //  x.sort((a,b)=> (a.numDistance > b.numDistance) ? 1 : (b.numDistance > a.numDistance)? -1 : 0 );
-    //  x = x.slice(0,1);
-    //  x.forEach(x => {
-    //    this.vendorId = x.id;
-    //    this.duration = x.duration
-    //    this.emit();
-    //  });
-    // })
-    // subj.next(this.coordinates);
   }
   @Output() switcher = new EventEmitter<any>();
+
+  //show the current position with the latitude and longitude
   showPosition(position) {
     this.lat = position.coords.latitude;
     this.long = position.coords.longitude;
@@ -92,8 +85,10 @@ export class FindVendorComponent {
   }
 
   markerClicked(marker) {
-    // console.log(marker.company);
+    
   }
+
+  //get the distance between the origin and detination
   getDistance(origin, destination): Observable<any> {
     let x = new Subject<any>();
     let service = new google.maps.DistanceMatrixService();
@@ -119,6 +114,8 @@ export class FindVendorComponent {
     }
     this.switcher.emit(loc);
   }
+
+//co-ordinates for latitude and longitude
   getLatLong() {
     this.appService.getExternal("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.address + "&key=AIzaSyCNH7ZuXjNdXqZFzlpOB0snpBZjoUC5jRo").subscribe(
       x => {

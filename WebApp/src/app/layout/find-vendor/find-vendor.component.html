@@ -2,21 +2,26 @@
 <div fxLayout="row">
     <div class="findVendor" fxLayout="column" fxFlex="50%">
         <div fxLayoutAlign="center">
+            <!-- input address form field -->
             <mat-form-field>
                 <input type="text" [(ngModel)]="address" (ngModelChange)="getLatLong()" matInput placeholder="Current Address" [value]="address">
             </mat-form-field>
         </div>
+            <!-- estimated arrival form field -->
         <div fxLayoutAlign="center">
             <mat-form-field *ngFor="let marker of coo;">
                 <input type="text" readonly matInput placeholder="Estimated Arrival" [value]="marker.duration">
             </mat-form-field>
         </div>
+            <!-- vehicle information -->
         <div *ngFor="let vin of vinData;" fxLayoutAlign="center">
             <mat-form-field>
                 <input type="text" readonly matInput [placeholder]="vin.Variable" [value]="vin.Value">
             </mat-form-field>
         </div>
     </div>
+        
+<!-- co-ordinates, latitude and longitude -->
     <div class="map" fxFlex="50%">
         <agm-map [latitude]="lat" [zoom]="15" [longitude]="long">
             <agm-marker [iconUrl]="icon" [latitude]="lat" [longitude]="long">
@@ -27,15 +32,3 @@
     </div>
 </div>
 <br>
-<!-- <div fxLayout="row">
-    <div fxFlex="50%" fxLayoutAlign="center center">
-        <button (click)="emit()" mat-button>
-            Back
-        </button>
-    </div>
-    <div fxFlex="50%" fxLayoutAlign="center center">
-        <button mat-button>
-            Request
-        </button>
-    </div>
-</div> -->

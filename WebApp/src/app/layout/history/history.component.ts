@@ -56,6 +56,6 @@ export class HistoryComponent implements OnInit {
   //sending the request details of a user to the next component - HistoryDetails Component
   redirectToDetails = (element: object) => {
     const navigationExtras: NavigationExtras = { state: { rowData: element } };
-    this.router.navigate(['/layout/historyDetails'], navigationExtras);
+    this.router.navigate(['/layout/history-details'], navigationExtras);
   }
 }
