@@ -14,12 +14,14 @@
         <mat-toolbar class="container layout" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
             <div fxLayoutAlign="left center" fxFlex="10%">
                 <button (click)="opened = !opened" mat-icon-button>
+                    <!-- menu icon -->
                 <mat-icon>menu</mat-icon>
             </button>
             </div>
             <div fxLayoutAlign="center center" fxFlex="80%" class="navbar">
                 Road Side Assistance
             </div>
+            <!-- profile picture in nav bar -->
             <div fxLayoutAlign="end center" fxFlex="10%"><img src = "{{blobUrl ? blobUrl : 'https://www.w3schools.com/howto/img_avatar.png'}}"/></div>
         </mat-toolbar>
         <router-outlet></router-outlet>

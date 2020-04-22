@@ -66,6 +66,7 @@ export class VendorAnalyticsComponent implements OnInit {
    lineChartDataDisp = [];
    pieChartDataDisp = [];
 
+   //get pie chart data
    getPieChart(dataDisp:any){
     this.pieChart = new Chart({
       chart: {
@@ -98,6 +99,7 @@ export class VendorAnalyticsComponent implements OnInit {
     });
    }
 
+   //line chart data
    getLineChart(datadisp : any){
     this.lineChart = new Chart({
       chart: {
