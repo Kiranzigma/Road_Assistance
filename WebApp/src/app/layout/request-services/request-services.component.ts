@@ -62,7 +62,7 @@ export class RequestServicesComponent implements OnInit {
   }
 
   back(){
-    this.router.navigate(['/layout/RequestDetailsComponent'], { state: { rowData:this.arr }});
+    this.router.navigate(['/layout/RequestDetails'], { state: { rowData:this.arr }});
   }
 
   outputemitted(x: string) {

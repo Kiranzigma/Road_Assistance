@@ -68,6 +68,6 @@ export class UserRequestComponent implements OnInit {
 
   redirectToDetails = (element:object) => {
     const navigationExtras: NavigationExtras = { state: { rowData : element }};
-    this.router.navigate(['/layout/RequestDetailsComponent'], navigationExtras);
+    this.router.navigate(['/layout/RequestDetails'], navigationExtras);
       }
 }

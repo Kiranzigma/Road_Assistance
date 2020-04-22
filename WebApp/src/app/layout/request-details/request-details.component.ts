@@ -228,7 +228,7 @@ export class RequestDetailsComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/layout/UserRequestComponent']);
+    this.router.navigate(['/layout/UserRequest']);
   }
 
   generateBill = (result:any) => {
