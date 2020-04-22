@@ -58,6 +58,11 @@ BackEnd:
 10. Distance Matrix API
 11. fxFlex
 
+## Steps:
+git pull
+npm install
+node server.js from the server 
+ng serve from WebApp
 
 ## Development server
 
