@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //emit
   emit(x: string){
     this.eventEmit.emit(x);
   }

@@ -43,6 +43,7 @@ export class LayoutComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    //navicons for user
      if(this.userService.getUser().userType == "user"){
       this.Nav = [
         { icon: 'commute', displayName : 'Request Mechanic', route : 'RequestVendor', data: 'user'},
@@ -50,6 +51,7 @@ export class LayoutComponent implements OnInit {
         { icon: 'account_circle', displayName : 'Profile', route : 'Profile', data: 'general'},
         { icon:'power_settings_new', displayName : 'Logout', route : 'logout', data: 'general'} ];
         this.blobUrl=this.userService.getUser().userImage;
+        //nav icons for vendor
     }else if(this.userService.getUser().userType == "vendor"){
       this.Nav = [
         { icon: 'commute', displayName : 'Requests', route : 'UserRequest', data: 'vendor'},
