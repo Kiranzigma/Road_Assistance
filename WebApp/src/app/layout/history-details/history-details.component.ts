@@ -62,9 +62,6 @@ export class HistoryDetailsComponent implements OnInit {
 
   //data source for table
   dataSource = new MatTableDataSource<HistoryDetailsElement>(ELEMENT_DATA);
-  companyName: any;
-  register_no: any;
-  data1: any;
 
 
 
@@ -73,37 +70,27 @@ export class HistoryDetailsComponent implements OnInit {
     //getting the array from the previous page
     this.arr = this.router.getCurrentNavigation().extras.state.rowData;
     let body = [];
-    body.push(this.arr.user_id);
+    body.push(this.arr.vendor_id);
     this.appservice.get<Iuser>('US-AU', body).subscribe((res => {
       this.data = res;
-      this.state = this.arr.state;
-      this.totalCost = this.arr.totalCost;
-      this.register_no = this.arr.register_no;
-      
-    }))
+      console.log(this.data);
+         //form group
+         this.form = this.fb.group({
+          userid: [this.arr.user_id],
+          register_no: [this.arr.register_no],
+          message: [this.arr.message],
+          description: [this.arr.description],
+          companyName:[this.data.companyName]
+        });
 
-    let body1 = [];
-    body1.push(this.arr.vendor_id);
-    this.appservice.get<Iuser>('US-AU', body1).subscribe((res1 => {
-      this.data1 = res1;
-      this.companyName=this.data1.companyName;
-    }
-    ));
+    }));
 
-      console.log(this.companyName);
+    this.state = this.arr.state;
+    this.totalCost = this.arr.totalCost;
+
+
+ 
       console.log(this.arr);
-
-      //form group
-      this.form = this.fb.group({
-        userid: [this.arr.user_id],
-        register_no: [this.arr.register_no],
-        message: [this.arr.message],
-        description: [this.arr.description],
-        companyName:[this.companyName]
-
-      });
-  
-
   }
 
 
