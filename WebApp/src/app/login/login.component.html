@@ -4,6 +4,7 @@
     <!-- https://github.com/angular/flex-layout/wiki/fxLayoutGap-API -->
     <!-- example for row wise fx -->
     <mat-card class="loginCardSize" fxLayout="column" [ngSwitch]="view">
+        <!-- Top Toolbar -->
         <mat-toolbar class="layout" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
             <div fxLayoutAlign="center" fxFlex="10%"></div>
             <div fxLayoutAlign="center center" fxFlex="80%" class="header"> Road Side Assistance</div>
@@ -12,6 +13,7 @@
                 <div fxLayoutAlign="center" fxFlex="10%"><button (click)="login()" mat-button>Login</button></div>
             </ng-template>
         </mat-toolbar>
+        <!-- Register Div -->
         <div class="register" *ngSwitchCase="'signUp'" fxLayoutAlign="center center">
             <form [formGroup]="registerForm" (ngSubmit)="register()">
                 <div fxLayoutAlign="center">
@@ -29,6 +31,7 @@
                         <mat-error *ngIf="rf.userLastName.invalid">{{getRegisterErrorMessage('userLastName')}}</mat-error>
                     </mat-form-field>
                 </div>
+                <!-- Radio Group  -->
                 <div fxLayoutAlign="center">
                     <mat-radio-group formControlName="userType" class="radioButton" (change)="onChangeRadio($event)">
                         <mat-radio-button value="user">User</mat-radio-button>
@@ -70,7 +73,7 @@
                 <div fxLayoutAlign="center"><button type="submit" mat-button>Sign Up</button></div>
             </form>
         </div>
-
+        <!-- Login Verification Token Div -->
         <div *ngSwitchCase="'verification'" class="verification">
             <form [formGroup]="verificationForm">
                 <div fxLayoutAlign="center">
@@ -92,6 +95,7 @@
                 <div fxLayoutAlign="center" class="Resend"><button type="submit"  (click)="verifyOrResend('Resend')" mat-button>Resend Code</button></div>
             </form>
         </div>
+        <!-- Login Div -->
         <div *ngSwitchDefault class="login">
             <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
                 <div fxLayoutAlign="center">
