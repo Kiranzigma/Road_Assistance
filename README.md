@@ -39,6 +39,7 @@ FrontEnd:
 2. SCSS
 3. TypeScript
 4. RxJS
+5. Angular
 
 BackEnd:
 1. NodeJS
@@ -55,7 +56,13 @@ BackEnd:
 8. CARMD API
 9. VIN API
 10. Distance Matrix API
+11. fxFlex
 
+## Steps:
+git pull
+npm install
+node server.js from the server 
+ng serve from WebApp
 
 ## Development server
 
