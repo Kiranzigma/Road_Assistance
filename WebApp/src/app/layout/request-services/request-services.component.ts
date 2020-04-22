@@ -48,7 +48,7 @@ export class RequestServicesComponent implements OnInit {
     private appservice: AppServiceService) {
     this.arr = this.router.getCurrentNavigation().extras.state.rowData;
     this.totalCost = this.arr.totalCost;
-    this.dataSource.paginator = this.paginator;
+    
   }
 
 
@@ -59,6 +59,8 @@ export class RequestServicesComponent implements OnInit {
       element.estimatedCost;
       ELEMENT_DATA.push({desc: element.desc, estimatedCost:element.estimatedCost});
     });
+
+    this.dataSource.paginator = this.paginator;
   }
 
   //method to navigate to the back page
