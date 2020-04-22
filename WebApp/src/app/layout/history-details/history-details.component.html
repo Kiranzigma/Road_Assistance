@@ -13,6 +13,21 @@
             <div fxLayout="row" class="matFormField">
                 <div fxFlex="50%">
                     <mat-form-field fxLayoutAlign="center">
+                        <input type="text" readonly matInput formControlName="companyName"
+                            placeholder="Company Name">
+                    </mat-form-field>
+                </div>
+
+<!-- Message form field-->
+                <div fxFlex="50%">
+                    <mat-form-field fxLayoutAlign="center">
+                        <input type="text" readonly matInput formControlName="register_no" placeholder="Registration Number">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxLayout="row" class="matFormField">
+                <div fxFlex="50%">
+                    <mat-form-field fxLayoutAlign="center">
                         <input type="text" readonly matInput formControlName="description"
                             placeholder=" Issue Description">
                     </mat-form-field>
@@ -25,24 +40,6 @@
                     </mat-form-field>
                 </div>
             </div>
-
-
-            <!--     
-    <div fxLayout="column" class="details">
-       
-        <div fxLayoutAlign="center center">
-            <mat-form-field>
-                <input type="text" readonly matInput formControlName="description" placeholder=" Issue Description">
-            </mat-form-field>
-        </div>
-            
-        <div fxLayoutAlign="center center">
-            <mat-form-field>
-                <input type="text" readonly matInput formControlName="message" placeholder="Message">
-            </mat-form-field>
-        </div>       
-        
-    </div>     -->
         </form>
     </div>
     <br>

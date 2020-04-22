@@ -21,7 +21,7 @@ A Road Side Assistance application using the RESt API's
 
 ## User Requirements:
 
-1. User will be able to login and request a service from a nearby vendor fetched using a REST API and GOOGLE API.
+1. User will be able to login and request a service from a nearby vendor fetched using a REST API , VIN API and GOOGLE API.
 2. User will be able a see a request to see its detailed view.
 3. User will be able to update his profile details.
 4. User will be able to make a payment for the service requested
@@ -32,6 +32,30 @@ A Road Side Assistance application using the RESt API's
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.7.
+
+## Technologies Used:
+FrontEnd: 
+1. HTML
+2. SCSS
+3. TypeScript
+4. RxJS
+
+BackEnd:
+1. NodeJS
+2. MongoDB
+
+## Features Used:
+1. jwt Authentication
+2. User Email verification
+3. Image blob upload
+4. HighCharts
+5. Material View
+6. Google API
+7. PayPal API
+8. CARMD API
+9. VIN API
+10. Distance Matrix API
+
 
 ## Development server
 
