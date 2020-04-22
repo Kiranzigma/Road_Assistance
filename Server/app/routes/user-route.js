@@ -16,14 +16,14 @@ module.exports = (app) => {
         .put(jwtAuth, userController.updateUser);
 
     app.route('/vendors/:type')
-        .get(userController.getAllUsers);
+        .get(jwtAuth, userController.getAllUsers);
 
     app.route('/userrequests/:id/:type')
-        .get(userrequestController.list);
+        .get(jwtAuth, userrequestController.list);
     app.route('/userrequests')
-        .post(userrequestController.save);
+        .post(jwtAuth, userrequestController.save);
     app.route('/userrequests/:id')
-        .put(userrequestController.update);
+        .put(jwtAuth, userrequestController.update);
 
     app.route('/registration')
         .post(userController.confirmationPost);
