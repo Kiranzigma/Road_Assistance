@@ -2,6 +2,10 @@
 const mongoose = require('mongoose');
 const userreq = mongoose.model('UserRequestSchema');
 
+<<<<<<< Updated upstream
+=======
+// method to search a user in the database
+>>>>>>> Stashed changes
 exports.search = (user,type) => {
     if(type == "user"){
         const promise = userreq.find({user_id:user}).exec();
@@ -13,6 +17,10 @@ exports.search = (user,type) => {
     
 };
 
+<<<<<<< Updated upstream
+=======
+// method to register a value in the database
+>>>>>>> Stashed changes
 exports.save = (user) => {
     const newuser = new userreq(user);
     // get the current utc datetime
@@ -22,6 +30,10 @@ exports.save = (user) => {
     return newuser.save();
 };
 
+<<<<<<< Updated upstream
+=======
+// method to update a value in the database
+>>>>>>> Stashed changes
 exports.update = (updatereq) => {
     const promise = userreq.findByIdAndUpdate({
         _id: updatereq.id
