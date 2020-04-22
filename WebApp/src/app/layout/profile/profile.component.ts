@@ -83,7 +83,6 @@ export class ProfileComponent implements OnInit {
     //extracting image in blob format from the db
     this.blobUrl = this.user.userImage;
 
-
   }
 
 
@@ -163,7 +162,7 @@ export class ProfileComponent implements OnInit {
       arr.push(this.user.id);
       this.appservice.put<Iuser>('US-AU', body, arr).subscribe(y => {
         this.userService.reloadUser(y);
-        //  console.log(body)
+        console.log(body)
 
       });
       alert('Details have been updated successfully');
