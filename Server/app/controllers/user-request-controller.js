@@ -10,11 +10,10 @@ const userreqmodel = mongoose.model('UserRequestSchema');
 let CryptoJS = require("crypto-js");
 const tokenmodel = mongoose.model('TokenSchema');
 
-<<<<<<< Updated upstream
-=======
+
 // method to retrieve the list of values from the resource
 // @params - req, resp
->>>>>>> Stashed changes
+
 exports.list = (request, response) => {
     const userId = request.params.id;
     const type = request.params.type;
@@ -30,11 +29,10 @@ exports.list = (request, response) => {
         .catch(renderErrorResponse(response));
 };
 
-<<<<<<< Updated upstream
-=======
+
 // method to save the values from the user
 // @params - req, resp
->>>>>>> Stashed changes
+
 exports.save = (req, res) => {
     const user = Object.assign({}, req.body);
     const result = (userRequest) => {
@@ -46,11 +44,10 @@ exports.save = (req, res) => {
         .catch(renderErrorResponse(res));
 };
 
-<<<<<<< Updated upstream
-=======
+
 // method to update the values from the resource
 // @params - req, resp
->>>>>>> Stashed changes
+
 exports.update = (req, res) => {
     const reqID = req.params.id;
     const reqbody = Object.assign({}, req.body);
