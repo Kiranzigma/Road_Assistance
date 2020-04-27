@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import {SelectionModel} from '@angular/cdk/collections';
 import { Router, NavigationExtras } from '@angular/router';
 import { routerTransition } from 'src/app/shared/router-animations';
